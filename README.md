@@ -38,7 +38,9 @@ bundle update find-ai
 ```ruby
 require "find-ai"
 
-find_ai = FindAI::Client.new
+find_ai = FindAI::Client.new(
+  api_key: "My API Key" # defaults to ENV["FIND_AI_API_KEY"]
+)
 
 searches = find_ai.searches.retrieve
 ```

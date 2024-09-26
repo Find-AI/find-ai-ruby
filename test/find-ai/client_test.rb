@@ -5,6 +5,12 @@ require "time"
 require_relative "test_helper"
 
 class FindAITest < Test::Unit::TestCase
+  def test_raises_on_missing_non_nullable_opts
+    assert_raise_with_message(ArgumentError, /is required/) do
+      FindAI::Client.new
+    end
+  end
+
   class MockResponse
     attr_accessor :code, :header, :body, :content_type
 
@@ -34,7 +40,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_client_default_request_default_retry_attempts
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010")
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key")
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     find_ai.requester = requester
     assert_raise(FindAI::HTTP::InternalServerError) do
@@ -44,7 +50,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_client_given_request_default_retry_attempts
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", max_retries: 3)
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key", max_retries: 3)
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     find_ai.requester = requester
     assert_raise(FindAI::HTTP::InternalServerError) do
@@ -54,7 +60,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_client_default_request_given_retry_attempts
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010")
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key")
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     find_ai.requester = requester
     assert_raise(FindAI::HTTP::InternalServerError) do
@@ -64,7 +70,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_client_given_request_given_retry_attempts
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", max_retries: 3)
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key", max_retries: 3)
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     find_ai.requester = requester
     assert_raise(FindAI::HTTP::InternalServerError) do
@@ -74,7 +80,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_client_retry_after_seconds
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", max_retries: 1)
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key", max_retries: 1)
     requester = MockRequester.new(500, {}, {"retry-after" => "1.3", "x-stainless-mock-sleep" => "true"})
     find_ai.requester = requester
     assert_raise(FindAI::HTTP::InternalServerError) do
@@ -85,7 +91,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_client_retry_after_date
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", max_retries: 1)
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key", max_retries: 1)
     requester = MockRequester.new(
       500,
       {},
@@ -104,7 +110,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_client_retry_after_ms
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", max_retries: 1)
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key", max_retries: 1)
     requester = MockRequester.new(500, {}, {"retry-after-ms" => "1300", "x-stainless-mock-sleep" => "true"})
     find_ai.requester = requester
     assert_raise(FindAI::HTTP::InternalServerError) do
@@ -115,7 +121,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_retry_count_header
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010")
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key")
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     find_ai.requester = requester
 
@@ -128,7 +134,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_omit_retry_count_header
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010")
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key")
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     find_ai.requester = requester
 
@@ -141,7 +147,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_overwrite_retry_count_header
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010")
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key")
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     find_ai.requester = requester
 
@@ -154,7 +160,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_client_redirect_307
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010")
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key")
     requester = MockRequester.new(307, {}, {"location" => "/redirected"})
     find_ai.requester = requester
     assert_raise(FindAI::HTTP::APIConnectionError) do
@@ -170,7 +176,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_client_redirect_303
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010")
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key")
     requester = MockRequester.new(303, {}, {"location" => "/redirected"})
     find_ai.requester = requester
     assert_raise(FindAI::HTTP::APIConnectionError) do
@@ -183,7 +189,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_client_redirect_auth_keep_same_origin
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010")
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key")
     requester = MockRequester.new(307, {}, {"location" => "/redirected"})
     find_ai.requester = requester
     assert_raise(FindAI::HTTP::APIConnectionError) do
@@ -196,7 +202,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_client_redirect_auth_strip_cross_origin
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010")
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key")
     requester = MockRequester.new(307, {}, {"location" => "https://example.com/redirected"})
     find_ai.requester = requester
     assert_raise(FindAI::HTTP::APIConnectionError) do
@@ -206,7 +212,7 @@ class FindAITest < Test::Unit::TestCase
   end
 
   def test_default_headers
-    find_ai = FindAI::Client.new(base_url: "http://localhost:4010")
+    find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key")
     requester = MockRequester.new(200, {}, {"x-stainless-mock-sleep" => "true"})
     find_ai.requester = requester
     find_ai.searches.retrieve("id")
