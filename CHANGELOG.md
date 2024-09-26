@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2024-09-26)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/Find-AI/find-ai-ruby/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** manual updates updated ([#9](https://github.com/Find-AI/find-ai-ruby/issues/9)) ([b1f1a0c](https://github.com/Find-AI/find-ai-ruby/commit/b1f1a0cbe21a6e7d31540bd6444bee1c24c7fa6c))
+
+
+### Chores
+
+* **internal:** codegen changes ([#6](https://github.com/Find-AI/find-ai-ruby/issues/6)) ([c208b5b](https://github.com/Find-AI/find-ai-ruby/commit/c208b5b78a0851d75b690b495037996e26ccccb4))
+* **internal:** codegen related update ([#8](https://github.com/Find-AI/find-ai-ruby/issues/8)) ([3c1e5de](https://github.com/Find-AI/find-ai-ruby/commit/3c1e5de42e8c339b51b506e61481de13e74b9230))
+
 ## 0.1.0-alpha.1 (2024-09-25)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/Find-AI/find-ai-ruby/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
