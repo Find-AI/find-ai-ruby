@@ -26,7 +26,7 @@ module FindAI
         end
 
         # The endpoint to poll to check the latest results when data about a company isn't
-        #   immediately available
+        #   immediately available.
         #
         # @param token [String] The token returned with your initial API call.
         # @param opts [Hash|RequestOptions] Options to specify HTTP behaviour for this request.
