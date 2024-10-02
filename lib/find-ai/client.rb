@@ -5,7 +5,8 @@ module FindAI
     # Default max number of retries to attempt after a failed retryable request.
     DEFAULT_MAX_RETRIES = 2
 
-    # Client options.
+    # Client option
+    # @return [String]
     attr_reader :api_key
 
     # @return [FindAI::Resources::CompanyEnrichment]
@@ -23,10 +24,14 @@ module FindAI
     end
 
     # Creates and returns a new client for interacting with the API.
-    def initialize(base_url: nil, api_key: nil, max_retries: nil)
+    #
+    # @param base_url [String, nil] Override the default base URL for the API, e.g., `"https://api.example.com/v2/"`
+    # @param api_key [String, nil] Defaults to `ENV["FIND_AI_API_KEY"]`
+    # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
+    #
+    # @return [FindAI::Client]
+    def initialize(base_url: nil, api_key: nil, max_retries: DEFAULT_MAX_RETRIES)
       base_url ||= "https://usefind.ai/found"
-
-      max_retries ||= DEFAULT_MAX_RETRIES
 
       @api_key = [api_key, ENV["FIND_AI_API_KEY"]].find { |v| !v.nil? }
       if @api_key.nil?
