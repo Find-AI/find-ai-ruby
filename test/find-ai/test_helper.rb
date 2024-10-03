@@ -9,6 +9,7 @@
 require "find-ai"
 
 require "test/unit"
+require "stringio"
 
 module FindAI
   module Test
