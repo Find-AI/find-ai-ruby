@@ -19,11 +19,13 @@ module FindAI
       #
       # @return [FindAI::Models::SearchCreateResponse]
       def create(params = {}, opts = {})
-        req = {}
-        req[:method] = :post
-        req[:path] = "/v1/searches"
-        req[:body] = params
-        req[:model] = FindAI::Models::SearchCreateResponse
+        req = {
+          method: :post,
+          path: "/v1/searches",
+          body: params,
+          headers: {"Content-Type" => "application/json"},
+          model: FindAI::Models::SearchCreateResponse
+        }
         @client.request(req, opts)
       end
 
@@ -34,10 +36,11 @@ module FindAI
       #
       # @return [Array<FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse>]
       def retrieve(id, opts = {})
-        req = {}
-        req[:method] = :get
-        req[:path] = "/v1/searches/#{id}"
-        req[:model] = FindAI::ArrayOf.new(FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse)
+        req = {
+          method: :get,
+          path: "/v1/searches/#{id}",
+          model: FindAI::ArrayOf.new(FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse)
+        }
         @client.request(req, opts)
       end
     end
