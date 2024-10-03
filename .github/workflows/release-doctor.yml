@@ -17,3 +17,6 @@ jobs:
       - name: Check release environment
         run: |
           bash ./bin/check-release-environment
+        env:
+          RUBYGEMS_HOST: ${{ secrets.FIND_AI_RUBYGEMS_HOST || secrets.RUBYGEMS_HOST }}
+          GEM_HOST_API_KEY: ${{ secrets.FIND_AI_GEM_HOST_API_KEY || secrets.GEM_HOST_API_KEY }}
