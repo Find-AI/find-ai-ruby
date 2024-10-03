@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.3 (2024-10-02)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/Find-AI/find-ai-ruby/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#11](https://github.com/Find-AI/find-ai-ruby/issues/11)) ([96c2c1d](https://github.com/Find-AI/find-ai-ruby/commit/96c2c1dc60a94573ffb5bb8784a1ac78bedaaaf6))
+
+
+### Chores
+
+* **types:** more detailed type documentation ([#13](https://github.com/Find-AI/find-ai-ruby/issues/13)) ([07c3177](https://github.com/Find-AI/find-ai-ruby/commit/07c3177ed3717f61c7ba031dbf058cfc1212d2d4))
+
 ## 0.1.0-alpha.2 (2024-09-26)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/Find-AI/find-ai-ruby/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
