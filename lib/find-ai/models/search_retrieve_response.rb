@@ -11,61 +11,45 @@ module FindAI
       #   @return [String]
       required :name_, String
 
-      # @!attribute [rw] photo_url
-      #   @return [String]
-      required :photo_url, String
-
-      # @!attribute [rw] reason
-      #   @return [String]
-      required :reason, String
-
-      # @!attribute [rw] short_description
-      #   @return [String]
-      required :short_description, String
-
-      # @!attribute [rw] slug
-      #   @return [String]
-      required :slug, String
-
       # @!attribute [rw] company
-      #   @return [FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse::Company]
-      optional :company, -> { FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse::Company }
-
-      # @!attribute [rw] company_size
-      #   Returned only for a company.
-      #   @return [String]
-      optional :company_size, String
-
-      # @!attribute [rw] inferred_email
       #   Returned only for a person.
       #   @return [String]
-      optional :inferred_email, String
+      optional :company, String
 
-      # @!attribute [rw] locations
+      # @!attribute [rw] criteria_and_reasons
+      #   @return [Array<FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse::CriteriaAndReason>]
+      optional :criteria_and_reasons,
+               FindAI::ArrayOf.new(
+                 lambda {
+                   FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse::CriteriaAndReason
+                 }
+               )
+
+      # @!attribute [rw] domain
       #   Returned only for a company.
-      #   @return [Array<String>]
-      optional :locations, FindAI::ArrayOf.new(String)
+      #   @return [String]
+      optional :domain, String
 
       # @!attribute [rw] title
       #   Returned only for a person.
       #   @return [String]
       optional :title, String
 
-      class Company < BaseModel
-        # @!attribute [rw] name_
-        #   Returned only for a person.
+      class CriteriaAndReason < BaseModel
+        # @!attribute [rw] criteria
+        #   Match criteria
         #   @return [String]
-        required :name_, String
+        optional :criteria, String
 
-        # @!attribute [rw] slug
-        #   Returned only for a person.
-        #   @return [String]
-        required :slug, String
+        # @!attribute [rw] match
+        #   Whether it's a match
+        #   @return [Boolean]
+        optional :match, FindAI::BooleanModel
 
-        # @!attribute [rw] website
-        #   Returned only for a person.
+        # @!attribute [rw] reason
+        #   Reason for the match
         #   @return [String]
-        required :website, String
+        optional :reason, String
       end
     end
   end
