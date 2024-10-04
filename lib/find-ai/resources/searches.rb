@@ -12,8 +12,8 @@ module FindAI
       # @param params [Hash] Attributes to send in this request.
       # @option params [Float, nil] :max_matches The maximum number of results to return. optional for result_mode exact
       # @option params [String, nil] :query Search query.
-      # @option params [String, nil] :result_mode The mode of the search. Valid values are 'exact' or 'best'.
-      # @option params [String, nil] :scope The scope of the search. Valid values are 'people' or 'companies'.
+      # @option params [Symbol, ResultMode, nil] :result_mode The mode of the search. Valid values are 'exact' or 'best'.
+      # @option params [Symbol, Scope, nil] :scope The scope of the search. Valid values are 'person' or 'company'.
       #
       # @param opts [Hash, FindAI::RequestOptions] Options to specify HTTP behaviour for this request.
       #
