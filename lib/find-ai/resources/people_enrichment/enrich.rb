@@ -4,6 +4,7 @@ module FindAI
   module Resources
     class PeopleEnrichment
       class Enrich
+        # @param client [FindAI::Client]
         def initialize(client:)
           @client = client
         end

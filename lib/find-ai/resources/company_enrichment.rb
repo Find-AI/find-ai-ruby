@@ -6,6 +6,7 @@ module FindAI
       # @return [FindAI::Resources::CompanyEnrichment::Enrich]
       attr_reader :enrich
 
+      # @param client [FindAI::Client]
       def initialize(client:)
         @client = client
         @enrich = FindAI::Resources::CompanyEnrichment::Enrich.new(client: client)
