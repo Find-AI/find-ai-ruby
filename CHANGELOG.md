@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.0 (2024-10-08)
+
+Full Changelog: [v0.1.0-alpha.3...v1.2.0](https://github.com/Find-AI/find-ai-ruby/compare/v0.1.0-alpha.3...v1.2.0)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#19](https://github.com/Find-AI/find-ai-ruby/issues/19)) ([c2ac6fe](https://github.com/Find-AI/find-ai-ruby/commit/c2ac6fe2a95fca8d152593eb2d7f1c9aed7334a5))
+* breaking change - replace deprecated 'DateTime' class in favour of 'Time' class ([#18](https://github.com/Find-AI/find-ai-ruby/issues/18)) ([568549d](https://github.com/Find-AI/find-ai-ruby/commit/568549d5aee590cf1fb5c3ff6c54c097342acd74))
+* **client:** add support for file uploads ([#17](https://github.com/Find-AI/find-ai-ruby/issues/17)) ([1b79244](https://github.com/Find-AI/find-ai-ruby/commit/1b79244a7809b53b68f7a3e726798ea3e5403533))
+* enable gem building ([#15](https://github.com/Find-AI/find-ai-ruby/issues/15)) ([86a6277](https://github.com/Find-AI/find-ai-ruby/commit/86a627740687fbdc2305e767189a1467b344547d))
+
 ## 0.1.0-alpha.3 (2024-10-02)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/Find-AI/find-ai-ruby/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)

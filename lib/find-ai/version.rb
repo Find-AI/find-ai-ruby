@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module FindAI
-  VERSION = "0.1.0-alpha.3"
+  VERSION = "1.2.0"
 end
