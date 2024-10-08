@@ -3,6 +3,7 @@
 module FindAI
   module Resources
     class Searches
+      # @param client [FindAI::Client]
       def initialize(client:)
         @client = client
       end
