@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    find-ai (0.1.0.pre.alpha.3)
+    find-ai (1.2.0)
       connection_pool
 
 GEM
