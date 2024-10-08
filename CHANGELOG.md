@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.3.0 (2024-10-08)
+
+Full Changelog: [v1.2.0...v1.3.0](https://github.com/Find-AI/find-ai-ruby/compare/v1.2.0...v1.3.0)
+
+### Features
+
+* annotate client type on resources ([#25](https://github.com/Find-AI/find-ai-ruby/issues/25)) ([8ad92ff](https://github.com/Find-AI/find-ai-ruby/commit/8ad92ff486e19a456641ea8ed4889eaed900051f))
+* replace test/unit with minitest to enable parallel testing ([#23](https://github.com/Find-AI/find-ai-ruby/issues/23)) ([6d91784](https://github.com/Find-AI/find-ai-ruby/commit/6d91784d9cece7e374f7dfa17b6e7ca10606a580))
+
+
+### Chores
+
+* **client:** normalize header names ([#21](https://github.com/Find-AI/find-ai-ruby/issues/21)) ([19cd616](https://github.com/Find-AI/find-ai-ruby/commit/19cd61679705f2bbaeb275cc3f8f9c4f60b53041))
+* reduce format task verbosity ([#24](https://github.com/Find-AI/find-ai-ruby/issues/24)) ([cfde15a](https://github.com/Find-AI/find-ai-ruby/commit/cfde15a0a64af79d47fe221c9d518f3cdc0c37f0))
+
 ## 1.2.0 (2024-10-08)
 
 Full Changelog: [v0.1.0-alpha.3...v1.2.0](https://github.com/Find-AI/find-ai-ruby/compare/v0.1.0-alpha.3...v1.2.0)
