@@ -2,9 +2,9 @@
 
 require_relative "test_helper"
 
-class FindAI::Test::UtilTest < Test::Unit::TestCase
+class FindAI::Test::UtilTest < Minitest::Test
   def test_left_map
-    assert_equal(FindAI::Util.deep_merge({a: 1}, nil), nil)
+    assert_nil(FindAI::Util.deep_merge({a: 1}, nil))
   end
 
   def test_right_map
