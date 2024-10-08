@@ -7,13 +7,7 @@
 # - Define shared testing namespace so that we don't need to indent test files as much
 
 require "find-ai"
+require_relative "test_namespaces"
 
-require "test/unit"
+require "minitest"
 require "stringio"
-
-module FindAI
-  module Test
-    module Resources
-    end
-  end
-end
