@@ -8,21 +8,28 @@ module FindAI
       @pools = {}
     end
 
-    def get_pool(req)
-      hostname = req[:host]
-      scheme = req[:scheme]
-      port =
-        req[:port] ||
-        case scheme.to_sym
-        when :https
-          Net::HTTP.https_default_port
-        else
+    # @param req [Hash{Symbol => Object}]
+    # @param timeout [Float]
+    #
+    # @return [ConnectionPool]
+    def get_pool(req, timeout:)
+      scheme, hostname = req.fetch_values(:scheme, :host)
+      scheme = scheme.to_sym
+      port = req.fetch(:port) do
+        case scheme
+        in :http
           Net::HTTP.http_default_port
+        else
+          Net::HTTP.https_default_port
         end
+      end
+
       @mutex.synchronize do
         @pools[hostname] ||= ConnectionPool.new do
           conn = Net::HTTP.new(hostname, port)
-          conn.use_ssl = scheme.to_sym == :https
+          conn.use_ssl = scheme == :https
+          conn.max_retries = 0
+          conn.open_timeout = timeout
           conn.start
           conn
         end
@@ -30,22 +37,26 @@ module FindAI
       end
     end
 
-    def execute(req)
-      method, headers, body = req.values_at(:method, :headers, :body)
-      get_pool(req).with do |conn|
-        # Net can't understand posting to a URI representing only path + query,
-        # so we concatenate
-        uri_string = FindAI::Util.uri_from_req(req, absolute: false)
+    # @param req [Hash{Symbol => Object}]
+    # @param timeout [Float]
+    #
+    # @return [Net::HTTPResponse]
+    def execute(req, timeout:)
+      method, headers, body = req.fetch_values(:method, :headers, :body)
+      content_type = headers["content-type"]
+
+      get_pool(req, timeout: timeout).with do |conn|
+        uri = FindAI::Util.unparse_uri(req, absolute: false)
 
         request = Net::HTTPGenericRequest.new(
           method.to_s.upcase,
           !body.nil?,
           method != :head,
-          uri_string
+          uri.to_s
         )
 
-        content_type = headers["content-type"]
-        if content_type == "multipart/form-data" && body
+        case [content_type, body]
+        in ["multipart/form-data", Hash]
           form_data =
             body.filter_map do |k, v|
               next if v.nil?
@@ -61,6 +72,8 @@ module FindAI
           request[k] = v
         end
 
+        conn.read_timeout = timeout
+        conn.write_timeout = timeout
         conn.request(request)
       end
     end

@@ -9,7 +9,7 @@ module FindAI
 
       # @!attribute [rw] name_
       #   @return [String]
-      required :name_, String
+      required :name_, String, api_name: :name
 
       # @!attribute [rw] company
       #   Returned only for a person.
@@ -20,7 +20,7 @@ module FindAI
       #   @return [Array<FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse::CriteriaAndReason>]
       optional :criteria_and_reasons,
                FindAI::ArrayOf.new(
-                 lambda {
+                 -> {
                    FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse::CriteriaAndReason
                  }
                )
@@ -29,6 +29,11 @@ module FindAI
       #   Returned only for a company.
       #   @return [String]
       optional :domain, String
+
+      # @!attribute [rw] status
+      #   The status of the search result.
+      #   @return [String]
+      optional :status, String
 
       # @!attribute [rw] title
       #   Returned only for a person.
@@ -50,7 +55,29 @@ module FindAI
         #   Reason for the match
         #   @return [String]
         optional :reason, String
+
+        # @!parse
+        #   # Create a new instance of CriteriaAndReason from a Hash of raw data.
+        #   #
+        #   # @param data [Hash{Symbol => Object}] .
+        #   #   @option data [String, nil] :criteria Match criteria
+        #   #   @option data [Hash, nil] :match Whether it's a match
+        #   #   @option data [String, nil] :reason Reason for the match
+        #   def initialize(data = {}) = super
       end
+
+      # @!parse
+      #   # Create a new instance of SearchRetrieveResponse from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [String] :linkedin_url
+      #   #   @option data [String] :name
+      #   #   @option data [String, nil] :company Returned only for a person.
+      #   #   @option data [Array<Object>, nil] :criteria_and_reasons
+      #   #   @option data [String, nil] :domain Returned only for a company.
+      #   #   @option data [String, nil] :status The status of the search result.
+      #   #   @option data [String, nil] :title Returned only for a person.
+      #   def initialize(data = {}) = super
     end
   end
 end
