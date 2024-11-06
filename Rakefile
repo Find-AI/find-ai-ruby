@@ -5,7 +5,10 @@ require "rubocop/rake_task"
 
 task(default: [:test, :format])
 
-Minitest::TestTask.create
+Minitest::TestTask.create do |t|
+  t.libs = %w[.]
+  t.test_globs = ENV.fetch("TEST", "test/**/*_test.rb")
+end
 
 RuboCop::RakeTask.new(:rubocop) do |t|
   t.options = %w[--fail-level E --autocorrect]

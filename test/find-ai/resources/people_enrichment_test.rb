@@ -6,6 +6,9 @@ class FindAI::Test::Resources::PeopleEnrichmentTest < Minitest::Test
   parallelize_me!
 
   def setup
-    @find_ai = FindAI::Client.new(base_url: "http://localhost:4010", api_key: "My API Key")
+    @find_ai = FindAI::Client.new(
+      base_url: ENV.fetch("TEST_API_BASE_URL", "http://localhost:4010"),
+      api_key: "My API Key"
+    )
   end
 end

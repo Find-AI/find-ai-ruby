@@ -30,7 +30,7 @@ module FindAI
     # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
     #
     # @return [FindAI::Client]
-    def initialize(base_url: nil, api_key: nil, max_retries: DEFAULT_MAX_RETRIES)
+    def initialize(base_url: nil, api_key: nil, max_retries: DEFAULT_MAX_RETRIES, timeout: 60)
       base_url ||= "https://usefind.ai/found"
 
       @api_key = [api_key, ENV["FIND_AI_API_KEY"]].find { |v| !v.nil? }
@@ -38,7 +38,7 @@ module FindAI
         raise ArgumentError, "api_key is required"
       end
 
-      super(base_url: base_url, max_retries: max_retries)
+      super(base_url: base_url, max_retries: max_retries, timeout: timeout)
 
       @company_enrichment = FindAI::Resources::CompanyEnrichment.new(client: self)
       @people_enrichment = FindAI::Resources::PeopleEnrichment.new(client: self)
