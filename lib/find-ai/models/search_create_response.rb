@@ -15,7 +15,22 @@ module FindAI
         # @!attribute [rw] path
         #   @return [String]
         required :path, String
+
+        # @!parse
+        #   # Create a new instance of Poll from a Hash of raw data.
+        #   #
+        #   # @param data [Hash{Symbol => Object}] .
+        #   #   @option data [String] :token
+        #   #   @option data [String] :path
+        #   def initialize(data = {}) = super
       end
+
+      # @!parse
+      #   # Create a new instance of SearchCreateResponse from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Object] :poll
+      #   def initialize(data = {}) = super
     end
   end
 end

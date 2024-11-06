@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "date"
-require "time"
-
 module FindAI
   # @!visibility private
   module Converter
@@ -10,6 +7,12 @@ module FindAI
     # - If the given `value` conforms to `type` already, the given `value`.
     # - If it's possible and safe to convert the given `value` to `type`, such a converted value.
     # - Otherwise, the given `value` unaltered.
+    #
+    # @param type [Class, FindAI::Converter]
+    # @param value [Object]
+    #
+    # @raise [StandardError]
+    # @return [Object]
     def self.convert(type, value)
       # If `type.is_a?(Converter)`, `type` is an instance of a class that mixes
       # in `Converter`, indicating that the type should define `#convert` on this
@@ -21,15 +24,15 @@ module FindAI
       # directly.
       if type.is_a?(Converter) || type.include?(Converter)
         type.convert(value)
-      elsif type == Date
-        Date.parse(value)
-      elsif type == Time
-        Time.parse(value)
-      elsif type == NilClass
+      elsif type <= NilClass
         nil
-      elsif type == Float
+      elsif type <= Date
+        Date.parse(value)
+      elsif type <= Time
+        Time.parse(value)
+      elsif type <= Float
         value.is_a?(Numeric) ? value.to_f : value
-      elsif [Object, Integer, String, Hash].include?(type)
+      elsif [Object, Hash, Integer, String].any? { |cls| type <= cls }
         value
       else
         raise StandardError, "Unexpected type #{type}"
@@ -42,6 +45,9 @@ module FindAI
   class Unknown
     include Converter
 
+    # @param value [Object]
+    #
+    # @return [Object]
     def self.convert(value)
       value
     end
@@ -52,6 +58,9 @@ module FindAI
   class BooleanModel
     include Converter
 
+    # @param value [Boolean, Object]
+    #
+    # @return [Boolean, Object]
     def self.convert(value)
       value
     end
@@ -69,8 +78,12 @@ module FindAI
   class Enum
     include Converter
 
+    # @param value [Symbol, String, Object]
+    #
+    # @return [Symbol, Object]
     def self.convert(value)
-      if value.is_a?(String)
+      case value
+      in String
         value.to_sym
       else
         value
@@ -88,13 +101,23 @@ module FindAI
   class ArrayOf
     include Converter
 
+    # @param items_type_info [Proc, Object, nil]
+    # @param enum [Proc, nil]
     def initialize(items_type_info = nil, enum: nil)
       @items_type_fn = enum || (items_type_info.is_a?(Proc) ? items_type_info : -> { items_type_info })
     end
 
+    # @param value [Enumerable, Object]
+    #
+    # @return [Array<Object>]
     def convert(value)
       items_type = @items_type_fn.call
-      value.map { |item| Converter.convert(items_type, item) }
+      case value
+      in Enumerable
+        value.map { |item| Converter.convert(items_type, item) }.to_a
+      else
+        value
+      end
     end
   end
 
@@ -102,62 +125,81 @@ module FindAI
     include Converter
 
     # @!visibility private
+    #
     # Assumes superclass fields are totally defined before fields are accessed / defined on subclasses.
+    #
+    # @return [Hash{Symbol => Hash{Symbol => Object}}]
     def self.fields
       @fields ||= (superclass == BaseModel ? {} : superclass.fields.dup)
     end
 
     # @!visibility private
-    def self.add_field(name_sym, type_info, mode)
+    #
+    # @param name_sym [Symbol]
+    # @param api_name [Symbol, nil]
+    # @param type_info [Proc, Object]
+    # @param mode [Symbol]
+    #
+    # @return [void]
+    def self.add_field(name_sym, api_name:, type_info:, mode:)
       type_fn = type_info.is_a?(Proc) ? type_info : -> { type_info }
-      fields[name_sym] = {type_fn: type_fn, mode: mode}
+      key = api_name || name_sym
+      fields[name_sym] = {type_fn: type_fn, mode: mode, key: key}
 
       define_method(name_sym) do
         field_type = type_fn.call
-        Converter.convert(field_type, @data[name_sym])
+        Converter.convert(field_type, @data[key])
       rescue StandardError
         name = self.class.name.split("::").last
         raise ConversionError,
-              "Failed to parse #{name}.#{name_sym} as #{field_type.inspect}. To get the unparsed API response, use #{name}[:#{name_sym}]."
+              "Failed to parse #{name}.#{name_sym} as #{field_type.inspect}. " \
+              "To get the unparsed API response, use #{name}[:#{key}]."
       end
-      define_method("#{name_sym}=") { |val| @data[name_sym] = val }
+      define_method("#{name_sym}=") { |val| @data[key] = val }
     end
 
     # @!visibility private
+    #
     # NB `required` is just a signal to the reader. We don't do runtime validation anyway.
-    def self.required(name_sym, type_info = nil, mode = :rw, enum: nil)
-      add_field(name_sym, enum || type_info, mode)
+    def self.required(name_sym, type_info = nil, mode = :rw, api_name: nil, enum: nil)
+      add_field(name_sym, api_name: api_name, type_info: enum || type_info, mode: mode)
     end
 
     # @!visibility private
+    #
     # NB `optional` is just a signal to the reader. We don't do runtime validation anyway.
-    def self.optional(name_sym, type_info = nil, mode = :rw, enum: nil)
-      add_field(name_sym, enum || type_info, mode)
+    def self.optional(name_sym, type_info = nil, mode = :rw, api_name: nil, enum: nil)
+      add_field(name_sym, api_name: api_name, type_info: enum || type_info, mode: mode)
     end
 
     # @!visibility private
+    #
+    # @param data [Hash{Symbol => Object}]
+    # @return [BaseModel]
     def self.convert(data)
       new(data)
     end
 
     # Create a new instance of a model.
-    # @param data [Hash] Model attributes.
+    # @param data [Hash{Symbol => Object}] Raw data to initialize the model with.
     def initialize(data = {})
-      @data = {}
-      # TODO: what if data isn't a hash?
-      data.each do |field_name, value|
-        next if value.nil?
+      unless data.respond_to?(:to_h)
+        raise ArgumentError,
+              "Expected a Hash, got #{data.inspect}"
+      end
 
-        field = self.class.fields[field_name.to_sym]
-        if field
-          next if field[:mode] == :w
-        end
-        @data[field_name.to_sym] = value
+      @data = {}
+      data.to_h.each do |field_name, value|
+        next if value.nil?
+        name = field_name.to_sym
+        next if self.class.fields.dig(name, :mode) == :w
+
+        @data[name] = value
       end
     end
 
     # Returns a Hash of the data underlying this object.
-    # Keys are Symbols and values are the parsed / typed domain objects.
+    # Keys are Symbols and values are the raw values from the response.
     # The return value indicates which values were ever set on the object -
     # i.e. there will be a key in this hash if they ever were, even if the
     # set value was nil.
@@ -171,26 +213,40 @@ module FindAI
 
     alias_method :to_hash, :to_h
 
-    # Lookup attribute value by key in the object.
-    # If this key was not provided when the object was formed (e.g. because the API response
-    # did not include that key), returns nil.
+    # Returns the raw value associated with the given key, if found. Otherwise, nil is returned.
     # It is valid to lookup keys that are not in the API spec, for example to access
     # undocumented features.
+    # This method does not parse response data into higher-level types.
     # Lookup by anything other than a Symbol is an ArgumentError.
     #
     # @param key [Symbol] Key to look up by.
     #
-    # @return [Object] Parsed / typed value at the given key, or nil if no data is available.
+    # @return [Object, nil] The raw value at the given key.
     def [](key)
-      if !key.instance_of?(Symbol)
+      unless key.instance_of?(Symbol)
         raise ArgumentError, "Expected symbol key for lookup, got #{key.inspect}"
       end
       @data[key]
     end
 
+    # @param keys [Array<Symbol>, nil]
+    #
+    # @return [Hash{Symbol => Object}]
+    def deconstruct_keys(keys)
+      (keys || self.class.fields.keys).to_h do |k|
+        unless self.class.fields.key?(k)
+          raise KeyError, "Expected one of #{self.class.fields.keys}, got #{k.inspect}"
+        end
+
+        [k, method(k).call]
+      end
+    end
+
     # @return [String]
     def inspect
-      "#<#{self.class.name}:0x#{object_id.to_s(16)} #{@data.inspect}>"
+      "#<#{self.class.name}:0x#{object_id.to_s(16)} #{deconstruct_keys(nil).map do |k, v|
+        "#{k}=#{v.inspect}"
+      end.join(' ')}>"
     end
 
     # @return [String]

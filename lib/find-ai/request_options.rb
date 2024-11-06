@@ -8,11 +8,15 @@ module FindAI
   # with symbol keys matching the attributes on this class.
   class RequestOptions
     # @!visibility private
+    #
+    # @return [Array<Symbol>]
     def self.options
       @options ||= []
     end
 
     # @!visibility private
+    #
+    # @param name [Symbol]
     def self.option(name)
       define_method(name) { @_values[name] }
       define_method("#{name}=") { |val| @_values[name] = val }
@@ -22,6 +26,12 @@ module FindAI
     # Returns a new instance of RequestOptions.
     #
     # @param values [Hash{Symbol => Object}] initial option values to set on the instance.
+    #   @option values [String] :idempotency_key
+    #   @option values [Hash{Symbol => String}] :extra_headers
+    #   @option values [Hash{Symbol => Array<String>}] :extra_query
+    #   @option values [Hash{Symbol => Object}] :extra_body
+    #   @option values [Integer] :max_retries
+    #   @option values [Integer] :timeout
     def initialize(values = {})
       @_values = values
     end
@@ -41,7 +51,7 @@ module FindAI
     # @!attribute extra_query
     # Extra query params to send with the request. These are `.merge`’d into any `query` given at
     #   the client level.
-    # @return [Hash{Symbol => Object}]
+    # @return [Hash{Symbol => Array<String>}]
     option :extra_query
 
     # @!attribute extra_body
@@ -54,6 +64,11 @@ module FindAI
     # Maximum number of retries to attempt after a failed initial request.
     # @return [Integer]
     option :max_retries
+
+    # @!attribute timeout
+    # Request timeout in seconds.
+    # @return [Integer]
+    option :timeout
 
     # Lookup an option previously set on this instance.
     #
@@ -73,12 +88,19 @@ module FindAI
 
     # @return [String]
     def inspect
-      "#<FindAI::RequestOptions:0x#{object_id.to_s(16)} #{@_values.inspect}>"
+      "#<#{self.class}:0x#{object_id.to_s(16)} #{@_values.inspect}>"
     end
 
     # @return [String]
     def to_s
       @_values.to_s
+    end
+
+    # @param keys [Array<Symbol>, nil]
+    #
+    # @return [Hash{Symbol => Object}]
+    def deconstruct_keys(keys)
+      @_values.deconstruct_keys(keys)
     end
   end
 end
