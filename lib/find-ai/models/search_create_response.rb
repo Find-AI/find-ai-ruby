@@ -2,12 +2,12 @@
 
 module FindAI
   module Models
-    class SearchCreateResponse < BaseModel
+    class SearchCreateResponse < FindAI::BaseModel
       # @!attribute [rw] poll
       #   @return [FindAI::Models::SearchCreateResponse::Poll]
       required :poll, -> { FindAI::Models::SearchCreateResponse::Poll }
 
-      class Poll < BaseModel
+      class Poll < FindAI::BaseModel
         # @!attribute [rw] token
         #   @return [String]
         required :token, String

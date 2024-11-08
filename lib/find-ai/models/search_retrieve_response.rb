@@ -2,7 +2,7 @@
 
 module FindAI
   module Models
-    class SearchRetrieveResponse < BaseModel
+    class SearchRetrieveResponse < FindAI::BaseModel
       # @!attribute [rw] linkedin_url
       #   @return [String]
       required :linkedin_url, String
@@ -40,7 +40,7 @@ module FindAI
       #   @return [String]
       optional :title, String
 
-      class CriteriaAndReason < BaseModel
+      class CriteriaAndReason < FindAI::BaseModel
         # @!attribute [rw] criteria
         #   Match criteria
         #   @return [String]
