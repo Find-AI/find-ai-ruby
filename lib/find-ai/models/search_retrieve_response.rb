@@ -7,9 +7,9 @@ module FindAI
       #   @return [String]
       required :linkedin_url, String
 
-      # @!attribute [rw] name_
+      # @!attribute [rw] name
       #   @return [String]
-      required :name_, String, api_name: :name
+      required :name, String
 
       # @!attribute [rw] company
       #   Returned only for a person.
