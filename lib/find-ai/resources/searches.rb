@@ -23,8 +23,8 @@ module FindAI
         req = {
           method: :post,
           path: "/v1/searches",
-          body: params,
           headers: {"Content-Type" => "application/json"},
+          body: params,
           model: FindAI::Models::SearchCreateResponse
         }
         @client.request(req, opts)
