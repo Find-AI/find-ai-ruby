@@ -1,0 +1,69 @@
+module FindAI
+  module Models
+    type search_create_params =
+      {
+        max_matches: Float,
+        query: String,
+        result_mode: FindAI::Models::SearchCreateParams::result_mode,
+        scope: FindAI::Models::SearchCreateParams::scope
+      }
+      & FindAI::request_parameters
+
+    class SearchCreateParams < FindAI::BaseModel
+      extend FindAI::RequestParameters::Converter
+      include FindAI::RequestParameters
+
+      attr_reader max_matches: Float?
+
+      def max_matches=: (Float) -> Float
+
+      attr_reader query: String?
+
+      def query=: (String) -> String
+
+      attr_reader result_mode: FindAI::Models::SearchCreateParams::result_mode?
+
+      def result_mode=: (
+        FindAI::Models::SearchCreateParams::result_mode
+      ) -> FindAI::Models::SearchCreateParams::result_mode
+
+      attr_reader scope: FindAI::Models::SearchCreateParams::scope?
+
+      def scope=: (
+        FindAI::Models::SearchCreateParams::scope
+      ) -> FindAI::Models::SearchCreateParams::scope
+
+      def initialize:
+        (
+          max_matches: Float,
+          query: String,
+          result_mode: FindAI::Models::SearchCreateParams::result_mode,
+          scope: FindAI::Models::SearchCreateParams::scope,
+          request_options: FindAI::request_opts
+        ) -> void
+        | (
+          ?FindAI::Models::search_create_params | FindAI::BaseModel data
+        ) -> void
+
+      def to_hash: -> FindAI::Models::search_create_params
+
+      type result_mode = :exact | :best
+
+      class ResultMode < FindAI::Enum
+        EXACT: :exact
+        BEST: :best
+
+        def self.values: -> ::Array[FindAI::Models::SearchCreateParams::result_mode]
+      end
+
+      type scope = :person | :company
+
+      class Scope < FindAI::Enum
+        PERSON: :person
+        COMPANY: :company
+
+        def self.values: -> ::Array[FindAI::Models::SearchCreateParams::scope]
+      end
+    end
+  end
+end

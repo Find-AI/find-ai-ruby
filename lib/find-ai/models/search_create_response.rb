@@ -3,34 +3,37 @@
 module FindAI
   module Models
     class SearchCreateResponse < FindAI::BaseModel
-      # @!attribute [rw] poll
+      # @!attribute poll
+      #
       #   @return [FindAI::Models::SearchCreateResponse::Poll]
       required :poll, -> { FindAI::Models::SearchCreateResponse::Poll }
 
+      # @!parse
+      #   # @param poll [FindAI::Models::SearchCreateResponse::Poll]
+      #   #
+      #   def initialize(poll:, **) = super
+
+      # def initialize: (Hash | FindAI::BaseModel) -> void
+
       class Poll < FindAI::BaseModel
-        # @!attribute [rw] token
+        # @!attribute token
+        #
         #   @return [String]
         required :token, String
 
-        # @!attribute [rw] path
+        # @!attribute path
+        #
         #   @return [String]
         required :path, String
 
         # @!parse
-        #   # Create a new instance of Poll from a Hash of raw data.
+        #   # @param token [String]
+        #   # @param path [String]
         #   #
-        #   # @param data [Hash{Symbol => Object}] .
-        #   #   @option data [String] :token
-        #   #   @option data [String] :path
-        #   def initialize(data = {}) = super
-      end
+        #   def initialize(token:, path:, **) = super
 
-      # @!parse
-      #   # Create a new instance of SearchCreateResponse from a Hash of raw data.
-      #   #
-      #   # @param data [Hash{Symbol => Object}] .
-      #   #   @option data [Object] :poll
-      #   def initialize(data = {}) = super
+        # def initialize: (Hash | FindAI::BaseModel) -> void
+      end
     end
   end
 end
