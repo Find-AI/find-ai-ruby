@@ -1,0 +1,18 @@
+module FindAI
+  module Models
+    type search_retrieve_params = {  } & FindAI::request_parameters
+
+    class SearchRetrieveParams < FindAI::BaseModel
+      extend FindAI::RequestParameters::Converter
+      include FindAI::RequestParameters
+
+      def initialize:
+        (request_options: FindAI::request_opts) -> void
+        | (
+          ?FindAI::Models::search_retrieve_params | FindAI::BaseModel data
+        ) -> void
+
+      def to_hash: -> FindAI::Models::search_retrieve_params
+    end
+  end
+end

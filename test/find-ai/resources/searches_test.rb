@@ -2,23 +2,26 @@
 
 require_relative "../test_helper"
 
-class FindAI::Test::Resources::SearchesTest < Minitest::Test
-  parallelize_me!
-
-  def setup
-    @find_ai = FindAI::Client.new(
-      base_url: ENV.fetch("TEST_API_BASE_URL", "http://localhost:4010"),
-      api_key: "My API Key"
-    )
-  end
-
+class FindAI::Test::Resources::SearchesTest < FindAI::Test::ResourceTest
   def test_create
     response = @find_ai.searches.create
-    assert_kind_of(FindAI::Models::SearchCreateResponse, response)
+
+    assert_pattern do
+      response => FindAI::Models::SearchCreateResponse
+    end
+
+    assert_pattern do
+      response => {
+        poll: FindAI::Models::SearchCreateResponse::Poll
+      }
+    end
   end
 
   def test_retrieve
     response = @find_ai.searches.retrieve("id")
-    assert_kind_of(Array, response)
+
+    assert_pattern do
+      response => ^(FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem])
+    end
   end
 end

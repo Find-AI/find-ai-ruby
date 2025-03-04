@@ -2,82 +2,122 @@
 
 module FindAI
   module Models
-    class SearchRetrieveResponse < FindAI::BaseModel
-      # @!attribute [rw] linkedin_url
+    class SearchRetrieveResponseItem < FindAI::BaseModel
+      # @!attribute linkedin_url
+      #
       #   @return [String]
       required :linkedin_url, String
 
-      # @!attribute [rw] name
+      # @!attribute name
+      #
       #   @return [String]
       required :name, String
 
-      # @!attribute [rw] company
+      # @!attribute [r] company
       #   Returned only for a person.
-      #   @return [String]
+      #
+      #   @return [String, nil]
       optional :company, String
 
-      # @!attribute [rw] criteria_and_reasons
-      #   @return [Array<FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse::CriteriaAndReason>]
-      optional :criteria_and_reasons,
-               FindAI::ArrayOf.new(
-                 -> {
-                   FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse::CriteriaAndReason
-                 }
-               )
+      # @!parse
+      #   # @return [String]
+      #   attr_writer :company
 
-      # @!attribute [rw] domain
+      # @!attribute [r] criteria_and_reasons
+      #
+      #   @return [Array<FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason>, nil]
+      optional :criteria_and_reasons,
+               -> { FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason] }
+
+      # @!parse
+      #   # @return [Array<FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason>]
+      #   attr_writer :criteria_and_reasons
+
+      # @!attribute [r] domain
       #   Returned only for a company.
-      #   @return [String]
+      #
+      #   @return [String, nil]
       optional :domain, String
 
-      # @!attribute [rw] status
+      # @!parse
+      #   # @return [String]
+      #   attr_writer :domain
+
+      # @!attribute [r] status
       #   The status of the search result.
-      #   @return [String]
+      #
+      #   @return [String, nil]
       optional :status, String
 
-      # @!attribute [rw] title
+      # @!parse
+      #   # @return [String]
+      #   attr_writer :status
+
+      # @!attribute [r] title
       #   Returned only for a person.
-      #   @return [String]
+      #
+      #   @return [String, nil]
       optional :title, String
 
+      # @!parse
+      #   # @return [String]
+      #   attr_writer :title
+
+      # @!parse
+      #   # @param linkedin_url [String]
+      #   # @param name [String]
+      #   # @param company [String]
+      #   # @param criteria_and_reasons [Array<FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason>]
+      #   # @param domain [String]
+      #   # @param status [String]
+      #   # @param title [String]
+      #   #
+      #   def initialize(linkedin_url:, name:, company: nil, criteria_and_reasons: nil, domain: nil, status: nil, title: nil, **) = super
+
+      # def initialize: (Hash | FindAI::BaseModel) -> void
+
       class CriteriaAndReason < FindAI::BaseModel
-        # @!attribute [rw] criteria
+        # @!attribute [r] criteria
         #   Match criteria
-        #   @return [String]
+        #
+        #   @return [String, nil]
         optional :criteria, String
 
-        # @!attribute [rw] match
+        # @!parse
+        #   # @return [String]
+        #   attr_writer :criteria
+
+        # @!attribute [r] match
         #   Whether it's a match
-        #   @return [Boolean]
+        #
+        #   @return [Boolean, nil]
         optional :match, FindAI::BooleanModel
 
-        # @!attribute [rw] reason
+        # @!parse
+        #   # @return [Boolean]
+        #   attr_writer :match
+
+        # @!attribute [r] reason
         #   Reason for the match
-        #   @return [String]
+        #
+        #   @return [String, nil]
         optional :reason, String
 
         # @!parse
-        #   # Create a new instance of CriteriaAndReason from a Hash of raw data.
-        #   #
-        #   # @param data [Hash{Symbol => Object}] .
-        #   #   @option data [String, nil] :criteria Match criteria
-        #   #   @option data [Hash, nil] :match Whether it's a match
-        #   #   @option data [String, nil] :reason Reason for the match
-        #   def initialize(data = {}) = super
-      end
+        #   # @return [String]
+        #   attr_writer :reason
 
-      # @!parse
-      #   # Create a new instance of SearchRetrieveResponse from a Hash of raw data.
-      #   #
-      #   # @param data [Hash{Symbol => Object}] .
-      #   #   @option data [String] :linkedin_url
-      #   #   @option data [String] :name
-      #   #   @option data [String, nil] :company Returned only for a person.
-      #   #   @option data [Array<Object>, nil] :criteria_and_reasons
-      #   #   @option data [String, nil] :domain Returned only for a company.
-      #   #   @option data [String, nil] :status The status of the search result.
-      #   #   @option data [String, nil] :title Returned only for a person.
-      #   def initialize(data = {}) = super
+        # @!parse
+        #   # @param criteria [String]
+        #   # @param match [Boolean]
+        #   # @param reason [String]
+        #   #
+        #   def initialize(criteria: nil, match: nil, reason: nil, **) = super
+
+        # def initialize: (Hash | FindAI::BaseModel) -> void
+      end
     end
+
+    SearchRetrieveResponse = FindAI::ArrayOf[-> { FindAI::Models::SearchRetrieveResponseItem }]
   end
 end
