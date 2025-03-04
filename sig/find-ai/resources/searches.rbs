@@ -1,0 +1,29 @@
+module FindAI
+  module Resources
+    class Searches
+      def create:
+        (
+          ?FindAI::Models::SearchCreateParams | ::Hash[Symbol, top] params
+        ) -> FindAI::Models::SearchCreateResponse
+        | (
+          max_matches: Float,
+          query: String,
+          result_mode: FindAI::Models::SearchCreateParams::result_mode,
+          scope: FindAI::Models::SearchCreateParams::scope,
+          request_options: FindAI::request_opts
+        ) -> FindAI::Models::SearchCreateResponse
+
+      def retrieve:
+        (
+          String id,
+          ?FindAI::Models::SearchRetrieveParams | ::Hash[Symbol, top] params
+        ) -> FindAI::Models::search_retrieve_response
+        | (
+          String id,
+          request_options: FindAI::request_opts
+        ) -> FindAI::Models::search_retrieve_response
+
+      def initialize: (client: FindAI::Client) -> void
+    end
+  end
+end

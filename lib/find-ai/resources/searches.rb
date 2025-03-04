@@ -3,46 +3,56 @@
 module FindAI
   module Resources
     class Searches
-      # @param client [FindAI::Client]
-      def initialize(client:)
-        @client = client
-      end
-
       # Starts a search.
       #
-      # @param params [Hash{Symbol => Object}] Attributes to send in this request.
-      #   @option params [Float, nil] :max_matches The maximum number of results to return. optional for result_mode exact
-      #   @option params [String, nil] :query Search query.
-      #   @option params [Symbol, ResultMode, nil] :result_mode The mode of the search. Valid values are 'exact' or 'best'.
-      #   @option params [Symbol, Scope, nil] :scope The scope of the search. Valid values are 'person' or 'company'.
+      # @param params [FindAI::Models::SearchCreateParams, Hash{Symbol=>Object}] .
       #
-      # @param opts [Hash{Symbol => Object}, FindAI::RequestOptions] Options to specify HTTP behaviour for this request.
+      #   @option params [Float] :max_matches The maximum number of results to return. optional for result_mode exact
+      #
+      #   @option params [String] :query Search query.
+      #
+      #   @option params [Symbol, FindAI::Models::SearchCreateParams::ResultMode] :result_mode The mode of the search. Valid values are 'exact' or 'best'.
+      #
+      #   @option params [Symbol, FindAI::Models::SearchCreateParams::Scope] :scope The scope of the search. Valid values are 'person' or 'company'.
+      #
+      #   @option params [FindAI::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [FindAI::Models::SearchCreateResponse]
-      def create(params = {}, opts = {})
-        req = {
+      #
+      def create(params = {})
+        parsed, options = FindAI::Models::SearchCreateParams.dump_request(params)
+        @client.request(
           method: :post,
-          path: "/v1/searches",
-          headers: {"Content-Type" => "application/json"},
-          body: params,
-          model: FindAI::Models::SearchCreateResponse
-        }
-        @client.request(req, opts)
+          path: "v1/searches",
+          body: parsed,
+          model: FindAI::Models::SearchCreateResponse,
+          options: options
+        )
       end
 
       # The endpoint to poll to check the latest results of a search.
       #
       # @param id [String] The id returned with your initial API call.
-      # @param opts [Hash{Symbol => Object}, FindAI::RequestOptions] Options to specify HTTP behaviour for this request.
       #
-      # @return [Array<FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse>]
-      def retrieve(id, opts = {})
-        req = {
+      # @param params [FindAI::Models::SearchRetrieveParams, Hash{Symbol=>Object}] .
+      #
+      #   @option params [FindAI::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      #
+      # @return [Array<FindAI::Models::SearchRetrieveResponseItem>]
+      #
+      def retrieve(id, params = {})
+        @client.request(
           method: :get,
-          path: "/v1/searches/#{id}",
-          model: FindAI::ArrayOf.new(FindAI::Models::SearchRetrieveResponse::SearchRetrieveResponse)
-        }
-        @client.request(req, opts)
+          path: ["v1/searches/%0s", id],
+          model: FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem],
+          options: params[:request_options]
+        )
+      end
+
+      # @param client [FindAI::Client]
+      #
+      def initialize(client:)
+        @client = client
       end
     end
   end

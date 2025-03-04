@@ -1,13 +1,13 @@
 # Find AI Ruby API library
 
-The Find AI Ruby library provides convenient access to the Find AI REST API from any Ruby 3.0+
+The Find AI Ruby library provides convenient access to the Find AI REST API from any Ruby 3.0.0+
 application.
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-Documentation for the most recent version of this gem can be found [on RubyDoc](https://rubydoc.info/github/Find-AI/find-ai-ruby).
+Documentation for the most recent release of this gem can be found [on RubyDoc](https://gemdocs.org/gems/find-ai/latest).
 
 The underlying REST API documentation can be found on [usefind.ai](https://usefind.ai/api/docs/).
 
@@ -36,6 +36,7 @@ bundle update find-ai
 ## Usage
 
 ```ruby
+require "bundler/setup"
 require "find-ai"
 
 find_ai = FindAI::Client.new(
@@ -49,13 +50,13 @@ searches = find_ai.searches.retrieve
 
 When the library is unable to connect to the API, or if the API returns a
 non-success status code (i.e., 4xx or 5xx response), a subclass of
-`FindAI::HTTP::Error` will be thrown:
+`FindAI::Error` will be thrown:
 
 ```ruby
 begin
   search = find_ai.searches.retrieve
-rescue FindAI::HTTP::Error => e
-  puts(e.code) # 400
+rescue FindAI::Error => e
+  puts(e.status) # 400
 end
 ```
 
@@ -91,7 +92,7 @@ find_ai = FindAI::Client.new(
 )
 
 # Or, configure per-request:
-find_ai.searches.retrieve(max_retries: 5)
+find_ai.searches.retrieve(request_options: {max_retries: 5})
 ```
 
 ### Timeouts
@@ -109,7 +110,7 @@ find_ai = FindAI::Client.new(
 )
 
 # Or, configure per-request:
-find_ai.searches.retrieve(timeout: 5)
+find_ai.searches.retrieve(request_options: {timeout: 5})
 ```
 
 ## Versioning
