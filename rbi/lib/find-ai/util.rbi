@@ -155,11 +155,11 @@ module FindAI
     end
 
     sig { params(enum: T::Enumerable[String]).returns(T::Enumerable[String]) }
-    def self.enum_lines(enum)
+    def self.decode_lines(enum)
     end
 
     sig { params(lines: T::Enumerable[String]).returns(FindAI::Util::SSEMessage) }
-    def self.parse_sse(lines)
+    def self.decode_sse(lines)
     end
   end
 end
