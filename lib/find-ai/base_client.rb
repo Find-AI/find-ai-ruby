@@ -447,7 +447,7 @@ module FindAI
       in { stream: Class => st }
         st.new(model: model, url: url, status: status, response: response, messages: decoded)
       in { page: Class => page }
-        page.new(client: self, req: req, headers: response, unwrapped: decoded)
+        page.new(client: self, req: req, headers: response, page_data: decoded)
       else
         unwrapped = FindAI::Util.dig(decoded, req[:unwrap])
         FindAI::Converter.coerce(model, unwrapped)
