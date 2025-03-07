@@ -839,6 +839,13 @@ module FindAI
   #
   # @abstract
   #
+  # @example
+  # ```ruby
+  # # `search_create_response` is a `FindAI::Models::SearchCreateResponse`
+  # search_create_response => {
+  #   poll: poll
+  # }
+  # ```
   class BaseModel
     extend FindAI::Converter
 
