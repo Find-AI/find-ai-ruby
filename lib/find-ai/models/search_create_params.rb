@@ -61,16 +61,6 @@ module FindAI
       # @abstract
       #
       # The mode of the search. Valid values are 'exact' or 'best'.
-      #
-      # @example
-      # ```ruby
-      # case result_mode
-      # in :exact
-      #   # ...
-      # in :best
-      #   # ...
-      # end
-      # ```
       class ResultMode < FindAI::Enum
         EXACT = :exact
         BEST = :best
@@ -86,16 +76,6 @@ module FindAI
       # @abstract
       #
       # The scope of the search. Valid values are 'person' or 'company'.
-      #
-      # @example
-      # ```ruby
-      # case scope
-      # in :person
-      #   # ...
-      # in :company
-      #   # ...
-      # end
-      # ```
       class Scope < FindAI::Enum
         PERSON = :person
         COMPANY = :company
