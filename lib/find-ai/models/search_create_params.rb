@@ -66,11 +66,6 @@ module FindAI
         BEST = :best
 
         finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   #
-        #   def self.values; end
       end
 
       # @abstract
@@ -81,11 +76,6 @@ module FindAI
         COMPANY = :company
 
         finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   #
-        #   def self.values; end
       end
     end
   end

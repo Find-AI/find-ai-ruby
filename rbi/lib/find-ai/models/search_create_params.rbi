@@ -72,8 +72,10 @@ module FindAI
         EXACT = :exact
         BEST = :best
 
-        sig { override.returns(T::Array[Symbol]) }
-        def self.values
+        class << self
+          sig { override.returns(T::Array[Symbol]) }
+          def values
+          end
         end
       end
 
@@ -83,8 +85,10 @@ module FindAI
         PERSON = :person
         COMPANY = :company
 
-        sig { override.returns(T::Array[Symbol]) }
-        def self.values
+        class << self
+          sig { override.returns(T::Array[Symbol]) }
+          def values
+          end
         end
       end
     end
