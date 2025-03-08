@@ -43,25 +43,27 @@ module FindAI
 
     PLATFORM_HEADERS = T::Hash[String, String]
 
-    sig { params(req: FindAI::BaseClient::RequestComponentsShape).void }
-    def self.validate!(req)
-    end
+    class << self
+      sig { params(req: FindAI::BaseClient::RequestComponentsShape).void }
+      def self.validate!(req)
+      end
 
-    sig do
-      params(status: Integer, headers: T.any(T::Hash[String, String], Net::HTTPHeader)).returns(T::Boolean)
-    end
-    def self.should_retry?(status, headers:)
-    end
+      sig do
+        params(status: Integer, headers: T.any(T::Hash[String, String], Net::HTTPHeader)).returns(T::Boolean)
+      end
+      def self.should_retry?(status, headers:)
+      end
 
-    sig do
-      params(
-        request: FindAI::BaseClient::RequestInputShape,
-        status: Integer,
-        response_headers: T.any(T::Hash[String, String], Net::HTTPHeader)
-      )
-        .returns(FindAI::BaseClient::RequestInputShape)
-    end
-    def self.follow_redirect(request, status:, response_headers:)
+      sig do
+        params(
+          request: FindAI::BaseClient::RequestInputShape,
+          status: Integer,
+          response_headers: T.any(T::Hash[String, String], Net::HTTPHeader)
+        )
+          .returns(FindAI::BaseClient::RequestInputShape)
+      end
+      def self.follow_redirect(request, status:, response_headers:)
+      end
     end
 
     sig { returns(T.anything) }
