@@ -46,9 +46,9 @@ module FindAI
           scope: Symbol,
           request_options: T.any(FindAI::RequestOptions, T::Hash[Symbol, T.anything])
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {})
+      def self.new(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {})
       end
 
       sig do

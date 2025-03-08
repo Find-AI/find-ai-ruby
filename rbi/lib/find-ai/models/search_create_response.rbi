@@ -11,8 +11,8 @@ module FindAI
       def poll=(_)
       end
 
-      sig { params(poll: FindAI::Models::SearchCreateResponse::Poll).void }
-      def initialize(poll:)
+      sig { params(poll: FindAI::Models::SearchCreateResponse::Poll).returns(T.attached_class) }
+      def self.new(poll:)
       end
 
       sig { override.returns({poll: FindAI::Models::SearchCreateResponse::Poll}) }
@@ -36,8 +36,8 @@ module FindAI
         def path=(_)
         end
 
-        sig { params(token: String, path: String).void }
-        def initialize(token:, path:)
+        sig { params(token: String, path: String).returns(T.attached_class) }
+        def self.new(token:, path:)
         end
 
         sig { override.returns({token: String, path: String}) }

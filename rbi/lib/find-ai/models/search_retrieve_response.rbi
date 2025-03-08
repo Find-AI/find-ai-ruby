@@ -72,17 +72,9 @@ module FindAI
           status: String,
           title: String
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(
-        linkedin_url:,
-        name:,
-        company: nil,
-        criteria_and_reasons: nil,
-        domain: nil,
-        status: nil,
-        title: nil
-      )
+      def self.new(linkedin_url:, name:, company: nil, criteria_and_reasons: nil, domain: nil, status: nil, title: nil)
       end
 
       sig do
@@ -127,8 +119,8 @@ module FindAI
         def reason=(_)
         end
 
-        sig { params(criteria: String, match: T::Boolean, reason: String).void }
-        def initialize(criteria: nil, match: nil, reason: nil)
+        sig { params(criteria: String, match: T::Boolean, reason: String).returns(T.attached_class) }
+        def self.new(criteria: nil, match: nil, reason: nil)
         end
 
         sig { override.returns({criteria: String, match: T::Boolean, reason: String}) }
