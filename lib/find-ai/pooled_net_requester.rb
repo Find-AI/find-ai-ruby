@@ -156,11 +156,12 @@ module FindAI
       end
 
       conn, response = enum.next
-      body = FindAI::Util.fused_enum(enum) do
+      body = FindAI::Util.fused_enum(enum, external: true) do
         finished = true
         tap do
           enum.next
         rescue StopIteration
+          nil
         end
         conn.finish if !eof && conn&.started?
       end
