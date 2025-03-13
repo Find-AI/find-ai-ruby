@@ -5,6 +5,26 @@ module FindAI
   #
   # @abstract
   #
+  # @example
+  # ```ruby
+  # if page.has_next?
+  #   page = page.next_page
+  # end
+  # ```
+  #
+  # @example
+  # ```ruby
+  # page.auto_paging_each do |search|
+  #   puts(search)
+  # end
+  # ```
+  #
+  # @example
+  # ```ruby
+  # searches = page.to_enum.take(2)
+  #
+  # searches => Array
+  # ```
   module BasePage
     # @return [Boolean]
     #
