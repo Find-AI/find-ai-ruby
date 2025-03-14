@@ -205,7 +205,7 @@ module FindAI
       end
     end
 
-    SSEMessage = T.type_alias do
+    ServerSentEvent = T.type_alias do
       {event: T.nilable(String), data: T.nilable(String), id: T.nilable(String), retry: T.nilable(Integer)}
     end
 
@@ -214,7 +214,7 @@ module FindAI
       def decode_lines(enum)
       end
 
-      sig { params(lines: T::Enumerable[String]).returns(FindAI::Util::SSEMessage) }
+      sig { params(lines: T::Enumerable[String]).returns(FindAI::Util::ServerSentEvent) }
       def decode_sse(lines)
       end
     end
