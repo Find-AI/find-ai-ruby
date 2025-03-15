@@ -3,6 +3,7 @@
 module FindAI
   module Resources
     class Searches
+      # Starts a search.
       sig do
         params(
           max_matches: Float,
@@ -16,6 +17,7 @@ module FindAI
       def create(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {})
       end
 
+      # The endpoint to poll to check the latest results of a search.
       sig do
         params(
           id: String,

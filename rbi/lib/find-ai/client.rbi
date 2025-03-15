@@ -18,10 +18,12 @@ module FindAI
     def searches
     end
 
+    # @api private
     sig { override.returns(T::Hash[String, String]) }
     private def auth_headers
     end
 
+    # Creates and returns a new client for interacting with the API.
     sig do
       params(
         base_url: T.nilable(String),
