@@ -19,6 +19,7 @@ module FindAI
       def name=(_)
       end
 
+      # Returned only for a person.
       sig { returns(T.nilable(String)) }
       def company
       end
@@ -38,6 +39,7 @@ module FindAI
       def criteria_and_reasons=(_)
       end
 
+      # Returned only for a company.
       sig { returns(T.nilable(String)) }
       def domain
       end
@@ -46,6 +48,7 @@ module FindAI
       def domain=(_)
       end
 
+      # The status of the search result.
       sig { returns(T.nilable(String)) }
       def status
       end
@@ -54,6 +57,7 @@ module FindAI
       def status=(_)
       end
 
+      # Returned only for a person.
       sig { returns(T.nilable(String)) }
       def title
       end
@@ -95,6 +99,7 @@ module FindAI
       end
 
       class CriteriaAndReason < FindAI::BaseModel
+        # Match criteria
         sig { returns(T.nilable(String)) }
         def criteria
         end
@@ -103,6 +108,7 @@ module FindAI
         def criteria=(_)
         end
 
+        # Whether it's a match
         sig { returns(T.nilable(T::Boolean)) }
         def match
         end
@@ -111,6 +117,7 @@ module FindAI
         def match=(_)
         end
 
+        # Reason for the match
         sig { returns(T.nilable(String)) }
         def reason
         end
