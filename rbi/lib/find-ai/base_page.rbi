@@ -1,7 +1,6 @@
 # typed: strong
 
 module FindAI
-  # @api private
   module BasePage
     abstract!
 

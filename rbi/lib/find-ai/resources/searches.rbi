@@ -14,7 +14,17 @@ module FindAI
         )
           .returns(FindAI::Models::SearchCreateResponse)
       end
-      def create(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {})
+      def create(
+        # The maximum number of results to return. optional for result_mode exact
+        max_matches: nil,
+        # Search query.
+        query: nil,
+        # The mode of the search. Valid values are 'exact' or 'best'.
+        result_mode: nil,
+        # The scope of the search. Valid values are 'person' or 'company'.
+        scope: nil,
+        request_options: {}
+      )
       end
 
       # The endpoint to poll to check the latest results of a search.
@@ -30,7 +40,11 @@ module FindAI
         )
           .returns(FindAI::Models::SearchRetrieveResponse)
       end
-      def retrieve(id, request_options: {})
+      def retrieve(
+        # The id returned with your initial API call.
+        id,
+        request_options: {}
+      )
       end
 
       sig { params(client: FindAI::Client).returns(T.attached_class) }
