@@ -21,10 +21,9 @@ module FindAI
     # @return [FindAI::Resources::Searches]
     attr_reader :searches
 
-    # @private
+    # @api private
     #
     # @return [Hash{String=>String}]
-    #
     private def auth_headers
       {"authorization" => @api_key}
     end
@@ -42,7 +41,6 @@ module FindAI
     # @param initial_retry_delay [Float]
     #
     # @param max_retry_delay [Float]
-    #
     def initialize(
       base_url: nil,
       api_key: ENV["FIND_AI_API_KEY"],

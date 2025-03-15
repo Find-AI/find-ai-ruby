@@ -6,6 +6,7 @@ module FindAI
       extend FindAI::RequestParameters::Converter
       include FindAI::RequestParameters
 
+      # The maximum number of results to return. optional for result_mode exact
       sig { returns(T.nilable(Float)) }
       def max_matches
       end
@@ -14,6 +15,7 @@ module FindAI
       def max_matches=(_)
       end
 
+      # Search query.
       sig { returns(T.nilable(String)) }
       def query
       end
@@ -22,6 +24,7 @@ module FindAI
       def query=(_)
       end
 
+      # The mode of the search. Valid values are 'exact' or 'best'.
       sig { returns(T.nilable(Symbol)) }
       def result_mode
       end
@@ -30,6 +33,7 @@ module FindAI
       def result_mode=(_)
       end
 
+      # The scope of the search. Valid values are 'person' or 'company'.
       sig { returns(T.nilable(Symbol)) }
       def scope
       end
@@ -66,6 +70,7 @@ module FindAI
       def to_hash
       end
 
+      # The mode of the search. Valid values are 'exact' or 'best'.
       class ResultMode < FindAI::Enum
         abstract!
 
@@ -79,6 +84,7 @@ module FindAI
         end
       end
 
+      # The scope of the search. Valid values are 'person' or 'company'.
       class Scope < FindAI::Enum
         abstract!
 
