@@ -816,8 +816,6 @@ module FindAI
     end
   end
 
-  # @api private
-  #
   # @abstract
   #
   # @example
@@ -841,6 +839,8 @@ module FindAI
         @known_fields ||= (self < FindAI::BaseModel ? superclass.known_fields.dup : {})
       end
 
+      # @api private
+      #
       # @return [Hash{Symbol=>Hash{Symbol=>Object}}]
       def fields
         known_fields.transform_values do |field|

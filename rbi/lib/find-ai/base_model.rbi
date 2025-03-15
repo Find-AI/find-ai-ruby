@@ -438,6 +438,7 @@ module FindAI
       def known_fields
       end
 
+      # @api private
       sig do
         returns(T::Hash[Symbol, T.all(FindAI::BaseModel::KnownFieldShape, {type: FindAI::Converter::Input})])
       end
