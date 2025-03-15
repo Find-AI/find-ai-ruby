@@ -385,11 +385,16 @@ module FindAI
 
       # @api private
       #
+      # @return [Array<Array(Symbol, Object)>]
+      protected def derefed_variants
+        @known_variants.map { |key, variant_fn| [key, variant_fn.call] }
+      end
+
       # All of the specified variants for this union.
       #
-      # @return [Array<Array(Symbol, Object)>]
-      protected def variants
-        @known_variants.map { |key, variant_fn| [key, variant_fn.call] }
+      # @return [Array<Object>]
+      def variants
+        derefed_variants.map(&:last)
       end
 
       # @api private
@@ -471,7 +476,7 @@ module FindAI
     #
     # @return [Boolean]
     def self.==(other)
-      other.is_a?(Class) && other <= FindAI::Union && other.variants == variants
+      other.is_a?(Class) && other <= FindAI::Union && other.derefed_variants == derefed_variants
     end
 
     class << self
