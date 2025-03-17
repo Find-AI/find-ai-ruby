@@ -3,8 +3,6 @@
 module FindAI
   # @api private
   module RequestParameters
-    abstract!
-
     # Options to specify HTTP behaviour for this request.
     sig { returns(T.any(FindAI::RequestOptions, T::Hash[Symbol, T.anything])) }
     def request_options
