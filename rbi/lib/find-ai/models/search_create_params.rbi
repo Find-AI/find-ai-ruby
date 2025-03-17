@@ -74,28 +74,20 @@ module FindAI
       class ResultMode < FindAI::Enum
         abstract!
 
+        Value = type_template(:out) { {fixed: Symbol} }
+
         EXACT = :exact
         BEST = :best
-
-        class << self
-          sig { override.returns(T::Array[Symbol]) }
-          def values
-          end
-        end
       end
 
       # The scope of the search. Valid values are 'person' or 'company'.
       class Scope < FindAI::Enum
         abstract!
 
+        Value = type_template(:out) { {fixed: Symbol} }
+
         PERSON = :person
         COMPANY = :company
-
-        class << self
-          sig { override.returns(T::Array[Symbol]) }
-          def values
-          end
-        end
       end
     end
   end
