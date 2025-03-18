@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.md"]
   s.required_ruby_version = ">= 3.0.0"
   s.add_dependency "connection_pool"
-  s.homepage = "https://gemdocs.org/gems/find-ai/latest"
+  s.homepage = "https://gemdocs.org/gems/find-ai"
   s.metadata["homepage_uri"] = s.homepage
   s.metadata["source_code_uri"] = "https://github.com/Find-AI/find-ai-ruby"
   s.metadata["rubygems_mfa_required"] = "false"
