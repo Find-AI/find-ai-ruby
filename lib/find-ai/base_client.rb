@@ -9,14 +9,15 @@ module FindAI
     MAX_REDIRECTS = 20
 
     # rubocop:disable Style/MutableConstant
-    PLATFORM_HEADERS = {
-      "x-stainless-arch" => FindAI::Util.arch,
-      "x-stainless-lang" => "ruby",
-      "x-stainless-os" => FindAI::Util.os,
-      "x-stainless-package-version" => FindAI::VERSION,
-      "x-stainless-runtime" => ::RUBY_ENGINE,
-      "x-stainless-runtime-version" => ::RUBY_ENGINE_VERSION
-    }
+    PLATFORM_HEADERS =
+      {
+        "x-stainless-arch" => FindAI::Util.arch,
+        "x-stainless-lang" => "ruby",
+        "x-stainless-os" => FindAI::Util.os,
+        "x-stainless-package-version" => FindAI::VERSION,
+        "x-stainless-runtime" => ::RUBY_ENGINE,
+        "x-stainless-runtime-version" => ::RUBY_ENGINE_VERSION
+      }
     # rubocop:enable Style/MutableConstant
 
     class << self
