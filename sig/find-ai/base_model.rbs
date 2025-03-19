@@ -121,6 +121,13 @@ module FindAI
   class ArrayOf[Elem]
     include FindAI::Converter
 
+    def self.[]: (
+      ::Hash[Symbol, top]
+      | ^-> FindAI::Converter::input
+      | FindAI::Converter::input type_info,
+      ?::Hash[Symbol, top] spec
+    ) -> instance
+
     def ===: (top other) -> bool
 
     def ==: (top other) -> bool
@@ -145,6 +152,13 @@ module FindAI
 
   class HashOf[Elem]
     include FindAI::Converter
+
+    def self.[]: (
+      ::Hash[Symbol, top]
+      | ^-> FindAI::Converter::input
+      | FindAI::Converter::input type_info,
+      ?::Hash[Symbol, top] spec
+    ) -> instance
 
     def ===: (top other) -> bool
 
