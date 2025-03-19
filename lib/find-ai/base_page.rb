@@ -17,7 +17,8 @@ module FindAI
   #
   # @example
   # ```ruby
-  # searches = page
+  # searches =
+  #   page
   #   .to_enum
   #   .lazy
   #   .select { _1.object_id.even? }
