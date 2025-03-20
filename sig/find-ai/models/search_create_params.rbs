@@ -33,17 +33,13 @@ module FindAI
         FindAI::Models::SearchCreateParams::scope
       ) -> FindAI::Models::SearchCreateParams::scope
 
-      def initialize:
-        (
-          ?max_matches: Float,
-          ?query: String,
-          ?result_mode: FindAI::Models::SearchCreateParams::result_mode,
-          ?scope: FindAI::Models::SearchCreateParams::scope,
-          ?request_options: FindAI::request_opts
-        ) -> void
-        | (
-          ?FindAI::Models::search_create_params | FindAI::BaseModel data
-        ) -> void
+      def initialize: (
+        ?max_matches: Float,
+        ?query: String,
+        ?result_mode: FindAI::Models::SearchCreateParams::result_mode,
+        ?scope: FindAI::Models::SearchCreateParams::scope,
+        ?request_options: FindAI::request_opts
+      ) -> void
 
       def to_hash: -> FindAI::Models::search_create_params
 
