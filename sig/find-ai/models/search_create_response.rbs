@@ -6,11 +6,7 @@ module FindAI
     class SearchCreateResponse < FindAI::BaseModel
       attr_accessor poll: FindAI::Models::SearchCreateResponse::Poll
 
-      def initialize:
-        (poll: FindAI::Models::SearchCreateResponse::Poll) -> void
-        | (
-          ?FindAI::Models::search_create_response | FindAI::BaseModel data
-        ) -> void
+      def initialize: (poll: FindAI::Models::SearchCreateResponse::Poll) -> void
 
       def to_hash: -> FindAI::Models::search_create_response
 
@@ -21,11 +17,7 @@ module FindAI
 
         attr_accessor path: String
 
-        def initialize:
-          (token: String, path: String) -> void
-          | (
-            ?FindAI::Models::SearchCreateResponse::poll | FindAI::BaseModel data
-          ) -> void
+        def initialize: (token: String, path: String) -> void
 
         def to_hash: -> FindAI::Models::SearchCreateResponse::poll
       end

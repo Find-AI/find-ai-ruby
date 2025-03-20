@@ -38,20 +38,15 @@ module FindAI
 
       def title=: (String) -> String
 
-      def initialize:
-        (
-          linkedin_url: String,
-          name: String,
-          ?company: String,
-          ?criteria_and_reasons: ::Array[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason],
-          ?domain: String,
-          ?status: String,
-          ?title: String
-        ) -> void
-        | (
-          ?FindAI::Models::search_retrieve_response_item
-          | FindAI::BaseModel data
-        ) -> void
+      def initialize: (
+        linkedin_url: String,
+        name: String,
+        ?company: String,
+        ?criteria_and_reasons: ::Array[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason],
+        ?domain: String,
+        ?status: String,
+        ?title: String
+      ) -> void
 
       def to_hash: -> FindAI::Models::search_retrieve_response_item
 
@@ -71,12 +66,11 @@ module FindAI
 
         def reason=: (String) -> String
 
-        def initialize:
-          (?criteria: String, ?match: bool, ?reason: String) -> void
-          | (
-            ?FindAI::Models::SearchRetrieveResponseItem::criteria_and_reason
-            | FindAI::BaseModel data
-          ) -> void
+        def initialize: (
+          ?criteria: String,
+          ?match: bool,
+          ?reason: String
+        ) -> void
 
         def to_hash: -> FindAI::Models::SearchRetrieveResponseItem::criteria_and_reason
       end

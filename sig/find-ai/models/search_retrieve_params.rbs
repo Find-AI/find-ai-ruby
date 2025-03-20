@@ -6,11 +6,7 @@ module FindAI
       extend FindAI::RequestParameters::Converter
       include FindAI::RequestParameters
 
-      def initialize:
-        (?request_options: FindAI::request_opts) -> void
-        | (
-          ?FindAI::Models::search_retrieve_params | FindAI::BaseModel data
-        ) -> void
+      def initialize: (?request_options: FindAI::request_opts) -> void
 
       def to_hash: -> FindAI::Models::search_retrieve_params
     end
