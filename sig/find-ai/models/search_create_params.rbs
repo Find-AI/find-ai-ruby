@@ -35,11 +35,11 @@ module FindAI
 
       def initialize:
         (
-          max_matches: Float,
-          query: String,
-          result_mode: FindAI::Models::SearchCreateParams::result_mode,
-          scope: FindAI::Models::SearchCreateParams::scope,
-          request_options: FindAI::request_opts
+          ?max_matches: Float,
+          ?query: String,
+          ?result_mode: FindAI::Models::SearchCreateParams::result_mode,
+          ?scope: FindAI::Models::SearchCreateParams::scope,
+          ?request_options: FindAI::request_opts
         ) -> void
         | (
           ?FindAI::Models::search_create_params | FindAI::BaseModel data

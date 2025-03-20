@@ -7,7 +7,7 @@ module FindAI
       include FindAI::RequestParameters
 
       def initialize:
-        (request_options: FindAI::request_opts) -> void
+        (?request_options: FindAI::request_opts) -> void
         | (
           ?FindAI::Models::search_retrieve_params | FindAI::BaseModel data
         ) -> void
