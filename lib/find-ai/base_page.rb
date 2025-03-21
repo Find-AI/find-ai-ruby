@@ -2,32 +2,26 @@
 
 module FindAI
   # @example
-  # ```ruby
-  # if page.has_next?
-  #   page = page.next_page
-  # end
-  # ```
+  #   if page.has_next?
+  #     page = page.next_page
+  #   end
   #
   # @example
-  # ```ruby
-  # page.auto_paging_each do |search|
-  #   puts(search)
-  # end
-  # ```
+  #   page.auto_paging_each do |search|
+  #     puts(search)
+  #   end
   #
   # @example
-  # ```ruby
-  # searches =
-  #   page
-  #   .to_enum
-  #   .lazy
-  #   .select { _1.object_id.even? }
-  #   .map(&:itself)
-  #   .take(2)
-  #   .to_a
+  #   searches =
+  #     page
+  #     .to_enum
+  #     .lazy
+  #     .select { _1.object_id.even? }
+  #     .map(&:itself)
+  #     .take(2)
+  #     .to_a
   #
-  # searches => Array
-  # ```
+  #   searches => Array
   module BasePage
     # rubocop:disable Lint/UnusedMethodArgument
 
