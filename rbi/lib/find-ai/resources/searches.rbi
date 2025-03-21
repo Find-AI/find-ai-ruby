@@ -38,7 +38,7 @@ module FindAI
             )
           )
         )
-          .returns(FindAI::Models::SearchRetrieveResponse)
+          .returns(T::Array[FindAI::Models::SearchRetrieveResponseItem])
       end
       def retrieve(
         # The id returned with your initial API call.
