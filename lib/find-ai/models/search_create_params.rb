@@ -58,20 +58,20 @@ module FindAI
 
       # def initialize: (Hash | FindAI::BaseModel) -> void
 
-      # @abstract
-      #
       # The mode of the search. Valid values are 'exact' or 'best'.
-      class ResultMode < FindAI::Enum
+      module ResultMode
+        extend FindAI::Enum
+
         EXACT = :exact
         BEST = :best
 
         finalize!
       end
 
-      # @abstract
-      #
       # The scope of the search. Valid values are 'person' or 'company'.
-      class Scope < FindAI::Enum
+      module Scope
+        extend FindAI::Enum
+
         PERSON = :person
         COMPANY = :company
 
