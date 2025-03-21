@@ -14,7 +14,10 @@ module FindAI
       def poll=(_)
       end
 
-      sig { params(poll: FindAI::Models::SearchCreateResponse::Poll).returns(T.attached_class) }
+      sig do
+        params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Util::AnyHash))
+          .returns(T.attached_class)
+      end
       def self.new(poll:)
       end
 
