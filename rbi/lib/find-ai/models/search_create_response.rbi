@@ -7,7 +7,10 @@ module FindAI
       def poll
       end
 
-      sig { params(_: FindAI::Models::SearchCreateResponse::Poll).returns(FindAI::Models::SearchCreateResponse::Poll) }
+      sig do
+        params(_: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Util::AnyHash))
+          .returns(T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Util::AnyHash))
+      end
       def poll=(_)
       end
 
