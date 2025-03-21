@@ -51,7 +51,7 @@ module FindAI
         EXACT: :exact
         BEST: :best
 
-        def self.values: -> ::Array[FindAI::Models::SearchCreateParams::result_mode]
+        def self?.values: -> ::Array[FindAI::Models::SearchCreateParams::result_mode]
       end
 
       type scope = :person | :company
@@ -62,7 +62,7 @@ module FindAI
         PERSON: :person
         COMPANY: :company
 
-        def self.values: -> ::Array[FindAI::Models::SearchCreateParams::scope]
+        def self?.values: -> ::Array[FindAI::Models::SearchCreateParams::scope]
       end
     end
   end
