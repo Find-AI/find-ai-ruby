@@ -25,20 +25,26 @@ module FindAI
       end
 
       # The mode of the search. Valid values are 'exact' or 'best'.
-      sig { returns(T.nilable(Symbol)) }
+      sig { returns(T.nilable(FindAI::Models::SearchCreateParams::ResultMode::OrSymbol)) }
       def result_mode
       end
 
-      sig { params(_: Symbol).returns(Symbol) }
+      sig do
+        params(_: FindAI::Models::SearchCreateParams::ResultMode::OrSymbol)
+          .returns(FindAI::Models::SearchCreateParams::ResultMode::OrSymbol)
+      end
       def result_mode=(_)
       end
 
       # The scope of the search. Valid values are 'person' or 'company'.
-      sig { returns(T.nilable(Symbol)) }
+      sig { returns(T.nilable(FindAI::Models::SearchCreateParams::Scope::OrSymbol)) }
       def scope
       end
 
-      sig { params(_: Symbol).returns(Symbol) }
+      sig do
+        params(_: FindAI::Models::SearchCreateParams::Scope::OrSymbol)
+          .returns(FindAI::Models::SearchCreateParams::Scope::OrSymbol)
+      end
       def scope=(_)
       end
 
@@ -46,8 +52,8 @@ module FindAI
         params(
           max_matches: Float,
           query: String,
-          result_mode: Symbol,
-          scope: Symbol,
+          result_mode: FindAI::Models::SearchCreateParams::ResultMode::OrSymbol,
+          scope: FindAI::Models::SearchCreateParams::Scope::OrSymbol,
           request_options: T.any(FindAI::RequestOptions, T::Hash[Symbol, T.anything])
         )
           .returns(T.attached_class)
@@ -61,8 +67,8 @@ module FindAI
             {
               max_matches: Float,
               query: String,
-              result_mode: Symbol,
-              scope: Symbol,
+              result_mode: FindAI::Models::SearchCreateParams::ResultMode::OrSymbol,
+              scope: FindAI::Models::SearchCreateParams::Scope::OrSymbol,
               request_options: FindAI::RequestOptions
             }
           )
@@ -71,23 +77,25 @@ module FindAI
       end
 
       # The mode of the search. Valid values are 'exact' or 'best'.
-      class ResultMode < FindAI::Enum
-        abstract!
+      module ResultMode
+        extend FindAI::Enum
 
-        Value = type_template(:out) { {fixed: Symbol} }
+        TaggedSymbol = T.type_alias { T.all(Symbol, FindAI::Models::SearchCreateParams::ResultMode) }
+        OrSymbol = T.type_alias { T.any(Symbol, FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol) }
 
-        EXACT = :exact
-        BEST = :best
+        EXACT = T.let(:exact, FindAI::Models::SearchCreateParams::ResultMode::OrSymbol)
+        BEST = T.let(:best, FindAI::Models::SearchCreateParams::ResultMode::OrSymbol)
       end
 
       # The scope of the search. Valid values are 'person' or 'company'.
-      class Scope < FindAI::Enum
-        abstract!
+      module Scope
+        extend FindAI::Enum
 
-        Value = type_template(:out) { {fixed: Symbol} }
+        TaggedSymbol = T.type_alias { T.all(Symbol, FindAI::Models::SearchCreateParams::Scope) }
+        OrSymbol = T.type_alias { T.any(Symbol, FindAI::Models::SearchCreateParams::Scope::TaggedSymbol) }
 
-        PERSON = :person
-        COMPANY = :company
+        PERSON = T.let(:person, FindAI::Models::SearchCreateParams::Scope::OrSymbol)
+        COMPANY = T.let(:company, FindAI::Models::SearchCreateParams::Scope::OrSymbol)
       end
     end
   end

@@ -45,7 +45,9 @@ module FindAI
 
       type result_mode = :exact | :best
 
-      class ResultMode < FindAI::Enum
+      module ResultMode
+        extend FindAI::Enum
+
         EXACT: :exact
         BEST: :best
 
@@ -54,7 +56,9 @@ module FindAI
 
       type scope = :person | :company
 
-      class Scope < FindAI::Enum
+      module Scope
+        extend FindAI::Enum
+
         PERSON: :person
         COMPANY: :company
 
