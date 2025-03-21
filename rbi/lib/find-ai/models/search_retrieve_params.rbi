@@ -7,8 +7,12 @@ module FindAI
       include FindAI::RequestParameters
 
       sig do
-        params(request_options: T.any(FindAI::RequestOptions, T::Hash[Symbol, T.anything]))
-          .returns(T.attached_class)
+        params(
+          request_options: T.any(
+            FindAI::RequestOptions,
+            FindAI::Util::AnyHash
+          )
+        ).returns(T.attached_class)
       end
       def self.new(request_options: {})
       end

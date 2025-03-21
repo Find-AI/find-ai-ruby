@@ -10,7 +10,7 @@ module FindAI
           query: String,
           result_mode: FindAI::Models::SearchCreateParams::ResultMode::OrSymbol,
           scope: FindAI::Models::SearchCreateParams::Scope::OrSymbol,
-          request_options: T.nilable(T.any(FindAI::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Util::AnyHash))
         )
           .returns(FindAI::Models::SearchCreateResponse)
       end
@@ -29,15 +29,7 @@ module FindAI
 
       # The endpoint to poll to check the latest results of a search.
       sig do
-        params(
-          id: String,
-          request_options: T.nilable(
-            T.any(
-              FindAI::RequestOptions,
-              T::Hash[Symbol, T.anything]
-            )
-          )
-        )
+        params(id: String, request_options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Util::AnyHash)))
           .returns(T::Array[FindAI::Models::SearchRetrieveResponseItem])
       end
       def retrieve(
