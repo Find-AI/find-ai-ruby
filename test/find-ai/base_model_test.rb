@@ -3,7 +3,9 @@
 require_relative "test_helper"
 
 class FindAI::Test::BaseModelTest < Minitest::Test
-  class E1 < FindAI::Enum
+  module E1
+    extend FindAI::Enum
+
     A = :a
     B = :b
   end
@@ -242,13 +244,17 @@ class FindAI::Test::BaseModelTest < Minitest::Test
     optional :b, E1, api_name: :renamed_again
   end
 
-  class U1 < FindAI::Union
+  module U1
+    extend FindAI::Union
+
     discriminator :type
     variant :a, M1
     variant :b, M3
   end
 
-  class U2 < FindAI::Union
+  module U2
+    extend FindAI::Union
+
     variant A1
     variant A3
   end
@@ -330,12 +336,16 @@ class FindAI::Test::BaseModelTest < Minitest::Test
     end
   end
 
-  class E2 < FindAI::Enum
+  module E2
+    extend FindAI::Enum
+
     A = :a
     B = :b
   end
 
-  class U3 < FindAI::Union
+  module U3
+    extend FindAI::Union
+
     discriminator :type
     variant :a, M1
     variant :b, M3
@@ -353,7 +363,9 @@ class FindAI::Test::BaseModelTest < Minitest::Test
     assert_equal(U1, U3)
   end
 
-  class U4 < FindAI::Union
+  module U4
+    extend FindAI::Union
+
     variant :a, const: :a
     variant :b, const: :b
   end

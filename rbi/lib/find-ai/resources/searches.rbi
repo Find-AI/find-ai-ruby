@@ -8,8 +8,8 @@ module FindAI
         params(
           max_matches: Float,
           query: String,
-          result_mode: Symbol,
-          scope: Symbol,
+          result_mode: FindAI::Models::SearchCreateParams::ResultMode::OrSymbol,
+          scope: FindAI::Models::SearchCreateParams::Scope::OrSymbol,
           request_options: T.nilable(T.any(FindAI::RequestOptions, T::Hash[Symbol, T.anything]))
         )
           .returns(FindAI::Models::SearchCreateResponse)
