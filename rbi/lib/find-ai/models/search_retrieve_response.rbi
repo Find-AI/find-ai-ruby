@@ -136,6 +136,7 @@ module FindAI
       end
     end
 
-    SearchRetrieveResponse = T.type_alias { T::Array[FindAI::Models::SearchRetrieveResponseItem] }
+    SearchRetrieveResponse =
+      T.let(FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem], FindAI::Converter)
   end
 end
