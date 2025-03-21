@@ -54,7 +54,7 @@ module FindAI
           query: String,
           result_mode: FindAI::Models::SearchCreateParams::ResultMode::OrSymbol,
           scope: FindAI::Models::SearchCreateParams::Scope::OrSymbol,
-          request_options: T.any(FindAI::RequestOptions, T::Hash[Symbol, T.anything])
+          request_options: T.any(FindAI::RequestOptions, FindAI::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

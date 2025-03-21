@@ -26,7 +26,7 @@ module FindAI
           page: T.nilable(T::Class[FindAI::BasePage[FindAI::BaseModel]]),
           stream: T.nilable(T::Class[T.anything]),
           model: T.nilable(FindAI::Converter::Input),
-          options: T.nilable(T.any(FindAI::RequestOptions, T::Hash[Symbol, T.anything]))
+          options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Util::AnyHash))
         }
       end
 
@@ -129,7 +129,7 @@ module FindAI
     # @api private
     sig do
       overridable
-        .params(req: FindAI::BaseClient::RequestComponentsShape, opts: T::Hash[Symbol, T.anything])
+        .params(req: FindAI::BaseClient::RequestComponentsShape, opts: FindAI::Util::AnyHash)
         .returns(FindAI::BaseClient::RequestInputShape)
     end
     private def build_request(req, opts)
@@ -175,7 +175,7 @@ module FindAI
         page: T.nilable(T::Class[FindAI::BasePage[FindAI::BaseModel]]),
         stream: T.nilable(T::Class[T.anything]),
         model: T.nilable(FindAI::Converter::Input),
-        options: T.nilable(T.any(FindAI::RequestOptions, T::Hash[Symbol, T.anything]))
+        options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Util::AnyHash))
       )
         .returns(T.anything)
     end
