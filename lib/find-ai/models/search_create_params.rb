@@ -66,6 +66,12 @@ module FindAI
         BEST = :best
 
         finalize!
+
+        class << self
+          # @!parse
+          #   # @return [Array<Symbol>]
+          #   def values; end
+        end
       end
 
       # The scope of the search. Valid values are 'person' or 'company'.
@@ -76,6 +82,12 @@ module FindAI
         COMPANY = :company
 
         finalize!
+
+        class << self
+          # @!parse
+          #   # @return [Array<Symbol>]
+          #   def values; end
+        end
       end
     end
   end

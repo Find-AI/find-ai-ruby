@@ -83,8 +83,14 @@ module FindAI
         TaggedSymbol = T.type_alias { T.all(Symbol, FindAI::Models::SearchCreateParams::ResultMode) }
         OrSymbol = T.type_alias { T.any(Symbol, FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol) }
 
-        EXACT = T.let(:exact, FindAI::Models::SearchCreateParams::ResultMode::OrSymbol)
-        BEST = T.let(:best, FindAI::Models::SearchCreateParams::ResultMode::OrSymbol)
+        EXACT = T.let(:exact, FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol)
+        BEST = T.let(:best, FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol)
+
+        class << self
+          sig { override.returns(T::Array[FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol]) }
+          def values
+          end
+        end
       end
 
       # The scope of the search. Valid values are 'person' or 'company'.
@@ -94,8 +100,14 @@ module FindAI
         TaggedSymbol = T.type_alias { T.all(Symbol, FindAI::Models::SearchCreateParams::Scope) }
         OrSymbol = T.type_alias { T.any(Symbol, FindAI::Models::SearchCreateParams::Scope::TaggedSymbol) }
 
-        PERSON = T.let(:person, FindAI::Models::SearchCreateParams::Scope::OrSymbol)
-        COMPANY = T.let(:company, FindAI::Models::SearchCreateParams::Scope::OrSymbol)
+        PERSON = T.let(:person, FindAI::Models::SearchCreateParams::Scope::TaggedSymbol)
+        COMPANY = T.let(:company, FindAI::Models::SearchCreateParams::Scope::TaggedSymbol)
+
+        class << self
+          sig { override.returns(T::Array[FindAI::Models::SearchCreateParams::Scope::TaggedSymbol]) }
+          def values
+          end
+        end
       end
     end
   end
