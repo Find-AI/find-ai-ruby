@@ -72,10 +72,8 @@ module FindAI
         EXACT = T.let(:exact, FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol)
         BEST = T.let(:best, FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol]) }
-          def values
-          end
+        sig { override.returns(T::Array[FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol]) }
+        def self.values
         end
       end
 
@@ -89,10 +87,8 @@ module FindAI
         PERSON = T.let(:person, FindAI::Models::SearchCreateParams::Scope::TaggedSymbol)
         COMPANY = T.let(:company, FindAI::Models::SearchCreateParams::Scope::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[FindAI::Models::SearchCreateParams::Scope::TaggedSymbol]) }
-          def values
-          end
+        sig { override.returns(T::Array[FindAI::Models::SearchCreateParams::Scope::TaggedSymbol]) }
+        def self.values
         end
       end
     end
