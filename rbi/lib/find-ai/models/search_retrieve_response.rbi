@@ -4,71 +4,49 @@ module FindAI
   module Models
     class SearchRetrieveResponseItem < FindAI::BaseModel
       sig { returns(String) }
-      def linkedin_url
-      end
-
-      sig { params(_: String).returns(String) }
-      def linkedin_url=(_)
-      end
+      attr_accessor :linkedin_url
 
       sig { returns(String) }
-      def name
-      end
-
-      sig { params(_: String).returns(String) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       # Returned only for a person.
       sig { returns(T.nilable(String)) }
-      def company
-      end
+      attr_reader :company
 
-      sig { params(_: String).returns(String) }
-      def company=(_)
-      end
+      sig { params(company: String).void }
+      attr_writer :company
 
       sig { returns(T.nilable(T::Array[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason])) }
-      def criteria_and_reasons
-      end
+      attr_reader :criteria_and_reasons
 
       sig do
         params(
-          _: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Util::AnyHash)]
+          criteria_and_reasons: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Util::AnyHash)]
         )
-          .returns(
-            T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Util::AnyHash)]
-          )
+          .void
       end
-      def criteria_and_reasons=(_)
-      end
+      attr_writer :criteria_and_reasons
 
       # Returned only for a company.
       sig { returns(T.nilable(String)) }
-      def domain
-      end
+      attr_reader :domain
 
-      sig { params(_: String).returns(String) }
-      def domain=(_)
-      end
+      sig { params(domain: String).void }
+      attr_writer :domain
 
       # The status of the search result.
       sig { returns(T.nilable(String)) }
-      def status
-      end
+      attr_reader :status
 
-      sig { params(_: String).returns(String) }
-      def status=(_)
-      end
+      sig { params(status: String).void }
+      attr_writer :status
 
       # Returned only for a person.
       sig { returns(T.nilable(String)) }
-      def title
-      end
+      attr_reader :title
 
-      sig { params(_: String).returns(String) }
-      def title=(_)
-      end
+      sig { params(title: String).void }
+      attr_writer :title
 
       sig do
         params(
@@ -105,30 +83,24 @@ module FindAI
       class CriteriaAndReason < FindAI::BaseModel
         # Match criteria
         sig { returns(T.nilable(String)) }
-        def criteria
-        end
+        attr_reader :criteria
 
-        sig { params(_: String).returns(String) }
-        def criteria=(_)
-        end
+        sig { params(criteria: String).void }
+        attr_writer :criteria
 
         # Whether it's a match
         sig { returns(T.nilable(T::Boolean)) }
-        def match
-        end
+        attr_reader :match
 
-        sig { params(_: T::Boolean).returns(T::Boolean) }
-        def match=(_)
-        end
+        sig { params(match: T::Boolean).void }
+        attr_writer :match
 
         # Reason for the match
         sig { returns(T.nilable(String)) }
-        def reason
-        end
+        attr_reader :reason
 
-        sig { params(_: String).returns(String) }
-        def reason=(_)
-        end
+        sig { params(reason: String).void }
+        attr_writer :reason
 
         sig { params(criteria: String, match: T::Boolean, reason: String).returns(T.attached_class) }
         def self.new(criteria: nil, match: nil, reason: nil)
