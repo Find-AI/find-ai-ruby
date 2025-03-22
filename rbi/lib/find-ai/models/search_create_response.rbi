@@ -4,15 +4,10 @@ module FindAI
   module Models
     class SearchCreateResponse < FindAI::BaseModel
       sig { returns(FindAI::Models::SearchCreateResponse::Poll) }
-      def poll
-      end
+      attr_reader :poll
 
-      sig do
-        params(_: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Util::AnyHash))
-          .returns(T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Util::AnyHash))
-      end
-      def poll=(_)
-      end
+      sig { params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Util::AnyHash)).void }
+      attr_writer :poll
 
       sig do
         params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Util::AnyHash))
@@ -27,20 +22,10 @@ module FindAI
 
       class Poll < FindAI::BaseModel
         sig { returns(String) }
-        def token
-        end
-
-        sig { params(_: String).returns(String) }
-        def token=(_)
-        end
+        attr_accessor :token
 
         sig { returns(String) }
-        def path
-        end
-
-        sig { params(_: String).returns(String) }
-        def path=(_)
-        end
+        attr_accessor :path
 
         sig { params(token: String, path: String).returns(T.attached_class) }
         def self.new(token:, path:)
