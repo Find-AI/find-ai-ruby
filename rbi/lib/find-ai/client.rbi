@@ -11,12 +11,10 @@ module FindAI
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
     sig { returns(String) }
-    def api_key
-    end
+    attr_reader :api_key
 
     sig { returns(FindAI::Resources::Searches) }
-    def searches
-    end
+    attr_reader :searches
 
     # @api private
     sig { override.returns(T::Hash[String, String]) }

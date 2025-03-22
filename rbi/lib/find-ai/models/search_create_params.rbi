@@ -8,45 +8,31 @@ module FindAI
 
       # The maximum number of results to return. optional for result_mode exact
       sig { returns(T.nilable(Float)) }
-      def max_matches
-      end
+      attr_reader :max_matches
 
-      sig { params(_: Float).returns(Float) }
-      def max_matches=(_)
-      end
+      sig { params(max_matches: Float).void }
+      attr_writer :max_matches
 
       # Search query.
       sig { returns(T.nilable(String)) }
-      def query
-      end
+      attr_reader :query
 
-      sig { params(_: String).returns(String) }
-      def query=(_)
-      end
+      sig { params(query: String).void }
+      attr_writer :query
 
       # The mode of the search. Valid values are 'exact' or 'best'.
       sig { returns(T.nilable(FindAI::Models::SearchCreateParams::ResultMode::OrSymbol)) }
-      def result_mode
-      end
+      attr_reader :result_mode
 
-      sig do
-        params(_: FindAI::Models::SearchCreateParams::ResultMode::OrSymbol)
-          .returns(FindAI::Models::SearchCreateParams::ResultMode::OrSymbol)
-      end
-      def result_mode=(_)
-      end
+      sig { params(result_mode: FindAI::Models::SearchCreateParams::ResultMode::OrSymbol).void }
+      attr_writer :result_mode
 
       # The scope of the search. Valid values are 'person' or 'company'.
       sig { returns(T.nilable(FindAI::Models::SearchCreateParams::Scope::OrSymbol)) }
-      def scope
-      end
+      attr_reader :scope
 
-      sig do
-        params(_: FindAI::Models::SearchCreateParams::Scope::OrSymbol)
-          .returns(FindAI::Models::SearchCreateParams::Scope::OrSymbol)
-      end
-      def scope=(_)
-      end
+      sig { params(scope: FindAI::Models::SearchCreateParams::Scope::OrSymbol).void }
+      attr_writer :scope
 
       sig do
         params(
