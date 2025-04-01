@@ -84,7 +84,7 @@ module FindAI
     end
 
     # @api private
-    sig { returns(T.anything) }
+    sig { returns(FindAI::PooledNetRequester) }
     attr_accessor :requester
 
     # @api private

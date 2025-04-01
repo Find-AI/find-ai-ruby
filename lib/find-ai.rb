@@ -36,7 +36,6 @@ require "connection_pool"
 # Package files.
 require_relative "find-ai/version"
 require_relative "find-ai/util"
-require_relative "find-ai/extern"
 require_relative "find-ai/base_model"
 require_relative "find-ai/base_page"
 require_relative "find-ai/request_options"
