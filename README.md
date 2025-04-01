@@ -12,22 +12,16 @@ The underlying REST API documentation can be found on [usefind.ai](https://usefi
 
 ## Installation
 
-To use this gem during the beta, install directly from GitHub with Bundler by adding the following to your application's `Gemfile`:
+To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
 ```ruby
-gem "find-ai", git: "https://github.com/Find-AI/find-ai-ruby", branch: "main"
+gem "find-ai", "~> 1.2.0"
 ```
 
 To fetch an initial copy of the gem:
 
 ```sh
 bundle install
-```
-
-To update the version used by your application when updates are pushed to GitHub:
-
-```sh
-bundle update find-ai
 ```
 
 ## Usage
