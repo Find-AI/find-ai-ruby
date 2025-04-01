@@ -1,6 +1,6 @@
 module FindAI
   module Type
-    class ArrayOf
+    class ArrayOf[Elem]
       include FindAI::Type::Converter
 
       def self.[]: (
@@ -15,13 +15,13 @@ module FindAI
       def ==: (top other) -> bool
 
       def coerce: (
-        Enumerable[top] | top value,
+        Enumerable[Elem] | top value,
         state: FindAI::Type::Converter::state
       ) -> (::Array[top] | top)
 
-      def dump: (Enumerable[top] | top value) -> (::Array[top] | top)
+      def dump: (Enumerable[Elem] | top value) -> (::Array[top] | top)
 
-      def item_type: -> top
+      def item_type: -> Elem
 
       def nilable?: -> bool
 
