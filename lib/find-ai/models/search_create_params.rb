@@ -4,7 +4,7 @@ module FindAI
   module Models
     class SearchCreateParams < FindAI::BaseModel
       # @!parse
-      #   extend FindAI::RequestParameters::Converter
+      #   extend FindAI::Type::RequestParameters::Converter
       include FindAI::RequestParameters
 
       # @!attribute [r] max_matches

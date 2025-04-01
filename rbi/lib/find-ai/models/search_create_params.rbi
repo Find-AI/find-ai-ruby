@@ -3,7 +3,7 @@
 module FindAI
   module Models
     class SearchCreateParams < FindAI::BaseModel
-      extend FindAI::RequestParameters::Converter
+      extend FindAI::Type::RequestParameters::Converter
       include FindAI::RequestParameters
 
       # The maximum number of results to return. optional for result_mode exact
