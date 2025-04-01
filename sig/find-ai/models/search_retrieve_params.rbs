@@ -3,7 +3,7 @@ module FindAI
     type search_retrieve_params = {  } & FindAI::request_parameters
 
     class SearchRetrieveParams < FindAI::BaseModel
-      extend FindAI::RequestParameters::Converter
+      extend FindAI::Type::RequestParameters::Converter
       include FindAI::RequestParameters
 
       def initialize: (?request_options: FindAI::request_opts) -> void

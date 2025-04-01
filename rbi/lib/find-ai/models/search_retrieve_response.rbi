@@ -113,6 +113,6 @@ module FindAI
     end
 
     SearchRetrieveResponse =
-      T.let(FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem], FindAI::Converter)
+      T.let(FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem], FindAI::Type::Converter)
   end
 end
