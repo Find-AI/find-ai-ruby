@@ -60,7 +60,15 @@ module FindAI
         )
           .returns(T.attached_class)
       end
-      def self.new(linkedin_url:, name:, company: nil, criteria_and_reasons: nil, domain: nil, status: nil, title: nil)
+      def self.new(
+        linkedin_url:,
+        name:,
+        company: nil,
+        criteria_and_reasons: nil,
+        domain: nil,
+        status: nil,
+        title: nil
+      )
       end
 
       sig do
