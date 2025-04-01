@@ -3,7 +3,7 @@
 module FindAI
   module Models
     class SearchRetrieveParams < FindAI::BaseModel
-      extend FindAI::RequestParameters::Converter
+      extend FindAI::Type::RequestParameters::Converter
       include FindAI::RequestParameters
 
       sig do

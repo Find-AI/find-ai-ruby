@@ -10,7 +10,7 @@ module FindAI
       & FindAI::request_parameters
 
     class SearchCreateParams < FindAI::BaseModel
-      extend FindAI::RequestParameters::Converter
+      extend FindAI::Type::RequestParameters::Converter
       include FindAI::RequestParameters
 
       attr_reader max_matches: Float?
