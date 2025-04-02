@@ -15,6 +15,7 @@ module FindAI
 
       # def initialize: (Hash | FindAI::BaseModel) -> void
 
+      # @see FindAI::Models::SearchCreateResponse#poll
       class Poll < FindAI::BaseModel
         # @!attribute token
         #
