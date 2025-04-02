@@ -87,9 +87,9 @@ multitask(typecheck: [:steep, :sorbet])
 multitask(lint: [:rubocop, :typecheck])
 
 multitask(:build) do
-  sh(*%w[gem build -- find-ai.gemspec])
+  sh(*%w[gem build -- find_ai.gemspec])
 end
 
 multitask(release: [:build]) do
-  sh(*%w[gem push], *FileList["find-ai-*.gem"])
+  sh(*%w[gem push], *FileList["find_ai-*.gem"])
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "lib/find-ai/version"
+require_relative "lib/find_ai/version"
 
 Gem::Specification.new do |s|
   s.name = "find-ai"
