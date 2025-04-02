@@ -16,7 +16,7 @@ require "minitest/hooks/test"
 require "minitest/proveit"
 require "minitest/rg"
 
-require_relative "../../lib/find-ai"
+require_relative "../../lib/find_ai"
 require_relative "resource_namespaces"
 
 module Kernel
