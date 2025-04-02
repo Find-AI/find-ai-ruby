@@ -18,6 +18,8 @@ module FindAI
       #   @option params [FindAI::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [FindAI::Models::SearchCreateResponse]
+      #
+      # @see FindAI::Models::SearchCreateParams
       def create(params = {})
         parsed, options = FindAI::Models::SearchCreateParams.dump_request(params)
         @client.request(
@@ -38,6 +40,8 @@ module FindAI
       #   @option params [FindAI::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Array<FindAI::Models::SearchRetrieveResponseItem>]
+      #
+      # @see FindAI::Models::SearchRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
@@ -47,6 +51,8 @@ module FindAI
         )
       end
 
+      # @api private
+      #
       # @param client [FindAI::Client]
       def initialize(client:)
         @client = client

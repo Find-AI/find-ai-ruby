@@ -39,6 +39,7 @@ module FindAI
       )
       end
 
+      # @api private
       sig { params(client: FindAI::Client).returns(T.attached_class) }
       def self.new(client:)
       end
