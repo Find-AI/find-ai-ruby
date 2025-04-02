@@ -2,6 +2,7 @@
 
 module FindAI
   module Models
+    # @see FindAI::Resources::Searches#create
     class SearchCreateResponse < FindAI::BaseModel
       # @!attribute poll
       #
