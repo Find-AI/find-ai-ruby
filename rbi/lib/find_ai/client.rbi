@@ -24,8 +24,8 @@ module FindAI
     # Creates and returns a new client for interacting with the API.
     sig do
       params(
-        base_url: T.nilable(String),
         api_key: T.nilable(String),
+        base_url: T.nilable(String),
         max_retries: Integer,
         timeout: Float,
         initial_retry_delay: Float,
@@ -34,10 +34,10 @@ module FindAI
         .returns(T.attached_class)
     end
     def self.new(
-      # Override the default base URL for the API, e.g., `"https://api.example.com/v2/"`
-      base_url: nil,
       # Defaults to `ENV["FIND_AI_API_KEY"]`
       api_key: ENV["FIND_AI_API_KEY"],
+      # Override the default base URL for the API, e.g., `"https://api.example.com/v2/"`
+      base_url: nil,
       # Max number of retries to attempt after a failed retryable request.
       max_retries: DEFAULT_MAX_RETRIES,
       timeout: DEFAULT_TIMEOUT_IN_SECONDS,
