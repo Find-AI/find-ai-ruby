@@ -2,6 +2,7 @@
 
 module FindAI
   module Models
+    # @see FindAI::Resources::Searches#create
     class SearchCreateParams < FindAI::BaseModel
       # @!parse
       #   extend FindAI::Type::RequestParameters::Converter
