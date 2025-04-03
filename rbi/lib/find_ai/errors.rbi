@@ -1,144 +1,174 @@
 # typed: strong
 
 module FindAI
-  class Error < StandardError
-    sig { returns(T.nilable(StandardError)) }
-    attr_accessor :cause
-  end
-
-  class ConversionError < FindAI::Error
-  end
-
-  class APIError < FindAI::Error
-    sig { returns(URI::Generic) }
-    attr_accessor :url
-
-    sig { returns(T.nilable(Integer)) }
-    attr_accessor :status
-
-    sig { returns(T.nilable(T.anything)) }
-    attr_accessor :body
-
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: T.nilable(Integer),
-        body: T.nilable(Object),
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
-    end
-  end
-
-  class APIConnectionError < FindAI::APIError
-    sig { void }
-    attr_accessor :status
-
-    sig { void }
-    attr_accessor :body
-
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: NilClass,
-        body: NilClass,
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Connection error.")
-    end
-  end
-
-  class APITimeoutError < FindAI::APIConnectionError
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: NilClass,
-        body: NilClass,
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Request timed out.")
-    end
-  end
-
-  class APIStatusError < FindAI::APIError
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: Integer,
-        body: T.nilable(Object),
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.for(url:, status:, body:, request:, response:, message: nil)
+  module Errors
+    class Error < StandardError
+      sig { returns(T.nilable(StandardError)) }
+      attr_accessor :cause
     end
 
-    sig { returns(Integer) }
-    attr_accessor :status
-
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: Integer,
-        body: T.nilable(Object),
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
+    class ConversionError < FindAI::Errors::Error
     end
-    def self.new(url:, status:, body:, request:, response:, message: nil)
+
+    class APIError < FindAI::Errors::Error
+      sig { returns(URI::Generic) }
+      attr_accessor :url
+
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :status
+
+      sig { returns(T.nilable(T.anything)) }
+      attr_accessor :body
+
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: T.nilable(Integer),
+          body: T.nilable(Object),
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
+      end
+    end
+
+    class APIConnectionError < FindAI::Errors::APIError
+      sig { void }
+      attr_accessor :status
+
+      sig { void }
+      attr_accessor :body
+
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: NilClass,
+          body: NilClass,
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Connection error.")
+      end
+    end
+
+    class APITimeoutError < FindAI::Errors::APIConnectionError
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: NilClass,
+          body: NilClass,
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Request timed out.")
+      end
+    end
+
+    class APIStatusError < FindAI::Errors::APIError
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: Integer,
+          body: T.nilable(Object),
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.for(url:, status:, body:, request:, response:, message: nil)
+      end
+
+      sig { returns(Integer) }
+      attr_accessor :status
+
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: Integer,
+          body: T.nilable(Object),
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status:, body:, request:, response:, message: nil)
+      end
+    end
+
+    class BadRequestError < FindAI::Errors::APIStatusError
+      HTTP_STATUS = 400
+    end
+
+    class AuthenticationError < FindAI::Errors::APIStatusError
+      HTTP_STATUS = 401
+    end
+
+    class PermissionDeniedError < FindAI::Errors::APIStatusError
+      HTTP_STATUS = 403
+    end
+
+    class NotFoundError < FindAI::Errors::APIStatusError
+      HTTP_STATUS = 404
+    end
+
+    class ConflictError < FindAI::Errors::APIStatusError
+      HTTP_STATUS = 409
+    end
+
+    class UnprocessableEntityError < FindAI::Errors::APIStatusError
+      HTTP_STATUS = 422
+    end
+
+    class RateLimitError < FindAI::Errors::APIStatusError
+      HTTP_STATUS = 429
+    end
+
+    class InternalServerError < FindAI::Errors::APIStatusError
+      HTTP_STATUS = T.let((500..), T::Range[Integer])
     end
   end
 
-  class BadRequestError < FindAI::APIStatusError
-    HTTP_STATUS = 400
-  end
+  Error = FindAI::Errors::Error
 
-  class AuthenticationError < FindAI::APIStatusError
-    HTTP_STATUS = 401
-  end
+  ConversionError = FindAI::Errors::ConversionError
 
-  class PermissionDeniedError < FindAI::APIStatusError
-    HTTP_STATUS = 403
-  end
+  APIError = FindAI::Errors::APIError
 
-  class NotFoundError < FindAI::APIStatusError
-    HTTP_STATUS = 404
-  end
+  APIStatusError = FindAI::Errors::APIStatusError
 
-  class ConflictError < FindAI::APIStatusError
-    HTTP_STATUS = 409
-  end
+  APIConnectionError = FindAI::Errors::APIConnectionError
 
-  class UnprocessableEntityError < FindAI::APIStatusError
-    HTTP_STATUS = 422
-  end
+  APITimeoutError = FindAI::Errors::APITimeoutError
 
-  class RateLimitError < FindAI::APIStatusError
-    HTTP_STATUS = 429
-  end
+  BadRequestError = FindAI::Errors::BadRequestError
 
-  class InternalServerError < FindAI::APIStatusError
-    HTTP_STATUS = T.let((500..), T::Range[Integer])
-  end
+  AuthenticationError = FindAI::Errors::AuthenticationError
+
+  PermissionDeniedError = FindAI::Errors::PermissionDeniedError
+
+  NotFoundError = FindAI::Errors::NotFoundError
+
+  ConflictError = FindAI::Errors::ConflictError
+
+  UnprocessableEntityError = FindAI::Errors::UnprocessableEntityError
+
+  RateLimitError = FindAI::Errors::RateLimitError
+
+  InternalServerError = FindAI::Errors::InternalServerError
 end

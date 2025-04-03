@@ -29,7 +29,7 @@ module FindAI
       # @return [Boolean]
       def next_page? = (raise NotImplementedError)
 
-      # @raise [FindAI::APIError]
+      # @raise [FindAI::Errors::APIError]
       # @return [FindAI::Type::BasePage]
       def next_page = (raise NotImplementedError)
 
