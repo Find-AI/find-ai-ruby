@@ -47,7 +47,7 @@ module FindAI
       ) -> FindAI::Transport::BaseClient::request_input
 
       def self.reap_connection!: (
-        Integer | FindAI::APIConnectionError status,
+        Integer | FindAI::Errors::APIConnectionError status,
         stream: Enumerable[String]?
       ) -> void
 

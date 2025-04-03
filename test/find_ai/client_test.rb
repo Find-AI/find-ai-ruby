@@ -183,7 +183,7 @@ class FindAITest < Minitest::Test
     requester = MockRequester.new(307, {"location" => "/redirected"}, {})
     find_ai.requester = requester
 
-    assert_raises(FindAI::APIConnectionError) do
+    assert_raises(FindAI::Errors::APIConnectionError) do
       find_ai.searches.retrieve("id", request_options: {extra_headers: {}})
     end
 
@@ -201,7 +201,7 @@ class FindAITest < Minitest::Test
     requester = MockRequester.new(303, {"location" => "/redirected"}, {})
     find_ai.requester = requester
 
-    assert_raises(FindAI::APIConnectionError) do
+    assert_raises(FindAI::Errors::APIConnectionError) do
       find_ai.searches.retrieve("id", request_options: {extra_headers: {}})
     end
 
@@ -216,7 +216,7 @@ class FindAITest < Minitest::Test
     requester = MockRequester.new(307, {"location" => "/redirected"}, {})
     find_ai.requester = requester
 
-    assert_raises(FindAI::APIConnectionError) do
+    assert_raises(FindAI::Errors::APIConnectionError) do
       find_ai.searches.retrieve("id", request_options: {extra_headers: {"Authorization" => "Bearer xyz"}})
     end
 
@@ -231,7 +231,7 @@ class FindAITest < Minitest::Test
     requester = MockRequester.new(307, {"location" => "https://example.com/redirected"}, {})
     find_ai.requester = requester
 
-    assert_raises(FindAI::APIConnectionError) do
+    assert_raises(FindAI::Errors::APIConnectionError) do
       find_ai.searches.retrieve("id", request_options: {extra_headers: {"Authorization" => "Bearer xyz"}})
     end
 

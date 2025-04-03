@@ -82,9 +82,10 @@ module FindAI
         # @api private
         sig do
           params(
-            status: T.any(Integer, FindAI::APIConnectionError),
+            status: T.any(Integer, FindAI::Errors::APIConnectionError),
             stream: T.nilable(T::Enumerable[String])
-          ).void
+          )
+            .void
         end
         def reap_connection!(status, stream:)
         end

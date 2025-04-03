@@ -1,99 +1,129 @@
 module FindAI
-  class Error < StandardError
-    attr_accessor cause: StandardError?
+  module Errors
+    class Error < StandardError
+      attr_accessor cause: StandardError?
+    end
+
+    class ConversionError < FindAI::Errors::Error
+    end
+
+    class APIError < FindAI::Errors::Error
+      attr_accessor url: URI::Generic
+
+      attr_accessor status: Integer?
+
+      attr_accessor body: top?
+
+      def initialize: (
+        url: URI::Generic,
+        ?status: Integer?,
+        ?body: Object?,
+        ?request: nil,
+        ?response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class APIConnectionError < FindAI::Errors::APIError
+      def initialize: (
+        url: URI::Generic,
+        ?status: nil,
+        ?body: nil,
+        ?request: nil,
+        ?response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class APITimeoutError < FindAI::Errors::APIConnectionError
+      def initialize: (
+        url: URI::Generic,
+        ?status: nil,
+        ?body: nil,
+        ?request: nil,
+        ?response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class APIStatusError < FindAI::Errors::APIError
+      def self.for: (
+        url: URI::Generic,
+        status: Integer,
+        body: Object?,
+        request: nil,
+        response: nil,
+        ?message: String?
+      ) -> instance
+
+      def initialize: (
+        url: URI::Generic,
+        status: Integer,
+        body: Object?,
+        request: nil,
+        response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class BadRequestError < FindAI::Errors::APIStatusError
+      HTTP_STATUS: 400
+    end
+
+    class AuthenticationError < FindAI::Errors::APIStatusError
+      HTTP_STATUS: 401
+    end
+
+    class PermissionDeniedError < FindAI::Errors::APIStatusError
+      HTTP_STATUS: 403
+    end
+
+    class NotFoundError < FindAI::Errors::APIStatusError
+      HTTP_STATUS: 404
+    end
+
+    class ConflictError < FindAI::Errors::APIStatusError
+      HTTP_STATUS: 409
+    end
+
+    class UnprocessableEntityError < FindAI::Errors::APIStatusError
+      HTTP_STATUS: 422
+    end
+
+    class RateLimitError < FindAI::Errors::APIStatusError
+      HTTP_STATUS: 429
+    end
+
+    class InternalServerError < FindAI::Errors::APIStatusError
+      HTTP_STATUS: Range[Integer]
+    end
   end
 
-  class ConversionError < FindAI::Error
-  end
+  class Error = FindAI::Errors::Error
 
-  class APIError < FindAI::Error
-    attr_accessor url: URI::Generic
+  class ConversionError = FindAI::Errors::ConversionError
 
-    attr_accessor status: Integer?
+  class APIError = FindAI::Errors::APIError
 
-    attr_accessor body: top?
+  class APIStatusError = FindAI::Errors::APIStatusError
 
-    def initialize: (
-      url: URI::Generic,
-      ?status: Integer?,
-      ?body: Object?,
-      ?request: nil,
-      ?response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class APIConnectionError = FindAI::Errors::APIConnectionError
 
-  class APIConnectionError < FindAI::APIError
-    def initialize: (
-      url: URI::Generic,
-      ?status: nil,
-      ?body: nil,
-      ?request: nil,
-      ?response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class APITimeoutError = FindAI::Errors::APITimeoutError
 
-  class APITimeoutError < FindAI::APIConnectionError
-    def initialize: (
-      url: URI::Generic,
-      ?status: nil,
-      ?body: nil,
-      ?request: nil,
-      ?response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class BadRequestError = FindAI::Errors::BadRequestError
 
-  class APIStatusError < FindAI::APIError
-    def self.for: (
-      url: URI::Generic,
-      status: Integer,
-      body: Object?,
-      request: nil,
-      response: nil,
-      ?message: String?
-    ) -> instance
+  class AuthenticationError = FindAI::Errors::AuthenticationError
 
-    def initialize: (
-      url: URI::Generic,
-      status: Integer,
-      body: Object?,
-      request: nil,
-      response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class PermissionDeniedError = FindAI::Errors::PermissionDeniedError
 
-  class BadRequestError < FindAI::APIStatusError
-    HTTP_STATUS: 400
-  end
+  class NotFoundError = FindAI::Errors::NotFoundError
 
-  class AuthenticationError < FindAI::APIStatusError
-    HTTP_STATUS: 401
-  end
+  class ConflictError = FindAI::Errors::ConflictError
 
-  class PermissionDeniedError < FindAI::APIStatusError
-    HTTP_STATUS: 403
-  end
+  class UnprocessableEntityError = FindAI::Errors::UnprocessableEntityError
 
-  class NotFoundError < FindAI::APIStatusError
-    HTTP_STATUS: 404
-  end
+  class RateLimitError = FindAI::Errors::RateLimitError
 
-  class ConflictError < FindAI::APIStatusError
-    HTTP_STATUS: 409
-  end
-
-  class UnprocessableEntityError < FindAI::APIStatusError
-    HTTP_STATUS: 422
-  end
-
-  class RateLimitError < FindAI::APIStatusError
-    HTTP_STATUS: 429
-  end
-
-  class InternalServerError < FindAI::APIStatusError
-    HTTP_STATUS: Range[Integer]
-  end
+  class InternalServerError = FindAI::Errors::InternalServerError
 end
