@@ -153,7 +153,7 @@ module FindAI
             end
           end
         rescue Timeout::Error
-          raise FindAI::APITimeoutError
+          raise FindAI::Errors::APITimeoutError
         end
 
         conn, _, response = enum.next
