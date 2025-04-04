@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module FindAI
-  class Client < FindAI::Transport::BaseClient
+  class Client < FindAI::Internal::Transport::BaseClient
     # Default max number of retries to attempt after a failed retryable request.
     DEFAULT_MAX_RETRIES = 2
 

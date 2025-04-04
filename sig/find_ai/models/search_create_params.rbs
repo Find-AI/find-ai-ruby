@@ -7,11 +7,11 @@ module FindAI
         result_mode: FindAI::Models::SearchCreateParams::result_mode,
         scope: FindAI::Models::SearchCreateParams::scope
       }
-      & FindAI::request_parameters
+      & FindAI::Internal::Type::request_parameters
 
     class SearchCreateParams < FindAI::BaseModel
-      extend FindAI::Type::RequestParameters::Converter
-      include FindAI::RequestParameters
+      extend FindAI::Internal::Type::RequestParameters::Converter
+      include FindAI::Internal::Type::RequestParameters
 
       attr_reader max_matches: Float?
 

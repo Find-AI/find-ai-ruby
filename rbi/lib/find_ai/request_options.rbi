@@ -41,7 +41,7 @@ module FindAI
     attr_accessor :timeout
 
     # Returns a new instance of RequestOptions.
-    sig { params(values: FindAI::Util::AnyHash).returns(T.attached_class) }
+    sig { params(values: FindAI::Internal::Util::AnyHash).returns(T.attached_class) }
     def self.new(values = {})
     end
   end
