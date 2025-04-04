@@ -3,7 +3,7 @@
 module FindAI
   module Models
     # @see FindAI::Resources::Searches#create
-    class SearchCreateResponse < FindAI::BaseModel
+    class SearchCreateResponse < FindAI::Internal::Type::BaseModel
       # @!attribute poll
       #
       #   @return [FindAI::Models::SearchCreateResponse::Poll]
@@ -14,10 +14,10 @@ module FindAI
       #   #
       #   def initialize(poll:, **) = super
 
-      # def initialize: (Hash | FindAI::BaseModel) -> void
+      # def initialize: (Hash | FindAI::Internal::Type::BaseModel) -> void
 
       # @see FindAI::Models::SearchCreateResponse#poll
-      class Poll < FindAI::BaseModel
+      class Poll < FindAI::Internal::Type::BaseModel
         # @!attribute token
         #
         #   @return [String]
@@ -34,7 +34,7 @@ module FindAI
         #   #
         #   def initialize(token:, path:, **) = super
 
-        # def initialize: (Hash | FindAI::BaseModel) -> void
+        # def initialize: (Hash | FindAI::Internal::Type::BaseModel) -> void
       end
     end
   end

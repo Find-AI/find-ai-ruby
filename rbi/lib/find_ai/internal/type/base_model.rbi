@@ -22,7 +22,7 @@ module FindAI
               T::Hash[
               Symbol,
               T.all(
-                FindAI::BaseModel::KnownFieldShape,
+                FindAI::Internal::Type::BaseModel::KnownFieldShape,
                 {type_fn: T.proc.returns(FindAI::Internal::Type::Converter::Input)}
               )
               ]
@@ -34,11 +34,13 @@ module FindAI
           # @api private
           sig do
             returns(
-              T::Hash[Symbol,
-                      T.all(
-                        FindAI::BaseModel::KnownFieldShape,
-                        {type: FindAI::Internal::Type::Converter::Input}
-                      )]
+              T::Hash[
+              Symbol,
+              T.all(
+                FindAI::Internal::Type::BaseModel::KnownFieldShape,
+                {type: FindAI::Internal::Type::Converter::Input}
+              )
+              ]
             )
           end
           def fields
@@ -60,7 +62,7 @@ module FindAI
                 T.proc.returns(FindAI::Internal::Type::Converter::Input),
                 FindAI::Internal::Type::Converter::Input
               ),
-              spec: FindAI::Internal::Util::AnyHash
+              spec: FindAI::Internal::AnyHash
             )
               .void
           end
@@ -72,11 +74,11 @@ module FindAI
             params(
               name_sym: Symbol,
               type_info: T.any(
-                FindAI::Internal::Util::AnyHash,
+                FindAI::Internal::AnyHash,
                 T.proc.returns(FindAI::Internal::Type::Converter::Input),
                 FindAI::Internal::Type::Converter::Input
               ),
-              spec: FindAI::Internal::Util::AnyHash
+              spec: FindAI::Internal::AnyHash
             )
               .void
           end
@@ -88,11 +90,11 @@ module FindAI
             params(
               name_sym: Symbol,
               type_info: T.any(
-                FindAI::Internal::Util::AnyHash,
+                FindAI::Internal::AnyHash,
                 T.proc.returns(FindAI::Internal::Type::Converter::Input),
                 FindAI::Internal::Type::Converter::Input
               ),
-              spec: FindAI::Internal::Util::AnyHash
+              spec: FindAI::Internal::AnyHash
             )
               .void
           end
@@ -128,7 +130,7 @@ module FindAI
           sig do
             override
               .params(
-                value: T.any(FindAI::BaseModel, T::Hash[T.anything, T.anything], T.anything),
+                value: T.any(FindAI::Internal::Type::BaseModel, T::Hash[T.anything, T.anything], T.anything),
                 state: FindAI::Internal::Type::Converter::State
               )
               .returns(T.any(T.attached_class, T.anything))
@@ -164,7 +166,7 @@ module FindAI
         #
         #   This method is not recursive. The returned value is shared by the object, so it
         #   should not be mutated.
-        sig { overridable.returns(FindAI::Internal::Util::AnyHash) }
+        sig { overridable.returns(FindAI::Internal::AnyHash) }
         def to_h
         end
 
@@ -176,11 +178,11 @@ module FindAI
         #
         #   This method is not recursive. The returned value is shared by the object, so it
         #   should not be mutated.
-        sig { overridable.returns(FindAI::Internal::Util::AnyHash) }
+        sig { overridable.returns(FindAI::Internal::AnyHash) }
         def to_hash
         end
 
-        sig { params(keys: T.nilable(T::Array[Symbol])).returns(FindAI::Internal::Util::AnyHash) }
+        sig { params(keys: T.nilable(T::Array[Symbol])).returns(FindAI::Internal::AnyHash) }
         def deconstruct_keys(keys)
         end
 

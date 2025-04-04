@@ -3,26 +3,26 @@
 require_relative "../../test_helper"
 
 class FindAI::Test::PrimitiveModelTest < Minitest::Test
-  A = FindAI::ArrayOf[-> { Integer }]
-  H = FindAI::HashOf[-> { Integer }, nil?: true]
+  A = FindAI::Internal::Type::ArrayOf[-> { Integer }]
+  H = FindAI::Internal::Type::HashOf[-> { Integer }, nil?: true]
 
   module E
-    extend FindAI::Enum
+    extend FindAI::Internal::Type::Enum
   end
 
   module U
-    extend FindAI::Union
+    extend FindAI::Internal::Type::Union
   end
 
-  class B < FindAI::BaseModel
+  class B < FindAI::Internal::Type::BaseModel
     optional :a, Integer
     optional :b, B
   end
 
   def test_typing
     converters = [
-      FindAI::Unknown,
-      FindAI::BooleanModel,
+      FindAI::Internal::Type::Unknown,
+      FindAI::Internal::Type::BooleanModel,
       A,
       H,
       E,
@@ -39,11 +39,11 @@ class FindAI::Test::PrimitiveModelTest < Minitest::Test
 
   def test_coerce
     cases = {
-      [FindAI::Unknown, :a] => [{yes: 1}, :a],
+      [FindAI::Internal::Type::Unknown, :a] => [{yes: 1}, :a],
       [NilClass, :a] => [{maybe: 1}, nil],
       [NilClass, nil] => [{yes: 1}, nil],
-      [FindAI::BooleanModel, true] => [{yes: 1}, true],
-      [FindAI::BooleanModel, "true"] => [{no: 1}, "true"],
+      [FindAI::Internal::Type::BooleanModel, true] => [{yes: 1}, true],
+      [FindAI::Internal::Type::BooleanModel, "true"] => [{no: 1}, "true"],
       [Integer, 1] => [{yes: 1}, 1],
       [Integer, 1.0] => [{maybe: 1}, 1],
       [Integer, "1"] => [{maybe: 1}, 1],
@@ -76,7 +76,7 @@ class FindAI::Test::PrimitiveModelTest < Minitest::Test
 
   def test_dump
     cases = {
-      [FindAI::Unknown, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
+      [FindAI::Internal::Type::Unknown, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
       [A, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
       [H, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
       [E, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
@@ -85,8 +85,8 @@ class FindAI::Test::PrimitiveModelTest < Minitest::Test
       [String, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
       [:b, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
       [nil, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
-      [FindAI::BooleanModel, true] => true,
-      [FindAI::BooleanModel, "true"] => "true",
+      [FindAI::Internal::Type::BooleanModel, true] => true,
+      [FindAI::Internal::Type::BooleanModel, "true"] => "true",
       [Integer, "1"] => "1",
       [Float, 1] => 1,
       [String, "one"] => "one",
@@ -126,27 +126,27 @@ end
 
 class FindAI::Test::EnumModelTest < Minitest::Test
   module E1
-    extend FindAI::Enum
+    extend FindAI::Internal::Type::Enum
 
     TRUE = true
   end
 
   module E2
-    extend FindAI::Enum
+    extend FindAI::Internal::Type::Enum
 
     ONE = 1
     TWO = 2
   end
 
   module E3
-    extend FindAI::Enum
+    extend FindAI::Internal::Type::Enum
 
     ONE = 1.0
     TWO = 2.0
   end
 
   module E4
-    extend FindAI::Enum
+    extend FindAI::Internal::Type::Enum
 
     ONE = :one
     TWO = :two
@@ -216,14 +216,14 @@ class FindAI::Test::EnumModelTest < Minitest::Test
 end
 
 class FindAI::Test::CollectionModelTest < Minitest::Test
-  A1 = FindAI::ArrayOf[-> { Integer }]
-  H1 = FindAI::HashOf[Integer]
+  A1 = FindAI::Internal::Type::ArrayOf[-> { Integer }]
+  H1 = FindAI::Internal::Type::HashOf[Integer]
 
-  A2 = FindAI::ArrayOf[H1]
-  H2 = FindAI::HashOf[-> { A1 }]
+  A2 = FindAI::Internal::Type::ArrayOf[H1]
+  H2 = FindAI::Internal::Type::HashOf[-> { A1 }]
 
-  A3 = FindAI::ArrayOf[Integer, nil?: true]
-  H3 = FindAI::HashOf[Integer, nil?: true]
+  A3 = FindAI::Internal::Type::ArrayOf[Integer, nil?: true]
+  H3 = FindAI::Internal::Type::HashOf[Integer, nil?: true]
 
   def test_coerce
     cases = {
@@ -263,7 +263,7 @@ class FindAI::Test::CollectionModelTest < Minitest::Test
 end
 
 class FindAI::Test::BaseModelTest < Minitest::Test
-  class M1 < FindAI::BaseModel
+  class M1 < FindAI::Internal::Type::BaseModel
     required :a, Integer
   end
 
@@ -273,7 +273,7 @@ class FindAI::Test::BaseModelTest < Minitest::Test
     optional :c, String
   end
 
-  class M3 < FindAI::BaseModel
+  class M3 < FindAI::Internal::Type::BaseModel
     optional :c, const: :c
     required :d, const: :d
   end
@@ -290,7 +290,7 @@ class FindAI::Test::BaseModelTest < Minitest::Test
     end
   end
 
-  class M5 < FindAI::BaseModel
+  class M5 < FindAI::Internal::Type::BaseModel
     request_only do
       required :c, const: :c
     end
@@ -301,7 +301,7 @@ class FindAI::Test::BaseModelTest < Minitest::Test
   end
 
   class M6 < M1
-    required :a, FindAI::ArrayOf[M6]
+    required :a, FindAI::Internal::Type::ArrayOf[M6]
   end
 
   def test_coerce
@@ -337,7 +337,7 @@ class FindAI::Test::BaseModelTest < Minitest::Test
       assert_pattern do
         coerced = FindAI::Internal::Type::Converter.coerce(target, input, state: state)
         assert_equal(coerced, coerced)
-        if coerced.is_a?(FindAI::BaseModel)
+        if coerced.is_a?(FindAI::Internal::Type::BaseModel)
           coerced.to_h => ^expect
         else
           coerced => ^expect
@@ -403,27 +403,27 @@ end
 
 class FindAI::Test::UnionTest < Minitest::Test
   module U0
-    extend FindAI::Union
+    extend FindAI::Internal::Type::Union
   end
 
   module U1
-    extend FindAI::Union
+    extend FindAI::Internal::Type::Union
     variant const: :a
     variant const: 2
   end
 
-  class M1 < FindAI::BaseModel
+  class M1 < FindAI::Internal::Type::BaseModel
     required :t, const: :a, api_name: :type
     optional :c, String
   end
 
-  class M2 < FindAI::BaseModel
+  class M2 < FindAI::Internal::Type::BaseModel
     required :type, const: :b
     optional :c, String
   end
 
   module U2
-    extend FindAI::Union
+    extend FindAI::Internal::Type::Union
     discriminator :type
 
     variant :a, M1
@@ -431,7 +431,7 @@ class FindAI::Test::UnionTest < Minitest::Test
   end
 
   module U3
-    extend FindAI::Union
+    extend FindAI::Internal::Type::Union
     discriminator :type
 
     variant :a, M1
@@ -439,37 +439,37 @@ class FindAI::Test::UnionTest < Minitest::Test
   end
 
   module U4
-    extend FindAI::Union
+    extend FindAI::Internal::Type::Union
     discriminator :type
 
     variant String
     variant :a, M1
   end
 
-  class M3 < FindAI::BaseModel
+  class M3 < FindAI::Internal::Type::BaseModel
     optional :recur, -> { U5 }
     required :a, Integer
   end
 
-  class M4 < FindAI::BaseModel
+  class M4 < FindAI::Internal::Type::BaseModel
     optional :recur, -> { U5 }
-    required :a, FindAI::ArrayOf[-> { U5 }]
+    required :a, FindAI::Internal::Type::ArrayOf[-> { U5 }]
   end
 
-  class M5 < FindAI::BaseModel
+  class M5 < FindAI::Internal::Type::BaseModel
     optional :recur, -> { U5 }
-    required :b, FindAI::ArrayOf[-> { U5 }]
+    required :b, FindAI::Internal::Type::ArrayOf[-> { U5 }]
   end
 
   module U5
-    extend FindAI::Union
+    extend FindAI::Internal::Type::Union
 
     variant -> { M3 }
     variant -> { M4 }
   end
 
   module U6
-    extend FindAI::Union
+    extend FindAI::Internal::Type::Union
 
     variant -> { M3 }
     variant -> { M5 }
@@ -480,7 +480,7 @@ class FindAI::Test::UnionTest < Minitest::Test
     tap do
       model.recur
       flunk
-    rescue FindAI::ConversionError => e
+    rescue FindAI::Errors::ConversionError => e
       assert_kind_of(ArgumentError, e.cause)
     end
   end
@@ -513,7 +513,7 @@ class FindAI::Test::UnionTest < Minitest::Test
       assert_pattern do
         coerced = FindAI::Internal::Type::Converter.coerce(target, input, state: state)
         assert_equal(coerced, coerced)
-        if coerced.is_a?(FindAI::BaseModel)
+        if coerced.is_a?(FindAI::Internal::Type::BaseModel)
           coerced.to_h => ^expect
         else
           coerced => ^expect
@@ -527,29 +527,29 @@ end
 
 class FindAI::Test::BaseModelQoLTest < Minitest::Test
   module E1
-    extend FindAI::Enum
+    extend FindAI::Internal::Type::Enum
 
     A = 1
   end
 
   module E2
-    extend FindAI::Enum
+    extend FindAI::Internal::Type::Enum
 
     A = 1
   end
 
   module E3
-    extend FindAI::Enum
+    extend FindAI::Internal::Type::Enum
 
     A = 2
     B = 3
   end
 
-  class M1 < FindAI::BaseModel
+  class M1 < FindAI::Internal::Type::BaseModel
     required :a, Integer
   end
 
-  class M2 < FindAI::BaseModel
+  class M2 < FindAI::Internal::Type::BaseModel
     required :a, Integer, nil?: true
   end
 
@@ -559,9 +559,9 @@ class FindAI::Test::BaseModelQoLTest < Minitest::Test
 
   def test_equality
     cases = {
-      [FindAI::Unknown, FindAI::Unknown] => true,
-      [FindAI::BooleanModel, FindAI::BooleanModel] => true,
-      [FindAI::Unknown, FindAI::BooleanModel] => false,
+      [FindAI::Internal::Type::Unknown, FindAI::Internal::Type::Unknown] => true,
+      [FindAI::Internal::Type::BooleanModel, FindAI::Internal::Type::BooleanModel] => true,
+      [FindAI::Internal::Type::Unknown, FindAI::Internal::Type::BooleanModel] => false,
       [E1, E2] => true,
       [E1, E3] => false,
       [M1, M2] => false,

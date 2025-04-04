@@ -37,7 +37,7 @@ module FindAI
         #
         # @return [Boolean]
         def ==(other)
-          other.is_a?(Module) && other.singleton_class <= FindAI::Enum && other.values.to_set == values.to_set
+          other.is_a?(Module) && other.singleton_class <= FindAI::Internal::Type::Enum && other.values.to_set == values.to_set
         end
 
         # @api private

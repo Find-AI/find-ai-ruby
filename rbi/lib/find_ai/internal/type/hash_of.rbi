@@ -17,11 +17,11 @@ module FindAI
         sig(:final) do
           params(
             type_info: T.any(
-              FindAI::Internal::Util::AnyHash,
+              FindAI::Internal::AnyHash,
               T.proc.returns(FindAI::Internal::Type::Converter::Input),
               FindAI::Internal::Type::Converter::Input
             ),
-            spec: FindAI::Internal::Util::AnyHash
+            spec: FindAI::Internal::AnyHash
           )
             .returns(T.attached_class)
         end
@@ -43,7 +43,7 @@ module FindAI
               value: T.any(T::Hash[T.anything, T.anything], T.anything),
               state: FindAI::Internal::Type::Converter::State
             )
-            .returns(T.any(FindAI::Internal::Util::AnyHash, T.anything))
+            .returns(T.any(FindAI::Internal::AnyHash, T.anything))
         end
         def coerce(value, state:)
         end
@@ -52,7 +52,7 @@ module FindAI
         sig(:final) do
           override
             .params(value: T.any(T::Hash[T.anything, T.anything], T.anything))
-            .returns(T.any(FindAI::Internal::Util::AnyHash, T.anything))
+            .returns(T.any(FindAI::Internal::AnyHash, T.anything))
         end
         def dump(value)
         end
@@ -71,11 +71,11 @@ module FindAI
         sig(:final) do
           params(
             type_info: T.any(
-              FindAI::Internal::Util::AnyHash,
+              FindAI::Internal::AnyHash,
               T.proc.returns(FindAI::Internal::Type::Converter::Input),
               FindAI::Internal::Type::Converter::Input
             ),
-            spec: FindAI::Internal::Util::AnyHash
+            spec: FindAI::Internal::AnyHash
           )
             .void
         end

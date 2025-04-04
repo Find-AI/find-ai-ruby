@@ -98,32 +98,4 @@ module FindAI
       HTTP_STATUS: Range[Integer]
     end
   end
-
-  class Error = FindAI::Errors::Error
-
-  class ConversionError = FindAI::Errors::ConversionError
-
-  class APIError = FindAI::Errors::APIError
-
-  class APIStatusError = FindAI::Errors::APIStatusError
-
-  class APIConnectionError = FindAI::Errors::APIConnectionError
-
-  class APITimeoutError = FindAI::Errors::APITimeoutError
-
-  class BadRequestError = FindAI::Errors::BadRequestError
-
-  class AuthenticationError = FindAI::Errors::AuthenticationError
-
-  class PermissionDeniedError = FindAI::Errors::PermissionDeniedError
-
-  class NotFoundError = FindAI::Errors::NotFoundError
-
-  class ConflictError = FindAI::Errors::ConflictError
-
-  class UnprocessableEntityError = FindAI::Errors::UnprocessableEntityError
-
-  class RateLimitError = FindAI::Errors::RateLimitError
-
-  class InternalServerError = FindAI::Errors::InternalServerError
 end

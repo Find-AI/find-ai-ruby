@@ -12,7 +12,7 @@ module FindAI
       timeout: Float?
     }
 
-  class RequestOptions < FindAI::BaseModel
+  class RequestOptions < FindAI::Internal::Type::BaseModel
     def self.validate!: (self | ::Hash[Symbol, top] opts) -> void
 
     attr_accessor idempotency_key: String?

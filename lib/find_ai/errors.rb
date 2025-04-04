@@ -189,32 +189,4 @@ module FindAI
       HTTP_STATUS = (500..)
     end
   end
-
-  Error = FindAI::Errors::Error
-
-  ConversionError = FindAI::Errors::ConversionError
-
-  APIError = FindAI::Errors::APIError
-
-  APIStatusError = FindAI::Errors::APIStatusError
-
-  APIConnectionError = FindAI::Errors::APIConnectionError
-
-  APITimeoutError = FindAI::Errors::APITimeoutError
-
-  BadRequestError = FindAI::Errors::BadRequestError
-
-  AuthenticationError = FindAI::Errors::AuthenticationError
-
-  PermissionDeniedError = FindAI::Errors::PermissionDeniedError
-
-  NotFoundError = FindAI::Errors::NotFoundError
-
-  ConflictError = FindAI::Errors::ConflictError
-
-  UnprocessableEntityError = FindAI::Errors::UnprocessableEntityError
-
-  RateLimitError = FindAI::Errors::RateLimitError
-
-  InternalServerError = FindAI::Errors::InternalServerError
 end

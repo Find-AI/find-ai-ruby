@@ -19,7 +19,7 @@ module FindAI
         # @param other [Object]
         #
         # @return [Boolean]
-        def self.==(other) = other.is_a?(Class) && other <= FindAI::BooleanModel
+        def self.==(other) = other.is_a?(Class) && other <= FindAI::Internal::Type::BooleanModel
 
         class << self
           # @api private

@@ -3,7 +3,7 @@
 module FindAI
   module Models
     # @see FindAI::Resources::Searches#create
-    class SearchCreateParams < FindAI::BaseModel
+    class SearchCreateParams < FindAI::Internal::Type::BaseModel
       # @!parse
       #   extend FindAI::Internal::Type::RequestParameters::Converter
       include FindAI::Internal::Type::RequestParameters
@@ -57,11 +57,11 @@ module FindAI
       #   #
       #   def initialize(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {}, **) = super
 
-      # def initialize: (Hash | FindAI::BaseModel) -> void
+      # def initialize: (Hash | FindAI::Internal::Type::BaseModel) -> void
 
       # The mode of the search. Valid values are 'exact' or 'best'.
       module ResultMode
-        extend FindAI::Enum
+        extend FindAI::Internal::Type::Enum
 
         EXACT = :exact
         BEST = :best
@@ -75,7 +75,7 @@ module FindAI
 
       # The scope of the search. Valid values are 'person' or 'company'.
       module Scope
-        extend FindAI::Enum
+        extend FindAI::Internal::Type::Enum
 
         PERSON = :person
         COMPANY = :company

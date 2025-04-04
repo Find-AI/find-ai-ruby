@@ -10,7 +10,7 @@ module FindAI
           query: String,
           result_mode: FindAI::Models::SearchCreateParams::ResultMode::OrSymbol,
           scope: FindAI::Models::SearchCreateParams::Scope::OrSymbol,
-          request_options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Internal::Util::AnyHash))
+          request_options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Internal::AnyHash))
         )
           .returns(FindAI::Models::SearchCreateResponse)
       end
@@ -31,7 +31,12 @@ module FindAI
       sig do
         params(
           id: String,
-          request_options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Internal::Util::AnyHash))
+          request_options: T.nilable(
+            T.any(
+              FindAI::RequestOptions,
+              FindAI::Internal::AnyHash
+            )
+          )
         )
           .returns(T::Array[FindAI::Models::SearchRetrieveResponseItem])
       end

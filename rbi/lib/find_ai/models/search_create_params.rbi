@@ -2,7 +2,7 @@
 
 module FindAI
   module Models
-    class SearchCreateParams < FindAI::BaseModel
+    class SearchCreateParams < FindAI::Internal::Type::BaseModel
       extend FindAI::Internal::Type::RequestParameters::Converter
       include FindAI::Internal::Type::RequestParameters
 
@@ -40,7 +40,7 @@ module FindAI
           query: String,
           result_mode: FindAI::Models::SearchCreateParams::ResultMode::OrSymbol,
           scope: FindAI::Models::SearchCreateParams::Scope::OrSymbol,
-          request_options: T.any(FindAI::RequestOptions, FindAI::Internal::Util::AnyHash)
+          request_options: T.any(FindAI::RequestOptions, FindAI::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end
@@ -64,7 +64,7 @@ module FindAI
 
       # The mode of the search. Valid values are 'exact' or 'best'.
       module ResultMode
-        extend FindAI::Enum
+        extend FindAI::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, FindAI::Models::SearchCreateParams::ResultMode) }
         OrSymbol =
@@ -80,7 +80,7 @@ module FindAI
 
       # The scope of the search. Valid values are 'person' or 'company'.
       module Scope
-        extend FindAI::Enum
+        extend FindAI::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, FindAI::Models::SearchCreateParams::Scope) }
         OrSymbol =
