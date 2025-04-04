@@ -1,5 +1,5 @@
 # typed: strong
 
 module FindAI
-  VERSION = "1.2.0"
+  VERSION = T.let(T.unsafe(nil), String)
 end
