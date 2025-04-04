@@ -3,8 +3,8 @@
 module FindAI
   module Models
     class SearchCreateParams < FindAI::BaseModel
-      extend FindAI::Type::RequestParameters::Converter
-      include FindAI::RequestParameters
+      extend FindAI::Internal::Type::RequestParameters::Converter
+      include FindAI::Internal::Type::RequestParameters
 
       # The maximum number of results to return. optional for result_mode exact
       sig { returns(T.nilable(Float)) }
@@ -40,7 +40,7 @@ module FindAI
           query: String,
           result_mode: FindAI::Models::SearchCreateParams::ResultMode::OrSymbol,
           scope: FindAI::Models::SearchCreateParams::Scope::OrSymbol,
-          request_options: T.any(FindAI::RequestOptions, FindAI::Util::AnyHash)
+          request_options: T.any(FindAI::RequestOptions, FindAI::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

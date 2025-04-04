@@ -5,8 +5,8 @@ module FindAI
     # @see FindAI::Resources::Searches#retrieve
     class SearchRetrieveParams < FindAI::BaseModel
       # @!parse
-      #   extend FindAI::Type::RequestParameters::Converter
-      include FindAI::RequestParameters
+      #   extend FindAI::Internal::Type::RequestParameters::Converter
+      include FindAI::Internal::Type::RequestParameters
 
       # @!parse
       #   # @param request_options [FindAI::RequestOptions, Hash{Symbol=>Object}]

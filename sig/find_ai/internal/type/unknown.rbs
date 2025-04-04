@@ -1,0 +1,20 @@
+module FindAI
+  module Internal
+    module Type
+      class Unknown
+        extend FindAI::Internal::Type::Converter
+
+        def self.===: (top other) -> bool
+
+        def self.==: (top other) -> bool
+
+        def self.coerce: (
+          top value,
+          state: FindAI::Internal::Type::Converter::state
+        ) -> top
+
+        def self.dump: (top value) -> top
+      end
+    end
+  end
+end
