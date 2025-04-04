@@ -21,7 +21,7 @@ module FindAI
 
       sig do
         params(
-          criteria_and_reasons: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Util::AnyHash)]
+          criteria_and_reasons: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Internal::Util::AnyHash)]
         )
           .void
       end
@@ -53,7 +53,7 @@ module FindAI
           linkedin_url: String,
           name: String,
           company: String,
-          criteria_and_reasons: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Util::AnyHash)],
+          criteria_and_reasons: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Internal::Util::AnyHash)],
           domain: String,
           status: String,
           title: String
@@ -121,6 +121,6 @@ module FindAI
     end
 
     SearchRetrieveResponse =
-      T.let(FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem], FindAI::Type::Converter)
+      T.let(FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem], FindAI::Internal::Type::Converter)
   end
 end

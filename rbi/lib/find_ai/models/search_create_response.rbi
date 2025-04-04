@@ -6,11 +6,11 @@ module FindAI
       sig { returns(FindAI::Models::SearchCreateResponse::Poll) }
       attr_reader :poll
 
-      sig { params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Util::AnyHash)).void }
+      sig { params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Internal::Util::AnyHash)).void }
       attr_writer :poll
 
       sig do
-        params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Util::AnyHash))
+        params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Internal::Util::AnyHash))
           .returns(T.attached_class)
       end
       def self.new(poll:)

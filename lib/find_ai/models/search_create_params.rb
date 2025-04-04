@@ -5,8 +5,8 @@ module FindAI
     # @see FindAI::Resources::Searches#create
     class SearchCreateParams < FindAI::BaseModel
       # @!parse
-      #   extend FindAI::Type::RequestParameters::Converter
-      include FindAI::RequestParameters
+      #   extend FindAI::Internal::Type::RequestParameters::Converter
+      include FindAI::Internal::Type::RequestParameters
 
       # @!attribute [r] max_matches
       #   The maximum number of results to return. optional for result_mode exact
