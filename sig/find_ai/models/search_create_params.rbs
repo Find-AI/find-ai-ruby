@@ -9,7 +9,7 @@ module FindAI
       }
       & FindAI::Internal::Type::request_parameters
 
-    class SearchCreateParams < FindAI::BaseModel
+    class SearchCreateParams < FindAI::Internal::Type::BaseModel
       extend FindAI::Internal::Type::RequestParameters::Converter
       include FindAI::Internal::Type::RequestParameters
 
@@ -46,7 +46,7 @@ module FindAI
       type result_mode = :exact | :best
 
       module ResultMode
-        extend FindAI::Enum
+        extend FindAI::Internal::Type::Enum
 
         EXACT: :exact
         BEST: :best
@@ -57,7 +57,7 @@ module FindAI
       type scope = :person | :company
 
       module Scope
-        extend FindAI::Enum
+        extend FindAI::Internal::Type::Enum
 
         PERSON: :person
         COMPANY: :company

@@ -41,7 +41,7 @@ module FindAI
         @client.request(
           method: :get,
           path: ["v1/searches/%1$s", id],
-          model: FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem],
+          model: FindAI::Internal::Type::ArrayOf[FindAI::Models::SearchRetrieveResponseItem],
           options: params[:request_options]
         )
       end

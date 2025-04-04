@@ -3,7 +3,7 @@
 module FindAI
   module Models
     # @see FindAI::Resources::Searches#retrieve
-    class SearchRetrieveParams < FindAI::BaseModel
+    class SearchRetrieveParams < FindAI::Internal::Type::BaseModel
       # @!parse
       #   extend FindAI::Internal::Type::RequestParameters::Converter
       include FindAI::Internal::Type::RequestParameters
@@ -13,7 +13,7 @@ module FindAI
       #   #
       #   def initialize(request_options: {}, **) = super
 
-      # def initialize: (Hash | FindAI::BaseModel) -> void
+      # def initialize: (Hash | FindAI::Internal::Type::BaseModel) -> void
     end
   end
 end

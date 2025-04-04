@@ -2,13 +2,17 @@
 
 module FindAI
   module Models
-    class SearchRetrieveParams < FindAI::BaseModel
+    class SearchRetrieveParams < FindAI::Internal::Type::BaseModel
       extend FindAI::Internal::Type::RequestParameters::Converter
       include FindAI::Internal::Type::RequestParameters
 
       sig do
-        params(request_options: T.any(FindAI::RequestOptions, FindAI::Internal::Util::AnyHash))
-          .returns(T.attached_class)
+        params(
+          request_options: T.any(
+            FindAI::RequestOptions,
+            FindAI::Internal::AnyHash
+          )
+        ).returns(T.attached_class)
       end
       def self.new(request_options: {})
       end

@@ -2,7 +2,7 @@
 
 module FindAI
   module Models
-    class SearchRetrieveResponseItem < FindAI::BaseModel
+    class SearchRetrieveResponseItem < FindAI::Internal::Type::BaseModel
       # @!attribute linkedin_url
       #
       #   @return [String]
@@ -27,7 +27,7 @@ module FindAI
       #
       #   @return [Array<FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason>, nil]
       optional :criteria_and_reasons,
-               -> { FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason] }
+               -> { FindAI::Internal::Type::ArrayOf[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason] }
 
       # @!parse
       #   # @return [Array<FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason>]
@@ -74,9 +74,9 @@ module FindAI
       #   #
       #   def initialize(linkedin_url:, name:, company: nil, criteria_and_reasons: nil, domain: nil, status: nil, title: nil, **) = super
 
-      # def initialize: (Hash | FindAI::BaseModel) -> void
+      # def initialize: (Hash | FindAI::Internal::Type::BaseModel) -> void
 
-      class CriteriaAndReason < FindAI::BaseModel
+      class CriteriaAndReason < FindAI::Internal::Type::BaseModel
         # @!attribute [r] criteria
         #   Match criteria
         #
@@ -91,7 +91,7 @@ module FindAI
         #   Whether it's a match
         #
         #   @return [Boolean, nil]
-        optional :match, FindAI::BooleanModel
+        optional :match, FindAI::Internal::Type::BooleanModel
 
         # @!parse
         #   # @return [Boolean]
@@ -114,10 +114,11 @@ module FindAI
         #   #
         #   def initialize(criteria: nil, match: nil, reason: nil, **) = super
 
-        # def initialize: (Hash | FindAI::BaseModel) -> void
+        # def initialize: (Hash | FindAI::Internal::Type::BaseModel) -> void
       end
     end
 
-    SearchRetrieveResponse = FindAI::ArrayOf[-> { FindAI::Models::SearchRetrieveResponseItem }]
+    SearchRetrieveResponse =
+      FindAI::Internal::Type::ArrayOf[-> { FindAI::Models::SearchRetrieveResponseItem }]
   end
 end

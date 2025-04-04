@@ -1,0 +1,4 @@
+module FindAI
+  module Internal
+  end
+end
