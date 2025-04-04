@@ -12,7 +12,7 @@ module FindAI
 
         # @param mod [Module]
         def self.included(mod)
-          return unless mod <= FindAI::BaseModel
+          return unless mod <= FindAI::Internal::Type::BaseModel
 
           mod.extend(FindAI::Internal::Type::RequestParameters::Converter)
           mod.optional(:request_options, FindAI::RequestOptions)

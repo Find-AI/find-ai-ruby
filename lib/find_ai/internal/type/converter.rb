@@ -31,10 +31,10 @@ module FindAI
         def dump(value)
           case value
           in Array
-            value.map { FindAI::Unknown.dump(_1) }
+            value.map { FindAI::Internal::Type::Unknown.dump(_1) }
           in Hash
-            value.transform_values { FindAI::Unknown.dump(_1) }
-          in FindAI::BaseModel
+            value.transform_values { FindAI::Internal::Type::Unknown.dump(_1) }
+          in FindAI::Internal::Type::BaseModel
             value.class.dump(value)
           else
             value
@@ -64,7 +64,7 @@ module FindAI
             in Hash
               type_info(spec.slice(:const, :enum, :union).first&.last)
             in true | false
-              -> { FindAI::BooleanModel }
+              -> { FindAI::Internal::Type::BooleanModel }
             in FindAI::Internal::Type::Converter | Class | Symbol
               -> { spec }
             in NilClass | Integer | Float
@@ -209,7 +209,7 @@ module FindAI
           #
           # @return [Object]
           def dump(target, value)
-            target.is_a?(FindAI::Internal::Type::Converter) ? target.dump(value) : FindAI::Unknown.dump(value)
+            target.is_a?(FindAI::Internal::Type::Converter) ? target.dump(value) : FindAI::Internal::Type::Unknown.dump(value)
           end
         end
       end

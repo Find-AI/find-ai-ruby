@@ -25,10 +25,10 @@ module FindAI
               ),
               body: T.nilable(T.anything),
               unwrap: T.nilable(Symbol),
-              page: T.nilable(T::Class[FindAI::Internal::Type::BasePage[FindAI::BaseModel]]),
+              page: T.nilable(T::Class[FindAI::Internal::Type::BasePage[FindAI::Internal::Type::BaseModel]]),
               stream: T.nilable(T::Class[T.anything]),
               model: T.nilable(FindAI::Internal::Type::Converter::Input),
-              options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Internal::Util::AnyHash))
+              options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Internal::AnyHash))
             }
           end
 
@@ -136,7 +136,7 @@ module FindAI
           overridable
             .params(
               req: FindAI::Internal::Transport::BaseClient::RequestComponentsShape,
-              opts: FindAI::Internal::Util::AnyHash
+              opts: FindAI::Internal::AnyHash
             )
             .returns(FindAI::Internal::Transport::BaseClient::RequestInputShape)
         end
@@ -180,10 +180,10 @@ module FindAI
             ),
             body: T.nilable(T.anything),
             unwrap: T.nilable(Symbol),
-            page: T.nilable(T::Class[FindAI::Internal::Type::BasePage[FindAI::BaseModel]]),
+            page: T.nilable(T::Class[FindAI::Internal::Type::BasePage[FindAI::Internal::Type::BaseModel]]),
             stream: T.nilable(T::Class[T.anything]),
             model: T.nilable(FindAI::Internal::Type::Converter::Input),
-            options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Internal::Util::AnyHash))
+            options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Internal::AnyHash))
           )
             .returns(T.anything)
         end
@@ -196,7 +196,7 @@ module FindAI
           unwrap: nil,
           page: nil,
           stream: nil,
-          model: FindAI::Unknown,
+          model: FindAI::Internal::Type::Unknown,
           options: {}
         )
         end

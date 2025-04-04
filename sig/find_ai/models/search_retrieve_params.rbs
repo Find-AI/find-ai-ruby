@@ -3,7 +3,7 @@ module FindAI
     type search_retrieve_params =
       {  } & FindAI::Internal::Type::request_parameters
 
-    class SearchRetrieveParams < FindAI::BaseModel
+    class SearchRetrieveParams < FindAI::Internal::Type::BaseModel
       extend FindAI::Internal::Type::RequestParameters::Converter
       include FindAI::Internal::Type::RequestParameters
 

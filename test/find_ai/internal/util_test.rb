@@ -42,7 +42,7 @@ class FindAI::Test::UtilDataHandlingTest < Minitest::Test
   def test_omission
     merged = FindAI::Internal::Util.deep_merge(
       {b: {b2: 1, b3: {c: 4, d: 5}}},
-      {b: {b2: 1, b3: {c: FindAI::Internal::Util::OMIT, d: 5}}}
+      {b: {b2: 1, b3: {c: FindAI::Internal::OMIT, d: 5}}}
     )
 
     assert_pattern do

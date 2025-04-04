@@ -17,11 +17,11 @@ module FindAI
         sig(:final) do
           params(
             type_info: T.any(
-              FindAI::Internal::Util::AnyHash,
+              FindAI::Internal::AnyHash,
               T.proc.returns(FindAI::Internal::Type::Converter::Input),
               FindAI::Internal::Type::Converter::Input
             ),
-            spec: FindAI::Internal::Util::AnyHash
+            spec: FindAI::Internal::AnyHash
           )
             .returns(T.attached_class)
         end
@@ -72,11 +72,11 @@ module FindAI
         sig(:final) do
           params(
             type_info: T.any(
-              FindAI::Internal::Util::AnyHash,
+              FindAI::Internal::AnyHash,
               T.proc.returns(FindAI::Internal::Type::Converter::Input),
               FindAI::Internal::Type::Converter::Input
             ),
-            spec: FindAI::Internal::Util::AnyHash
+            spec: FindAI::Internal::AnyHash
           )
             .void
         end

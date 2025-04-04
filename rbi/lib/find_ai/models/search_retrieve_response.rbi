@@ -2,7 +2,7 @@
 
 module FindAI
   module Models
-    class SearchRetrieveResponseItem < FindAI::BaseModel
+    class SearchRetrieveResponseItem < FindAI::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :linkedin_url
 
@@ -21,7 +21,7 @@ module FindAI
 
       sig do
         params(
-          criteria_and_reasons: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Internal::Util::AnyHash)]
+          criteria_and_reasons: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Internal::AnyHash)]
         )
           .void
       end
@@ -53,7 +53,7 @@ module FindAI
           linkedin_url: String,
           name: String,
           company: String,
-          criteria_and_reasons: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Internal::Util::AnyHash)],
+          criteria_and_reasons: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Internal::AnyHash)],
           domain: String,
           status: String,
           title: String
@@ -88,7 +88,7 @@ module FindAI
       def to_hash
       end
 
-      class CriteriaAndReason < FindAI::BaseModel
+      class CriteriaAndReason < FindAI::Internal::Type::BaseModel
         # Match criteria
         sig { returns(T.nilable(String)) }
         attr_reader :criteria
@@ -121,6 +121,9 @@ module FindAI
     end
 
     SearchRetrieveResponse =
-      T.let(FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem], FindAI::Internal::Type::Converter)
+      T.let(
+        FindAI::Internal::Type::ArrayOf[FindAI::Models::SearchRetrieveResponseItem],
+        FindAI::Internal::Type::Converter
+      )
   end
 end

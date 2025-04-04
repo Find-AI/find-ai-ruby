@@ -3,7 +3,7 @@ module FindAI
     type search_create_response =
       { poll: FindAI::Models::SearchCreateResponse::Poll }
 
-    class SearchCreateResponse < FindAI::BaseModel
+    class SearchCreateResponse < FindAI::Internal::Type::BaseModel
       attr_accessor poll: FindAI::Models::SearchCreateResponse::Poll
 
       def initialize: (poll: FindAI::Models::SearchCreateResponse::Poll) -> void
@@ -12,7 +12,7 @@ module FindAI
 
       type poll = { token: String, path: String }
 
-      class Poll < FindAI::BaseModel
+      class Poll < FindAI::Internal::Type::BaseModel
         attr_accessor token: String
 
         attr_accessor path: String

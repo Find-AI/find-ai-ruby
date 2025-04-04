@@ -2,15 +2,15 @@
 
 module FindAI
   module Models
-    class SearchCreateResponse < FindAI::BaseModel
+    class SearchCreateResponse < FindAI::Internal::Type::BaseModel
       sig { returns(FindAI::Models::SearchCreateResponse::Poll) }
       attr_reader :poll
 
-      sig { params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Internal::Util::AnyHash)).void }
+      sig { params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Internal::AnyHash)).void }
       attr_writer :poll
 
       sig do
-        params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Internal::Util::AnyHash))
+        params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Internal::AnyHash))
           .returns(T.attached_class)
       end
       def self.new(poll:)
@@ -20,7 +20,7 @@ module FindAI
       def to_hash
       end
 
-      class Poll < FindAI::BaseModel
+      class Poll < FindAI::Internal::Type::BaseModel
         sig { returns(String) }
         attr_accessor :token
 

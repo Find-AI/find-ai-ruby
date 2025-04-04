@@ -21,7 +21,7 @@ class FindAI::Test::Resources::SearchesTest < FindAI::Test::ResourceTest
     response = @find_ai.searches.retrieve("id")
 
     assert_pattern do
-      response => ^(FindAI::ArrayOf[FindAI::Models::SearchRetrieveResponseItem])
+      response => ^(FindAI::Internal::Type::ArrayOf[FindAI::Models::SearchRetrieveResponseItem])
     end
   end
 end

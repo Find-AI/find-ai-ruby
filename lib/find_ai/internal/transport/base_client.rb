@@ -339,7 +339,7 @@ module FindAI
 
           begin
             status, response, stream = @requester.execute(input)
-          rescue FindAI::APIConnectionError => e
+          rescue FindAI::Errors::APIConnectionError => e
             status = e
           end
 
@@ -361,7 +361,7 @@ module FindAI
               retry_count: retry_count,
               send_retry_header: send_retry_header
             )
-          in FindAI::APIConnectionError if retry_count >= max_retries
+          in FindAI::Errors::APIConnectionError if retry_count >= max_retries
             raise status
           in (400..) if retry_count >= max_retries || !self.class.should_retry?(status, headers: response)
             decoded = Kernel.then do
@@ -421,7 +421,7 @@ module FindAI
         # @return [Object]
         def request(req)
           self.class.validate!(req)
-          model = req.fetch(:model) { FindAI::Unknown }
+          model = req.fetch(:model) { FindAI::Internal::Type::Unknown }
           opts = req[:options].to_h
           FindAI::RequestOptions.validate!(opts)
           request = build_request(req.except(:options), opts)
