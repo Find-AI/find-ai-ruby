@@ -122,9 +122,9 @@ Due to limitations with the Sorbet type system, where a method otherwise can tak
 Please follow Sorbet's [setup guides](https://sorbet.org/docs/adopting) for best experience.
 
 ```ruby
-model = FindAI::Models::SearchRetrieveParams.new
+params = FindAI::Models::SearchRetrieveParams.new
 
-find_ai.searches.retrieve(**model)
+find_ai.searches.retrieve(**params)
 ```
 
 ## Advanced
