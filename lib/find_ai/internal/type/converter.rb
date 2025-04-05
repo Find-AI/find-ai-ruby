@@ -209,7 +209,9 @@ module FindAI
           #
           # @return [Object]
           def dump(target, value)
+            # rubocop:disable Layout/LineLength
             target.is_a?(FindAI::Internal::Type::Converter) ? target.dump(value) : FindAI::Internal::Type::Unknown.dump(value)
+            # rubocop:enable Layout/LineLength
           end
         end
       end
