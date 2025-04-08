@@ -91,7 +91,7 @@ module FindAI
         #   Whether it's a match
         #
         #   @return [Boolean, nil]
-        optional :match, FindAI::Internal::Type::BooleanModel
+        optional :match, FindAI::Internal::Type::Boolean
 
         # @!parse
         #   # @return [Boolean]

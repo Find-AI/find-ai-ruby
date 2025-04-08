@@ -64,7 +64,7 @@ module FindAI
             in Hash
               type_info(spec.slice(:const, :enum, :union).first&.last)
             in true | false
-              -> { FindAI::Internal::Type::BooleanModel }
+              -> { FindAI::Internal::Type::Boolean }
             in FindAI::Internal::Type::Converter | Class | Symbol
               -> { spec }
             in NilClass | Integer | Float
