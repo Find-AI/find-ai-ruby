@@ -44,8 +44,7 @@ module FindAI
         )
           .returns(T.attached_class)
       end
-      def self.new(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {})
-      end
+      def self.new(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {}); end
 
       sig do
         override
@@ -59,8 +58,7 @@ module FindAI
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       # The mode of the search. Valid values are 'exact' or 'best'.
       module ResultMode
@@ -74,8 +72,7 @@ module FindAI
         BEST = T.let(:best, FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol)
 
         sig { override.returns(T::Array[FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol]) }
-        def self.values
-        end
+        def self.values; end
       end
 
       # The scope of the search. Valid values are 'person' or 'company'.
@@ -90,8 +87,7 @@ module FindAI
         COMPANY = T.let(:company, FindAI::Models::SearchCreateParams::Scope::TaggedSymbol)
 
         sig { override.returns(T::Array[FindAI::Models::SearchCreateParams::Scope::TaggedSymbol]) }
-        def self.values
-        end
+        def self.values; end
       end
     end
   end
