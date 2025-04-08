@@ -24,9 +24,7 @@ module FindAI
         # The scope of the search. Valid values are 'person' or 'company'.
         scope: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # The endpoint to poll to check the latest results of a search.
       sig do
         params(
@@ -44,13 +42,10 @@ module FindAI
         # The id returned with your initial API call.
         id,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: FindAI::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

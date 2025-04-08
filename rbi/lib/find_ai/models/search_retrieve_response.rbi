@@ -85,8 +85,7 @@ module FindAI
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       class CriteriaAndReason < FindAI::Internal::Type::BaseModel
         # Match criteria
@@ -111,12 +110,10 @@ module FindAI
         attr_writer :reason
 
         sig { params(criteria: String, match: T::Boolean, reason: String).returns(T.attached_class) }
-        def self.new(criteria: nil, match: nil, reason: nil)
-        end
+        def self.new(criteria: nil, match: nil, reason: nil); end
 
         sig { override.returns({criteria: String, match: T::Boolean, reason: String}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

@@ -13,12 +13,10 @@ module FindAI
         params(poll: T.any(FindAI::Models::SearchCreateResponse::Poll, FindAI::Internal::AnyHash))
           .returns(T.attached_class)
       end
-      def self.new(poll:)
-      end
+      def self.new(poll:); end
 
       sig { override.returns({poll: FindAI::Models::SearchCreateResponse::Poll}) }
-      def to_hash
-      end
+      def to_hash; end
 
       class Poll < FindAI::Internal::Type::BaseModel
         sig { returns(String) }
@@ -28,12 +26,10 @@ module FindAI
         attr_accessor :path
 
         sig { params(token: String, path: String).returns(T.attached_class) }
-        def self.new(token:, path:)
-        end
+        def self.new(token:, path:); end
 
         sig { override.returns({token: String, path: String}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
   end
