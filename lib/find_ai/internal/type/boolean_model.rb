@@ -8,7 +8,7 @@ module FindAI
       # @abstract
       #
       # Ruby has no Boolean class; this is something for models to refer to.
-      class BooleanModel
+      class Boolean
         extend FindAI::Internal::Type::Converter
 
         # @param other [Object]
@@ -19,7 +19,7 @@ module FindAI
         # @param other [Object]
         #
         # @return [Boolean]
-        def self.==(other) = other.is_a?(Class) && other <= FindAI::Internal::Type::BooleanModel
+        def self.==(other) = other.is_a?(Class) && other <= FindAI::Internal::Type::Boolean
 
         class << self
           # @api private
