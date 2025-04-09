@@ -53,10 +53,13 @@ module FindAI
 
         def self.coerce: (
           FindAI::Internal::Type::BaseModel | ::Hash[top, top] | top value,
-          state: FindAI::Internal::Type::Converter::state
+          state: FindAI::Internal::Type::Converter::coerce_state
         ) -> (instance | top)
 
-        def self.dump: (instance | top value) -> (::Hash[top, top] | top)
+        def self.dump: (
+          instance | top value,
+          state: FindAI::Internal::Type::Converter::dump_state
+        ) -> (::Hash[top, top] | top)
 
         def []: (Symbol key) -> top?
 

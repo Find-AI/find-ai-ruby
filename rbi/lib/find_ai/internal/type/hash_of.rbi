@@ -38,7 +38,7 @@ module FindAI
           override
             .params(
               value: T.any(T::Hash[T.anything, T.anything], T.anything),
-              state: FindAI::Internal::Type::Converter::State
+              state: FindAI::Internal::Type::Converter::CoerceState
             )
             .returns(T.any(FindAI::Internal::AnyHash, T.anything))
         end
@@ -47,10 +47,13 @@ module FindAI
         # @api private
         sig(:final) do
           override
-            .params(value: T.any(T::Hash[T.anything, T.anything], T.anything))
+            .params(
+              value: T.any(T::Hash[T.anything, T.anything], T.anything),
+              state: FindAI::Internal::Type::Converter::DumpState
+            )
             .returns(T.any(FindAI::Internal::AnyHash, T.anything))
         end
-        def dump(value); end
+        def dump(value, state:); end
 
         # @api private
         sig(:final) { returns(Elem) }
