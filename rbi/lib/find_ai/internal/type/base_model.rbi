@@ -122,7 +122,7 @@ module FindAI
             override
               .params(
                 value: T.any(FindAI::Internal::Type::BaseModel, T::Hash[T.anything, T.anything], T.anything),
-                state: FindAI::Internal::Type::Converter::State
+                state: FindAI::Internal::Type::Converter::CoerceState
               )
               .returns(T.any(T.attached_class, T.anything))
           end
@@ -131,10 +131,14 @@ module FindAI
           # @api private
           sig do
             override
-              .params(value: T.any(T.attached_class, T.anything))
+              .params(value: T.any(
+                T.attached_class,
+                T.anything
+              ),
+                      state: FindAI::Internal::Type::Converter::DumpState)
               .returns(T.any(T::Hash[T.anything, T.anything], T.anything))
           end
-          def dump(value); end
+          def dump(value, state:); end
         end
 
         # Returns the raw value associated with the given key, if found. Otherwise, nil is
