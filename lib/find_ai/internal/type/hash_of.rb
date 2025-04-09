@@ -99,12 +99,16 @@ module FindAI
         #
         # @param value [Hash{Object=>Object}, Object]
         #
+        # @param state [Hash{Symbol=>Object}] .
+        #
+        #   @option state [Boolean] :can_retry
+        #
         # @return [Hash{Symbol=>Object}, Object]
-        def dump(value)
+        def dump(value, state:)
           target = item_type
           if value.is_a?(Hash)
             value.transform_values do
-              FindAI::Internal::Type::Converter.dump(target, _1)
+              FindAI::Internal::Type::Converter.dump(target, _1, state: state)
             end
           else
             super
