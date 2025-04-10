@@ -60,5 +60,8 @@
     }
   ],
   "release-type": "ruby",
-  "version-file": "lib/find_ai/version.rb"
+  "version-file": "lib/find_ai/version.rb",
+  "extra-files": [
+    "README.md"
+  ]
 }
