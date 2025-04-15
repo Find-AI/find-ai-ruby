@@ -11,6 +11,8 @@ module FindAI
       class Boolean
         extend FindAI::Internal::Type::Converter
 
+        private_class_method :new
+
         # @param other [Object]
         #
         # @return [Boolean]

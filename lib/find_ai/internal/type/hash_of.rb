@@ -13,6 +13,8 @@ module FindAI
       class HashOf
         include FindAI::Internal::Type::Converter
 
+        private_class_method :new
+
         # @param type_info [Hash{Symbol=>Object}, Proc, FindAI::Internal::Type::Converter, Class]
         #
         # @param spec [Hash{Symbol=>Object}] .
@@ -140,7 +142,18 @@ module FindAI
         #   @option spec [Boolean] :"nil?"
         def initialize(type_info, spec = {})
           @item_type_fn = FindAI::Internal::Type::Converter.type_info(type_info || spec)
-          @nilable = spec[:nil?]
+          @nilable = spec.fetch(:nil?, false)
+        end
+
+        # @api private
+        #
+        # @param depth [Integer]
+        #
+        # @return [String]
+        def inspect(depth: 0)
+          # rubocop:disable Layout/LineLength
+          "#{self.class}[#{[FindAI::Internal::Type::Converter.inspect(item_type, depth: depth.succ), nilable? ? 'nil' : nil].compact.join(' | ')}]"
+          # rubocop:enable Layout/LineLength
         end
       end
     end
