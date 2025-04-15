@@ -15,6 +15,8 @@ module FindAI
 
         private_class_method :new
 
+        # @overload [](type_info, spec = {})
+        #
         # @param type_info [Hash{Symbol=>Object}, Proc, FindAI::Internal::Type::Converter, Class]
         #
         # @param spec [Hash{Symbol=>Object}] .
@@ -26,7 +28,7 @@ module FindAI
         #   @option spec [Proc] :union
         #
         #   @option spec [Boolean] :"nil?"
-        def self.[](type_info, spec = {}) = new(type_info, spec)
+        def self.[](...) = new(...)
 
         # @param other [Object]
         #
@@ -131,9 +133,9 @@ module FindAI
         #
         # @return [String]
         def inspect(depth: 0)
-          # rubocop:disable Layout/LineLength
-          "#{self.class}[#{[FindAI::Internal::Type::Converter.inspect(item_type, depth: depth.succ), nilable? ? 'nil' : nil].compact.join(' | ')}]"
-          # rubocop:enable Layout/LineLength
+          items = FindAI::Internal::Type::Converter.inspect(item_type, depth: depth.succ)
+
+          "#{self.class}[#{[items, nilable? ? 'nil' : nil].compact.join(' | ')}]"
         end
       end
     end
