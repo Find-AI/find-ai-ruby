@@ -8,7 +8,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/find-ai).
 
-The underlying REST API documentation can be found on [usefind.ai](https://usefind.ai/api/docs/).
+The REST API documentation can be found on [usefind.ai](https://usefind.ai/api/docs/).
 
 ## Installation
 
