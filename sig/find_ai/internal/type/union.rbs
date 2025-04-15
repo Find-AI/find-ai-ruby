@@ -39,6 +39,8 @@ module FindAI
           top value,
           state: FindAI::Internal::Type::Converter::dump_state
         ) -> top
+
+        def inspect: (?depth: Integer) -> String
       end
     end
   end
