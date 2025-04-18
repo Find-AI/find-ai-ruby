@@ -175,6 +175,11 @@ module FindAI
         sig { params(keys: T.nilable(T::Array[Symbol])).returns(FindAI::Internal::AnyHash) }
         def deconstruct_keys(keys); end
 
+        class << self
+          sig { params(model: FindAI::Internal::Type::BaseModel).returns(FindAI::Internal::AnyHash) }
+          def walk(model); end
+        end
+
         sig { params(a: T.anything).returns(String) }
         def to_json(*a); end
 
@@ -190,6 +195,10 @@ module FindAI
           sig { params(depth: Integer).returns(String) }
           def inspect(depth: 0); end
         end
+
+        # @api private
+        sig { returns(String) }
+        def to_s; end
 
         # @api private
         sig { returns(String) }
