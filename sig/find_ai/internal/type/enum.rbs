@@ -10,6 +10,8 @@ module FindAI
 
         def ==: (top other) -> bool
 
+        def hash: -> Integer
+
         def coerce: (
           String | Symbol | top value,
           state: FindAI::Internal::Type::Converter::coerce_state

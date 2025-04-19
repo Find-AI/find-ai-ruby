@@ -15,6 +15,8 @@ module FindAI
 
         def ==: (top other) -> bool
 
+        def hash: -> Integer
+
         def coerce: (
           ::Hash[top, top] | top value,
           state: FindAI::Internal::Type::Converter::coerce_state
