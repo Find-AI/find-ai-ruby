@@ -39,10 +39,10 @@ module FindAI
       # `"https://api.example.com/v2/"`. Defaults to `ENV["FIND_AI_BASE_URL"]`
       base_url: ENV["FIND_AI_BASE_URL"],
       # Max number of retries to attempt after a failed retryable request.
-      max_retries: DEFAULT_MAX_RETRIES,
-      timeout: DEFAULT_TIMEOUT_IN_SECONDS,
-      initial_retry_delay: DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: DEFAULT_MAX_RETRY_DELAY
+      max_retries: FindAI::Client::DEFAULT_MAX_RETRIES,
+      timeout: FindAI::Client::DEFAULT_TIMEOUT_IN_SECONDS,
+      initial_retry_delay: FindAI::Client::DEFAULT_INITIAL_RETRY_DELAY,
+      max_retry_delay: FindAI::Client::DEFAULT_MAX_RETRY_DELAY
     ); end
   end
 end
