@@ -4,8 +4,7 @@ module FindAI
   module Models
     # @see FindAI::Resources::Searches#retrieve
     class SearchRetrieveParams < FindAI::Internal::Type::BaseModel
-      # @!parse
-      #   extend FindAI::Internal::Type::RequestParameters::Converter
+      extend FindAI::Internal::Type::RequestParameters::Converter
       include FindAI::Internal::Type::RequestParameters
 
       # @!method initialize(request_options: {})

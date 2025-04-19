@@ -13,55 +13,35 @@ module FindAI
       #   @return [String]
       required :name, String
 
-      # @!attribute [r] company
+      # @!attribute company
       #   Returned only for a person.
       #
       #   @return [String, nil]
       optional :company, String
 
-      # @!parse
-      #   # @return [String]
-      #   attr_writer :company
-
-      # @!attribute [r] criteria_and_reasons
+      # @!attribute criteria_and_reasons
       #
       #   @return [Array<FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason>, nil]
       optional :criteria_and_reasons,
                -> { FindAI::Internal::Type::ArrayOf[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason] }
 
-      # @!parse
-      #   # @return [Array<FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason>]
-      #   attr_writer :criteria_and_reasons
-
-      # @!attribute [r] domain
+      # @!attribute domain
       #   Returned only for a company.
       #
       #   @return [String, nil]
       optional :domain, String
 
-      # @!parse
-      #   # @return [String]
-      #   attr_writer :domain
-
-      # @!attribute [r] status
+      # @!attribute status
       #   The status of the search result.
       #
       #   @return [String, nil]
       optional :status, String
 
-      # @!parse
-      #   # @return [String]
-      #   attr_writer :status
-
-      # @!attribute [r] title
+      # @!attribute title
       #   Returned only for a person.
       #
       #   @return [String, nil]
       optional :title, String
-
-      # @!parse
-      #   # @return [String]
-      #   attr_writer :title
 
       # @!method initialize(linkedin_url:, name:, company: nil, criteria_and_reasons: nil, domain: nil, status: nil, title: nil)
       #   @param linkedin_url [String]
@@ -73,35 +53,23 @@ module FindAI
       #   @param title [String]
 
       class CriteriaAndReason < FindAI::Internal::Type::BaseModel
-        # @!attribute [r] criteria
+        # @!attribute criteria
         #   Match criteria
         #
         #   @return [String, nil]
         optional :criteria, String
 
-        # @!parse
-        #   # @return [String]
-        #   attr_writer :criteria
-
-        # @!attribute [r] match
+        # @!attribute match
         #   Whether it's a match
         #
         #   @return [Boolean, nil]
         optional :match, FindAI::Internal::Type::Boolean
 
-        # @!parse
-        #   # @return [Boolean]
-        #   attr_writer :match
-
-        # @!attribute [r] reason
+        # @!attribute reason
         #   Reason for the match
         #
         #   @return [String, nil]
         optional :reason, String
-
-        # @!parse
-        #   # @return [String]
-        #   attr_writer :reason
 
         # @!method initialize(criteria: nil, match: nil, reason: nil)
         #   @param criteria [String]
