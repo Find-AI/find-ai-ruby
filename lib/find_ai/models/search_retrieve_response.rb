@@ -63,18 +63,14 @@ module FindAI
       #   # @return [String]
       #   attr_writer :title
 
-      # @!parse
-      #   # @param linkedin_url [String]
-      #   # @param name [String]
-      #   # @param company [String]
-      #   # @param criteria_and_reasons [Array<FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason>]
-      #   # @param domain [String]
-      #   # @param status [String]
-      #   # @param title [String]
-      #   #
-      #   def initialize(linkedin_url:, name:, company: nil, criteria_and_reasons: nil, domain: nil, status: nil, title: nil, **) = super
-
-      # def initialize: (Hash | FindAI::Internal::Type::BaseModel) -> void
+      # @!method initialize(linkedin_url:, name:, company: nil, criteria_and_reasons: nil, domain: nil, status: nil, title: nil)
+      #   @param linkedin_url [String]
+      #   @param name [String]
+      #   @param company [String]
+      #   @param criteria_and_reasons [Array<FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason>]
+      #   @param domain [String]
+      #   @param status [String]
+      #   @param title [String]
 
       class CriteriaAndReason < FindAI::Internal::Type::BaseModel
         # @!attribute [r] criteria
@@ -107,14 +103,10 @@ module FindAI
         #   # @return [String]
         #   attr_writer :reason
 
-        # @!parse
-        #   # @param criteria [String]
-        #   # @param match [Boolean]
-        #   # @param reason [String]
-        #   #
-        #   def initialize(criteria: nil, match: nil, reason: nil, **) = super
-
-        # def initialize: (Hash | FindAI::Internal::Type::BaseModel) -> void
+        # @!method initialize(criteria: nil, match: nil, reason: nil)
+        #   @param criteria [String]
+        #   @param match [Boolean]
+        #   @param reason [String]
       end
     end
 

@@ -176,6 +176,7 @@ module FindAI
         def deconstruct_keys(keys); end
 
         class << self
+          # @api private
           sig { params(model: FindAI::Internal::Type::BaseModel).returns(FindAI::Internal::AnyHash) }
           def walk(model); end
         end

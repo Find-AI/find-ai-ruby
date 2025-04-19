@@ -48,16 +48,12 @@ module FindAI
       #   # @return [Symbol, FindAI::Models::SearchCreateParams::Scope]
       #   attr_writer :scope
 
-      # @!parse
-      #   # @param max_matches [Float]
-      #   # @param query [String]
-      #   # @param result_mode [Symbol, FindAI::Models::SearchCreateParams::ResultMode]
-      #   # @param scope [Symbol, FindAI::Models::SearchCreateParams::Scope]
-      #   # @param request_options [FindAI::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {}, **) = super
-
-      # def initialize: (Hash | FindAI::Internal::Type::BaseModel) -> void
+      # @!method initialize(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {})
+      #   @param max_matches [Float]
+      #   @param query [String]
+      #   @param result_mode [Symbol, FindAI::Models::SearchCreateParams::ResultMode]
+      #   @param scope [Symbol, FindAI::Models::SearchCreateParams::Scope]
+      #   @param request_options [FindAI::RequestOptions, Hash{Symbol=>Object}]
 
       # The mode of the search. Valid values are 'exact' or 'best'.
       module ResultMode
@@ -66,11 +62,8 @@ module FindAI
         EXACT = :exact
         BEST = :best
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
 
       # The scope of the search. Valid values are 'person' or 'company'.
@@ -80,11 +73,8 @@ module FindAI
         PERSON = :person
         COMPANY = :company
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end
