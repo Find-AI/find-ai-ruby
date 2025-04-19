@@ -337,6 +337,8 @@ module FindAI
         end
 
         class << self
+          # @api private
+          #
           # @param model [FindAI::Internal::Type::BaseModel]
           #
           # @return [Hash{Symbol=>Object}]

@@ -9,12 +9,8 @@ module FindAI
       #   @return [FindAI::Models::SearchCreateResponse::Poll]
       required :poll, -> { FindAI::Models::SearchCreateResponse::Poll }
 
-      # @!parse
-      #   # @param poll [FindAI::Models::SearchCreateResponse::Poll]
-      #   #
-      #   def initialize(poll:, **) = super
-
-      # def initialize: (Hash | FindAI::Internal::Type::BaseModel) -> void
+      # @!method initialize(poll:)
+      #   @param poll [FindAI::Models::SearchCreateResponse::Poll]
 
       # @see FindAI::Models::SearchCreateResponse#poll
       class Poll < FindAI::Internal::Type::BaseModel
@@ -28,13 +24,9 @@ module FindAI
         #   @return [String]
         required :path, String
 
-        # @!parse
-        #   # @param token [String]
-        #   # @param path [String]
-        #   #
-        #   def initialize(token:, path:, **) = super
-
-        # def initialize: (Hash | FindAI::Internal::Type::BaseModel) -> void
+        # @!method initialize(token:, path:)
+        #   @param token [String]
+        #   @param path [String]
       end
     end
   end
