@@ -65,8 +65,7 @@ module FindAI
         extend FindAI::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, FindAI::Models::SearchCreateParams::ResultMode) }
-        OrSymbol =
-          T.type_alias { T.any(Symbol, String, FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
 
         EXACT = T.let(:exact, FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol)
         BEST = T.let(:best, FindAI::Models::SearchCreateParams::ResultMode::TaggedSymbol)
@@ -80,8 +79,7 @@ module FindAI
         extend FindAI::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, FindAI::Models::SearchCreateParams::Scope) }
-        OrSymbol =
-          T.type_alias { T.any(Symbol, String, FindAI::Models::SearchCreateParams::Scope::TaggedSymbol) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
 
         PERSON = T.let(:person, FindAI::Models::SearchCreateParams::Scope::TaggedSymbol)
         COMPANY = T.let(:company, FindAI::Models::SearchCreateParams::Scope::TaggedSymbol)
