@@ -4,49 +4,32 @@ module FindAI
   module Models
     # @see FindAI::Resources::Searches#create
     class SearchCreateParams < FindAI::Internal::Type::BaseModel
-      # @!parse
-      #   extend FindAI::Internal::Type::RequestParameters::Converter
+      extend FindAI::Internal::Type::RequestParameters::Converter
       include FindAI::Internal::Type::RequestParameters
 
-      # @!attribute [r] max_matches
+      # @!attribute max_matches
       #   The maximum number of results to return. optional for result_mode exact
       #
       #   @return [Float, nil]
       optional :max_matches, Float
 
-      # @!parse
-      #   # @return [Float]
-      #   attr_writer :max_matches
-
-      # @!attribute [r] query
+      # @!attribute query
       #   Search query.
       #
       #   @return [String, nil]
       optional :query, String
 
-      # @!parse
-      #   # @return [String]
-      #   attr_writer :query
-
-      # @!attribute [r] result_mode
+      # @!attribute result_mode
       #   The mode of the search. Valid values are 'exact' or 'best'.
       #
       #   @return [Symbol, FindAI::Models::SearchCreateParams::ResultMode, nil]
       optional :result_mode, enum: -> { FindAI::Models::SearchCreateParams::ResultMode }
 
-      # @!parse
-      #   # @return [Symbol, FindAI::Models::SearchCreateParams::ResultMode]
-      #   attr_writer :result_mode
-
-      # @!attribute [r] scope
+      # @!attribute scope
       #   The scope of the search. Valid values are 'person' or 'company'.
       #
       #   @return [Symbol, FindAI::Models::SearchCreateParams::Scope, nil]
       optional :scope, enum: -> { FindAI::Models::SearchCreateParams::Scope }
-
-      # @!parse
-      #   # @return [Symbol, FindAI::Models::SearchCreateParams::Scope]
-      #   attr_writer :scope
 
       # @!method initialize(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {})
       #   @param max_matches [Float]
