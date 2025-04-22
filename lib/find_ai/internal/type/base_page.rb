@@ -19,7 +19,7 @@ module FindAI
         # @api public
         #
         # @raise [FindAI::Errors::APIError]
-        # @return [FindAI::Internal::Type::BasePage]
+        # @return [self]
         def next_page = (raise NotImplementedError)
 
         # @api public

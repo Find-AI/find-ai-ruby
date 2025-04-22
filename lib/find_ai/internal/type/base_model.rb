@@ -389,7 +389,7 @@ module FindAI
 
         # Create a new instance of a model.
         #
-        # @param data [Hash{Symbol=>Object}, FindAI::Internal::Type::BaseModel]
+        # @param data [Hash{Symbol=>Object}, self]
         def initialize(data = {})
           case FindAI::Internal::Util.coerce_hash(data)
           in Hash => coerced

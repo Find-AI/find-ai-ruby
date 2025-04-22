@@ -28,6 +28,8 @@ module FindAI
         #   @option spec [Proc] :union
         #
         #   @option spec [Boolean] :"nil?"
+        #
+        # @return [FindAI::Internal::Type::ArrayOf]
         def self.[](...) = new(...)
 
         # @api public

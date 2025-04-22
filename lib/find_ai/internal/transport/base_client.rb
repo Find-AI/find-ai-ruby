@@ -216,9 +216,9 @@ module FindAI
         #
         #   @option req [Symbol, nil] :unwrap
         #
-        #   @option req [Class, nil] :page
+        #   @option req [Class<FindAI::Internal::Type::BasePage>, nil] :page
         #
-        #   @option req [Class, nil] :stream
+        #   @option req [Class<FindAI::Internal::Type::BaseStream>, nil] :stream
         #
         #   @option req [FindAI::Internal::Type::Converter, Class, nil] :model
         #
@@ -417,9 +417,9 @@ module FindAI
         #
         # @param unwrap [Symbol, nil]
         #
-        # @param page [Class, nil]
+        # @param page [Class<FindAI::Internal::Type::BasePage>, nil]
         #
-        # @param stream [Class, nil]
+        # @param stream [Class<FindAI::Internal::Type::BaseStream>, nil]
         #
         # @param model [FindAI::Internal::Type::Converter, Class, nil]
         #
