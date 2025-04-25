@@ -44,8 +44,17 @@ module FindAI
         )
           .returns(T.attached_class)
       end
-      def self.new(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {}); end
-
+      def self.new(
+        # The maximum number of results to return. optional for result_mode exact
+        max_matches: nil,
+        # Search query.
+        query: nil,
+        # The mode of the search. Valid values are 'exact' or 'best'.
+        result_mode: nil,
+        # The scope of the search. Valid values are 'person' or 'company'.
+        scope: nil,
+        request_options: {}
+      ); end
       sig do
         override
           .returns(

@@ -45,12 +45,18 @@ module FindAI
 
       # @!method initialize(linkedin_url:, name:, company: nil, criteria_and_reasons: nil, domain: nil, status: nil, title: nil)
       #   @param linkedin_url [String]
+      #
       #   @param name [String]
-      #   @param company [String]
+      #
+      #   @param company [String] Returned only for a person.
+      #
       #   @param criteria_and_reasons [Array<FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason>]
-      #   @param domain [String]
-      #   @param status [String]
-      #   @param title [String]
+      #
+      #   @param domain [String] Returned only for a company.
+      #
+      #   @param status [String] The status of the search result.
+      #
+      #   @param title [String] Returned only for a person.
 
       class CriteriaAndReason < FindAI::Internal::Type::BaseModel
         # @!attribute criteria
@@ -72,9 +78,11 @@ module FindAI
         optional :reason, String
 
         # @!method initialize(criteria: nil, match: nil, reason: nil)
-        #   @param criteria [String]
-        #   @param match [Boolean]
-        #   @param reason [String]
+        #   @param criteria [String] Match criteria
+        #
+        #   @param match [Boolean] Whether it's a match
+        #
+        #   @param reason [String] Reason for the match
       end
     end
 
