@@ -153,7 +153,7 @@ module FindAI
 
         # @api private
         # @return [FindAI::Internal::Transport::PooledNetRequester]
-        attr_accessor :requester
+        attr_reader :requester
 
         # @api private
         #
