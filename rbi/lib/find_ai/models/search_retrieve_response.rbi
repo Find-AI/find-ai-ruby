@@ -63,14 +63,16 @@ module FindAI
       def self.new(
         linkedin_url:,
         name:,
+        # Returned only for a person.
         company: nil,
         criteria_and_reasons: nil,
+        # Returned only for a company.
         domain: nil,
+        # The status of the search result.
         status: nil,
+        # Returned only for a person.
         title: nil
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -110,8 +112,14 @@ module FindAI
         attr_writer :reason
 
         sig { params(criteria: String, match: T::Boolean, reason: String).returns(T.attached_class) }
-        def self.new(criteria: nil, match: nil, reason: nil); end
-
+        def self.new(
+          # Match criteria
+          criteria: nil,
+          # Whether it's a match
+          match: nil,
+          # Reason for the match
+          reason: nil
+        ); end
         sig { override.returns({criteria: String, match: T::Boolean, reason: String}) }
         def to_hash; end
       end

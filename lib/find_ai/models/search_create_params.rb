@@ -32,10 +32,14 @@ module FindAI
       optional :scope, enum: -> { FindAI::Models::SearchCreateParams::Scope }
 
       # @!method initialize(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {})
-      #   @param max_matches [Float]
-      #   @param query [String]
-      #   @param result_mode [Symbol, FindAI::Models::SearchCreateParams::ResultMode]
-      #   @param scope [Symbol, FindAI::Models::SearchCreateParams::Scope]
+      #   @param max_matches [Float] The maximum number of results to return. optional for result_mode exact
+      #
+      #   @param query [String] Search query.
+      #
+      #   @param result_mode [Symbol, FindAI::Models::SearchCreateParams::ResultMode] The mode of the search. Valid values are 'exact' or 'best'.
+      #
+      #   @param scope [Symbol, FindAI::Models::SearchCreateParams::Scope] The scope of the search. Valid values are 'person' or 'company'.
+      #
       #   @param request_options [FindAI::RequestOptions, Hash{Symbol=>Object}]
 
       # The mode of the search. Valid values are 'exact' or 'best'.
