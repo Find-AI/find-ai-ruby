@@ -90,7 +90,7 @@ module FindAI
 
         # @api private
         sig { returns(FindAI::Internal::Transport::PooledNetRequester) }
-        attr_accessor :requester
+        attr_reader :requester
 
         # @api private
         sig do
