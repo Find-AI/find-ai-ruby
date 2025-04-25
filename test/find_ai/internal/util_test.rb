@@ -200,8 +200,12 @@ class FindAI::Test::UtilFormDataEncodingTest < Minitest::Test
     file = Pathname(__FILE__)
     headers = {"content-type" => "multipart/form-data"}
     cases = {
+      "abc" => "abc",
       StringIO.new("abc") => "abc",
-      file => /^class FindAI/
+      FindAI::FilePart.new("abc") => "abc",
+      FindAI::FilePart.new(StringIO.new("abc")) => "abc",
+      file => /^class FindAI/,
+      FindAI::FilePart.new(file) => /^class FindAI/
     }
     cases.each do |body, val|
       encoded = FindAI::Internal::Util.encode_content(headers, body)
@@ -219,7 +223,13 @@ class FindAI::Test::UtilFormDataEncodingTest < Minitest::Test
       {a: 2, b: nil} => {"a" => "2", "b" => "null"},
       {a: 2, b: [1, 2, 3]} => {"a" => "2", "b" => "1"},
       {strio: StringIO.new("a")} => {"strio" => "a"},
-      {pathname: Pathname(__FILE__)} => {"pathname" => -> { _1.read in /^class FindAI/ }}
+      {strio: FindAI::FilePart.new("a")} => {"strio" => "a"},
+      {pathname: Pathname(__FILE__)} => {"pathname" => -> { _1.read in /^class FindAI/ }},
+      {pathname: FindAI::FilePart.new(Pathname(__FILE__))} => {
+        "pathname" => -> {
+          _1.read in /^class FindAI/
+        }
+      }
     }
     cases.each do |body, testcase|
       encoded = FindAI::Internal::Util.encode_content(headers, body)
