@@ -44,6 +44,9 @@ module FindAI
           in Pathname | IO
             state[:can_retry] = false if value.is_a?(IO)
             FindAI::FilePart.new(value)
+          in FindAI::FilePart
+            state[:can_retry] = false if value.content.is_a?(IO)
+            value
           else
             value
           end
