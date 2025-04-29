@@ -79,6 +79,6 @@ module FindAI
     type search_retrieve_response =
       ::Array[FindAI::Models::SearchRetrieveResponseItem]
 
-    SearchRetrieveResponse: search_retrieve_response
+    SearchRetrieveResponse: FindAI::Internal::Type::Converter
   end
 end
