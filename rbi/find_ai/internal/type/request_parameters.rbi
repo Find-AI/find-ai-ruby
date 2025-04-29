@@ -6,7 +6,7 @@ module FindAI
       # @api private
       module RequestParameters
         # Options to specify HTTP behaviour for this request.
-        sig { returns(T.any(FindAI::RequestOptions, FindAI::Internal::AnyHash)) }
+        sig { returns(FindAI::RequestOpts) }
         attr_accessor :request_options
 
         # @api private

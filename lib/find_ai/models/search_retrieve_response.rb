@@ -86,6 +86,7 @@ module FindAI
       end
     end
 
+    # @type [FindAI::Internal::Type::Converter]
     SearchRetrieveResponse =
       FindAI::Internal::Type::ArrayOf[-> { FindAI::Models::SearchRetrieveResponseItem }]
   end

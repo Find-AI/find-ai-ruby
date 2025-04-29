@@ -35,7 +35,7 @@ module FindAI
               page: T.nilable(T::Class[FindAI::Internal::Type::BasePage[FindAI::Internal::Type::BaseModel]]),
               stream: T.nilable(T::Class[T.anything]),
               model: T.nilable(FindAI::Internal::Type::Converter::Input),
-              options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Internal::AnyHash))
+              options: T.nilable(FindAI::RequestOpts)
             }
           end
 
@@ -188,7 +188,7 @@ module FindAI
             page: T.nilable(T::Class[FindAI::Internal::Type::BasePage[FindAI::Internal::Type::BaseModel]]),
             stream: T.nilable(T::Class[T.anything]),
             model: T.nilable(FindAI::Internal::Type::Converter::Input),
-            options: T.nilable(T.any(FindAI::RequestOptions, FindAI::Internal::AnyHash))
+            options: T.nilable(FindAI::RequestOpts)
           )
             .returns(T.anything)
         end
