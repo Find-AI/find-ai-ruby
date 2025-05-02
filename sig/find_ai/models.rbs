@@ -1,0 +1,5 @@
+module FindAI
+  class SearchCreateParams = FindAI::Models::SearchCreateParams
+
+  class SearchRetrieveParams = FindAI::Models::SearchRetrieveParams
+end
