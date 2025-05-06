@@ -29,7 +29,7 @@ require "bundler/setup"
 require "find_ai"
 
 find_ai = FindAI::Client.new(
-  api_key: "My API Key" # defaults to ENV["FIND_AI_API_KEY"]
+  api_key: ENV["FIND_AI_API_KEY"] # This is the default and can be omitted
 )
 
 searches = find_ai.searches.retrieve
