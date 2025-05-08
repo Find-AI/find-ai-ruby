@@ -48,8 +48,6 @@ module FindAI
         ?title: String
       ) -> void
 
-      def to_hash: -> FindAI::Models::search_retrieve_response_item
-
       type criteria_and_reason =
         { criteria: String, match: bool, reason: String }
 
@@ -71,8 +69,6 @@ module FindAI
           ?match: bool,
           ?reason: String
         ) -> void
-
-        def to_hash: -> FindAI::Models::SearchRetrieveResponseItem::criteria_and_reason
       end
     end
 

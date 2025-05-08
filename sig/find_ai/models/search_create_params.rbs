@@ -41,8 +41,6 @@ module FindAI
         ?request_options: FindAI::request_opts
       ) -> void
 
-      def to_hash: -> FindAI::Models::search_create_params
-
       type result_mode = :exact | :best
 
       module ResultMode

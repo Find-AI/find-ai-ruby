@@ -3,6 +3,8 @@
 module FindAI
   module Models
     class SearchRetrieveResponseItem < FindAI::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, FindAI::Internal::AnyHash) }
+
       sig { returns(String) }
       attr_accessor :linkedin_url
 
@@ -16,14 +18,24 @@ module FindAI
       sig { params(company: String).void }
       attr_writer :company
 
-      sig { returns(T.nilable(T::Array[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason])) }
+      sig do
+        returns(
+          T.nilable(
+            T::Array[
+              FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason
+            ]
+          )
+        )
+      end
       attr_reader :criteria_and_reasons
 
       sig do
         params(
-          criteria_and_reasons: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Internal::AnyHash)]
-        )
-          .void
+          criteria_and_reasons:
+            T::Array[
+              FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason::OrHash
+            ]
+        ).void
       end
       attr_writer :criteria_and_reasons
 
@@ -53,12 +65,14 @@ module FindAI
           linkedin_url: String,
           name: String,
           company: String,
-          criteria_and_reasons: T::Array[T.any(FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason, FindAI::Internal::AnyHash)],
+          criteria_and_reasons:
+            T::Array[
+              FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason::OrHash
+            ],
           domain: String,
           status: String,
           title: String
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         linkedin_url:,
@@ -72,24 +86,31 @@ module FindAI
         status: nil,
         # Returned only for a person.
         title: nil
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              linkedin_url: String,
-              name: String,
-              company: String,
-              criteria_and_reasons: T::Array[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason],
-              domain: String,
-              status: String,
-              title: String
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            linkedin_url: String,
+            name: String,
+            company: String,
+            criteria_and_reasons:
+              T::Array[
+                FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason
+              ],
+            domain: String,
+            status: String,
+            title: String
+          }
+        )
+      end
+      def to_hash
+      end
 
       class CriteriaAndReason < FindAI::Internal::Type::BaseModel
+        OrHash = T.type_alias { T.any(T.self_type, FindAI::Internal::AnyHash) }
+
         # Match criteria
         sig { returns(T.nilable(String)) }
         attr_reader :criteria
@@ -111,7 +132,11 @@ module FindAI
         sig { params(reason: String).void }
         attr_writer :reason
 
-        sig { params(criteria: String, match: T::Boolean, reason: String).returns(T.attached_class) }
+        sig do
+          params(criteria: String, match: T::Boolean, reason: String).returns(
+            T.attached_class
+          )
+        end
         def self.new(
           # Match criteria
           criteria: nil,
@@ -119,15 +144,24 @@ module FindAI
           match: nil,
           # Reason for the match
           reason: nil
-        ); end
-        sig { override.returns({criteria: String, match: T::Boolean, reason: String}) }
-        def to_hash; end
+        )
+        end
+
+        sig do
+          override.returns(
+            { criteria: String, match: T::Boolean, reason: String }
+          )
+        end
+        def to_hash
+        end
       end
     end
 
     SearchRetrieveResponse =
       T.let(
-        FindAI::Internal::Type::ArrayOf[FindAI::Models::SearchRetrieveResponseItem],
+        FindAI::Internal::Type::ArrayOf[
+          FindAI::Models::SearchRetrieveResponseItem
+        ],
         FindAI::Internal::Type::Converter
       )
   end

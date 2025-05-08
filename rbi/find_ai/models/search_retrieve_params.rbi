@@ -6,18 +6,19 @@ module FindAI
       extend FindAI::Internal::Type::RequestParameters::Converter
       include FindAI::Internal::Type::RequestParameters
 
-      sig do
-        params(
-          request_options: T.any(
-            FindAI::RequestOptions,
-            FindAI::Internal::AnyHash
-          )
-        ).returns(T.attached_class)
-      end
-      def self.new(request_options: {}); end
+      OrHash = T.type_alias { T.any(T.self_type, FindAI::Internal::AnyHash) }
 
-      sig { override.returns({request_options: FindAI::RequestOptions}) }
-      def to_hash; end
+      sig do
+        params(request_options: FindAI::RequestOptions::OrHash).returns(
+          T.attached_class
+        )
+      end
+      def self.new(request_options: {})
+      end
+
+      sig { override.returns({ request_options: FindAI::RequestOptions }) }
+      def to_hash
+      end
     end
   end
 end
