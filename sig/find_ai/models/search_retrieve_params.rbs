@@ -8,8 +8,6 @@ module FindAI
       include FindAI::Internal::Type::RequestParameters
 
       def initialize: (?request_options: FindAI::request_opts) -> void
-
-      def to_hash: -> FindAI::Models::search_retrieve_params
     end
   end
 end
