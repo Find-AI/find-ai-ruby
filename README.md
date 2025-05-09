@@ -32,7 +32,7 @@ find_ai = FindAI::Client.new(
   api_key: ENV["FIND_AI_API_KEY"] # This is the default and can be omitted
 )
 
-searches = find_ai.searches.retrieve
+searches = find_ai.searches.retrieve("id")
 
 puts(searches)
 ```
@@ -44,7 +44,7 @@ This library is written with [Sorbet type definitions](https://sorbet.org/docs/r
 When using sorbet, it is recommended to use model classes as below. This provides stronger type checking and tooling integration.
 
 ```ruby
-find_ai.searches.retrieve
+find_ai.searches.retrieve("id")
 ```
 
 ### Errors
@@ -53,7 +53,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  search = find_ai.searches.retrieve
+  search = find_ai.searches.retrieve("id")
 rescue FindAI::Errors::APIError => e
   puts(e.status) # 400
 end
@@ -90,7 +90,7 @@ find_ai = FindAI::Client.new(
 )
 
 # Or, configure per-request:
-find_ai.searches.retrieve(request_options: {max_retries: 5})
+find_ai.searches.retrieve("id", request_options: {max_retries: 5})
 ```
 
 ### Timeouts
@@ -108,7 +108,7 @@ find_ai = FindAI::Client.new(
 )
 
 # Or, configure per-request:
-find_ai.searches.retrieve(request_options: {timeout: 5})
+find_ai.searches.retrieve("id", request_options: {timeout: 5})
 ```
 
 ## Model DSL
