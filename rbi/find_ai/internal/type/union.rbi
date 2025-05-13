@@ -6,6 +6,7 @@ module FindAI
       # @api private
       module Union
         include FindAI::Internal::Type::Converter
+        include FindAI::Internal::Util::SorbetRuntimeSupport
 
         # @api private
         #

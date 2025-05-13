@@ -5,10 +5,11 @@ module FindAI
     module Type
       class BaseModel
         extend FindAI::Internal::Type::Converter
+        extend FindAI::Internal::Util::SorbetRuntimeSupport
 
         abstract!
 
-        KnownFieldShape =
+        KnownField =
           T.type_alias do
             {
               mode: T.nilable(Symbol),
@@ -17,19 +18,27 @@ module FindAI
             }
           end
 
-        OrHash = T.type_alias { T.any(T.self_type, FindAI::Internal::AnyHash) }
+        OrHash =
+          T.type_alias do
+            T.any(FindAI::Internal::Type::BaseModel, FindAI::Internal::AnyHash)
+          end
 
         class << self
           # @api private
           #
           # Assumes superclass fields are totally defined before fields are accessed /
           # defined on subclasses.
+          sig { params(child: T.self_type).void }
+          def inherited(child)
+          end
+
+          # @api private
           sig do
             returns(
               T::Hash[
                 Symbol,
                 T.all(
-                  FindAI::Internal::Type::BaseModel::KnownFieldShape,
+                  FindAI::Internal::Type::BaseModel::KnownField,
                   {
                     type_fn:
                       T.proc.returns(FindAI::Internal::Type::Converter::Input)
@@ -47,7 +56,7 @@ module FindAI
               T::Hash[
                 Symbol,
                 T.all(
-                  FindAI::Internal::Type::BaseModel::KnownFieldShape,
+                  FindAI::Internal::Type::BaseModel::KnownField,
                   { type: FindAI::Internal::Type::Converter::Input }
                 )
               ]

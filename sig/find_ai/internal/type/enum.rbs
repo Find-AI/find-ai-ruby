@@ -3,6 +3,7 @@ module FindAI
     module Type
       module Enum
         include FindAI::Internal::Type::Converter
+        include FindAI::Internal::Util::SorbetRuntimeSupport
 
         def self.values: -> ::Array[(nil | bool | Integer | Float | Symbol)]
 

@@ -29,8 +29,7 @@ module FindAI
         sig do
           params(
             client: FindAI::Internal::Transport::BaseClient,
-            req:
-              FindAI::Internal::Transport::BaseClient::RequestComponentsShape,
+            req: FindAI::Internal::Transport::BaseClient::RequestComponents,
             headers: T.any(T::Hash[String, String], Net::HTTPHeader),
             page_data: T.anything
           ).void

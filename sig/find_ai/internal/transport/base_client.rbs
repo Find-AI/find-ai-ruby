@@ -2,6 +2,8 @@ module FindAI
   module Internal
     module Transport
       class BaseClient
+        extend FindAI::Internal::Util::SorbetRuntimeSupport
+
         type request_components =
           {
             method: Symbol,
@@ -20,7 +22,6 @@ module FindAI
             model: FindAI::Internal::Type::Converter::input?,
             options: FindAI::request_opts?
           }
-
         type request_input =
           {
             method: Symbol,

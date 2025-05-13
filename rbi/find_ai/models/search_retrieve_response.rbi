@@ -3,7 +3,13 @@
 module FindAI
   module Models
     class SearchRetrieveResponseItem < FindAI::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, FindAI::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(
+            FindAI::Models::SearchRetrieveResponseItem,
+            FindAI::Internal::AnyHash
+          )
+        end
 
       sig { returns(String) }
       attr_accessor :linkedin_url
@@ -109,7 +115,13 @@ module FindAI
       end
 
       class CriteriaAndReason < FindAI::Internal::Type::BaseModel
-        OrHash = T.type_alias { T.any(T.self_type, FindAI::Internal::AnyHash) }
+        OrHash =
+          T.type_alias do
+            T.any(
+              FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason,
+              FindAI::Internal::AnyHash
+            )
+          end
 
         # Match criteria
         sig { returns(T.nilable(String)) }

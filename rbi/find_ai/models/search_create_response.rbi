@@ -3,7 +3,10 @@
 module FindAI
   module Models
     class SearchCreateResponse < FindAI::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, FindAI::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(FindAI::Models::SearchCreateResponse, FindAI::Internal::AnyHash)
+        end
 
       sig { returns(FindAI::Models::SearchCreateResponse::Poll) }
       attr_reader :poll
@@ -28,7 +31,13 @@ module FindAI
       end
 
       class Poll < FindAI::Internal::Type::BaseModel
-        OrHash = T.type_alias { T.any(T.self_type, FindAI::Internal::AnyHash) }
+        OrHash =
+          T.type_alias do
+            T.any(
+              FindAI::Models::SearchCreateResponse::Poll,
+              FindAI::Internal::AnyHash
+            )
+          end
 
         sig { returns(String) }
         attr_accessor :token

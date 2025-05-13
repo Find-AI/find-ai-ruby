@@ -2,6 +2,8 @@ module FindAI
   module Internal
     module Type
       module Converter
+        extend FindAI::Internal::Util::SorbetRuntimeSupport
+
         type input = FindAI::Internal::Type::Converter | Class
 
         type coerce_state =

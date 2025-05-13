@@ -7,7 +7,8 @@ module FindAI
   # When making a request, you can pass an actual {RequestOptions} instance, or
   # simply pass a Hash with symbol keys matching the attributes on this class.
   class RequestOptions < FindAI::Internal::Type::BaseModel
-    OrHash = T.type_alias { T.any(T.self_type, FindAI::Internal::AnyHash) }
+    OrHash =
+      T.type_alias { T.any(FindAI::RequestOptions, FindAI::Internal::AnyHash) }
 
     # @api private
     sig { params(opts: FindAI::RequestOptions::OrHash).void }

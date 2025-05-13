@@ -5,6 +5,8 @@ module FindAI
     module Type
       # @api private
       module Converter
+        extend FindAI::Internal::Util::SorbetRuntimeSupport
+
         Input =
           T.type_alias do
             T.any(FindAI::Internal::Type::Converter, T::Class[T.anything])
