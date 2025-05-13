@@ -3,6 +3,7 @@ module FindAI
     module Type
       module Union
         include FindAI::Internal::Type::Converter
+        include FindAI::Internal::Util::SorbetRuntimeSupport
 
         private def self.known_variants: -> ::Array[[Symbol?, (^-> FindAI::Internal::Type::Converter::input)]]
 

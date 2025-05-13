@@ -5,9 +5,11 @@ module FindAI
     module Transport
       # @api private
       class BaseClient
+        extend FindAI::Internal::Util::SorbetRuntimeSupport
+
         abstract!
 
-        RequestComponentsShape =
+        RequestComponents =
           T.type_alias do
             {
               method: Symbol,
@@ -53,7 +55,7 @@ module FindAI
             }
           end
 
-        RequestInputShape =
+        RequestInput =
           T.type_alias do
             {
               method: Symbol,
@@ -74,8 +76,7 @@ module FindAI
           # @api private
           sig do
             params(
-              req:
-                FindAI::Internal::Transport::BaseClient::RequestComponentsShape
+              req: FindAI::Internal::Transport::BaseClient::RequestComponents
             ).void
           end
           def validate!(req)
@@ -94,13 +95,10 @@ module FindAI
           # @api private
           sig do
             params(
-              request:
-                FindAI::Internal::Transport::BaseClient::RequestInputShape,
+              request: FindAI::Internal::Transport::BaseClient::RequestInput,
               status: Integer,
               response_headers: T.any(T::Hash[String, String], Net::HTTPHeader)
-            ).returns(
-              FindAI::Internal::Transport::BaseClient::RequestInputShape
-            )
+            ).returns(FindAI::Internal::Transport::BaseClient::RequestInput)
           end
           def follow_redirect(request, status:, response_headers:)
           end
@@ -167,11 +165,10 @@ module FindAI
         sig do
           overridable
             .params(
-              req:
-                FindAI::Internal::Transport::BaseClient::RequestComponentsShape,
+              req: FindAI::Internal::Transport::BaseClient::RequestComponents,
               opts: FindAI::Internal::AnyHash
             )
-            .returns(FindAI::Internal::Transport::BaseClient::RequestInputShape)
+            .returns(FindAI::Internal::Transport::BaseClient::RequestInput)
         end
         private def build_request(req, opts)
         end
@@ -189,7 +186,7 @@ module FindAI
         # @api private
         sig do
           params(
-            request: FindAI::Internal::Transport::BaseClient::RequestInputShape,
+            request: FindAI::Internal::Transport::BaseClient::RequestInput,
             redirect_count: Integer,
             retry_count: Integer,
             send_retry_header: T::Boolean

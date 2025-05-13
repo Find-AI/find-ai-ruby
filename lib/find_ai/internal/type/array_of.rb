@@ -29,7 +29,7 @@ module FindAI
         #
         #   @option spec [Boolean] :"nil?"
         #
-        # @return [FindAI::Internal::Type::ArrayOf]
+        # @return [self]
         def self.[](...) = new(...)
 
         # @api public

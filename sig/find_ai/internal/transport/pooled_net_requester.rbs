@@ -2,6 +2,8 @@ module FindAI
   module Internal
     module Transport
       class PooledNetRequester
+        extend FindAI::Internal::Util::SorbetRuntimeSupport
+
         type request =
           {
             method: Symbol,

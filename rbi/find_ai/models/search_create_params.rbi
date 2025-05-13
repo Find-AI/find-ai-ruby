@@ -6,7 +6,10 @@ module FindAI
       extend FindAI::Internal::Type::RequestParameters::Converter
       include FindAI::Internal::Type::RequestParameters
 
-      OrHash = T.type_alias { T.any(T.self_type, FindAI::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(FindAI::SearchCreateParams, FindAI::Internal::AnyHash)
+        end
 
       # The maximum number of results to return. optional for result_mode exact
       sig { returns(T.nilable(Float)) }

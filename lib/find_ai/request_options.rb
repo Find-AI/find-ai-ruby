@@ -69,5 +69,9 @@ module FindAI
     #   Returns a new instance of RequestOptions.
     #
     #   @param values [Hash{Symbol=>Object}]
+
+    define_sorbet_constant!(:OrHash) do
+      T.type_alias { T.any(FindAI::RequestOptions, FindAI::Internal::AnyHash) }
+    end
   end
 end

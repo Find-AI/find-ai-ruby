@@ -1,5 +1,7 @@
 module FindAI
   module Internal
+    extend FindAI::Internal::Util::SorbetRuntimeSupport
+
     OMIT: Object
   end
 end

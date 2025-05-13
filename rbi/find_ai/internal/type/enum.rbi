@@ -17,6 +17,7 @@ module FindAI
       # values safely.
       module Enum
         include FindAI::Internal::Type::Converter
+        include FindAI::Internal::Util::SorbetRuntimeSupport
 
         # All of the valid Symbol values for this enum.
         sig do
