@@ -147,7 +147,7 @@ multitask(:"build:gem") do
     sig/*
   GLOB
 
-  sh(*%w[gem build -- openai.gemspec])
+  sh(*%w[gem build -- find_ai.gemspec])
   rm_rf(ignore_file)
 end
 
