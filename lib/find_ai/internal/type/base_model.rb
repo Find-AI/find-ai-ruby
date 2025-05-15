@@ -386,6 +386,12 @@ module FindAI
         # @param keys [Array<Symbol>, nil]
         #
         # @return [Hash{Symbol=>Object}]
+        #
+        # @example
+        #   # `search_create_response` is a `FindAI::Models::SearchCreateResponse`
+        #   search_create_response => {
+        #     poll: poll
+        #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)
             .filter_map do |k|
