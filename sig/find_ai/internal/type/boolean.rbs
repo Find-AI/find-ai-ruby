@@ -3,6 +3,7 @@ module FindAI
     module Type
       class Boolean
         extend FindAI::Internal::Type::Converter
+        extend FindAI::Internal::Util::SorbetRuntimeSupport
 
         def self.===: (top other) -> bool
 
@@ -17,6 +18,8 @@ module FindAI
           bool | top value,
           state: FindAI::Internal::Type::Converter::dump_state
         ) -> (bool | top)
+
+        def self.to_sorbet_type: -> top
       end
     end
   end
