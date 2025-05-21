@@ -8,6 +8,7 @@ module FindAI
       # When we don't know what to expect for the value.
       class Unknown
         extend FindAI::Internal::Type::Converter
+        extend FindAI::Internal::Util::SorbetRuntimeSupport
 
         abstract!
 
@@ -42,6 +43,11 @@ module FindAI
               .returns(T.anything)
           end
           def dump(value, state:)
+          end
+
+          # @api private
+          sig { returns(T.anything) }
+          def to_sorbet_type
           end
         end
       end

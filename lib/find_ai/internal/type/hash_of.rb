@@ -12,6 +12,7 @@ module FindAI
       # Hash of items of a given type.
       class HashOf
         include FindAI::Internal::Type::Converter
+        include FindAI::Internal::Util::SorbetRuntimeSupport
 
         private_class_method :new
 
@@ -128,6 +129,13 @@ module FindAI
           else
             super
           end
+        end
+
+        # @api private
+        #
+        # @return [Object]
+        def to_sorbet_type
+          T::Hash[FindAI::Internal::Util::SorbetRuntimeSupport.to_sorbet_type(item_type)]
         end
 
         # @api private
