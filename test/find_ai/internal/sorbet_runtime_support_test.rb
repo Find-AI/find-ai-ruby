@@ -25,6 +25,7 @@ class FindAI::Test::SorbetRuntimeSupportTest < Minitest::Test
     err = FindAI::Internal::Util::SorbetRuntimeSupport::MissingSorbetRuntimeError
 
     assert_raises(err) { FindAI::Internal::AnyHash }
+    assert_raises(err) { FindAI::Internal::FileInput }
     assert_raises(err) { FindAI::Internal::Type::Converter::Input }
     assert_raises(err) { FindAI::Internal::Type::Converter::CoerceState }
     assert_raises(err) { FindAI::Internal::Type::Converter::DumpState }
