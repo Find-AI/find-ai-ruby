@@ -22,13 +22,13 @@ module FindAI
       # @!attribute result_mode
       #   The mode of the search. Valid values are 'exact' or 'best'.
       #
-      #   @return [Symbol, FindAI::SearchCreateParams::ResultMode, nil]
+      #   @return [Symbol, FindAI::Models::SearchCreateParams::ResultMode, nil]
       optional :result_mode, enum: -> { FindAI::SearchCreateParams::ResultMode }
 
       # @!attribute scope
       #   The scope of the search. Valid values are 'person' or 'company'.
       #
-      #   @return [Symbol, FindAI::SearchCreateParams::Scope, nil]
+      #   @return [Symbol, FindAI::Models::SearchCreateParams::Scope, nil]
       optional :scope, enum: -> { FindAI::SearchCreateParams::Scope }
 
       # @!method initialize(max_matches: nil, query: nil, result_mode: nil, scope: nil, request_options: {})
@@ -36,9 +36,9 @@ module FindAI
       #
       #   @param query [String] Search query.
       #
-      #   @param result_mode [Symbol, FindAI::SearchCreateParams::ResultMode] The mode of the search. Valid values are 'exact' or 'best'.
+      #   @param result_mode [Symbol, FindAI::Models::SearchCreateParams::ResultMode] The mode of the search. Valid values are 'exact' or 'best'.
       #
-      #   @param scope [Symbol, FindAI::SearchCreateParams::Scope] The scope of the search. Valid values are 'person' or 'company'.
+      #   @param scope [Symbol, FindAI::Models::SearchCreateParams::Scope] The scope of the search. Valid values are 'person' or 'company'.
       #
       #   @param request_options [FindAI::RequestOptions, Hash{Symbol=>Object}]
 

@@ -8,6 +8,8 @@ module FindAI
 
       def initialize: (poll: FindAI::Models::SearchCreateResponse::Poll) -> void
 
+      def to_hash: -> { poll: FindAI::Models::SearchCreateResponse::Poll }
+
       type poll = { token: String, path: String }
 
       class Poll < FindAI::Internal::Type::BaseModel
@@ -16,6 +18,8 @@ module FindAI
         attr_accessor path: String
 
         def initialize: (token: String, path: String) -> void
+
+        def to_hash: -> { token: String, path: String }
       end
     end
   end

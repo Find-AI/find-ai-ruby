@@ -11,9 +11,9 @@ module FindAI
       #
       # @param query [String] Search query.
       #
-      # @param result_mode [Symbol, FindAI::SearchCreateParams::ResultMode] The mode of the search. Valid values are 'exact' or 'best'.
+      # @param result_mode [Symbol, FindAI::Models::SearchCreateParams::ResultMode] The mode of the search. Valid values are 'exact' or 'best'.
       #
-      # @param scope [Symbol, FindAI::SearchCreateParams::Scope] The scope of the search. Valid values are 'person' or 'company'.
+      # @param scope [Symbol, FindAI::Models::SearchCreateParams::Scope] The scope of the search. Valid values are 'person' or 'company'.
       #
       # @param request_options [FindAI::RequestOptions, Hash{Symbol=>Object}, nil]
       #
