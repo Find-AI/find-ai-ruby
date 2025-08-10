@@ -16,7 +16,8 @@ module FindAI
             T::Array[
               [
                 T.nilable(Symbol),
-                T.proc.returns(FindAI::Internal::Type::Converter::Input)
+                T.proc.returns(FindAI::Internal::Type::Converter::Input),
+                FindAI::Internal::AnyHash
               ]
             ]
           )
@@ -25,7 +26,11 @@ module FindAI
         end
 
         # @api private
-        sig { returns(T::Array[[T.nilable(Symbol), T.anything]]) }
+        sig do
+          returns(
+            T::Array[[T.nilable(Symbol), T.anything, FindAI::Internal::AnyHash]]
+          )
+        end
         protected def derefed_variants
         end
 
