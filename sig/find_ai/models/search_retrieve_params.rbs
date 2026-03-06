@@ -1,15 +1,20 @@
 module FindAI
   module Models
     type search_retrieve_params =
-      {  } & FindAI::Internal::Type::request_parameters
+      { id: String } & FindAI::Internal::Type::request_parameters
 
     class SearchRetrieveParams < FindAI::Internal::Type::BaseModel
       extend FindAI::Internal::Type::RequestParameters::Converter
       include FindAI::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: FindAI::request_opts) -> void
+      attr_accessor id: String
 
-      def to_hash: -> { request_options: FindAI::RequestOptions }
+      def initialize: (
+        id: String,
+        ?request_options: FindAI::request_opts
+      ) -> void
+
+      def to_hash: -> { id: String, request_options: FindAI::RequestOptions }
     end
   end
 end
