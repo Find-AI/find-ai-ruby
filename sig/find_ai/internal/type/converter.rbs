@@ -1,0 +1,79 @@
+module FindAI
+  module Internal
+    module Type
+      module Converter
+        extend FindAI::Internal::Util::SorbetRuntimeSupport
+
+        type input = FindAI::Internal::Type::Converter | Class
+
+        type coerce_state =
+          {
+            translate_names: bool,
+            strictness: bool,
+            exactness: { yes: Integer, no: Integer, maybe: Integer },
+            error: Class,
+            branched: Integer
+          }
+
+        type dump_state = { can_retry: bool }
+
+        def coerce: (
+          top value,
+          state: FindAI::Internal::Type::Converter::coerce_state
+        ) -> top
+
+        def dump: (
+          top value,
+          state: FindAI::Internal::Type::Converter::dump_state
+        ) -> top
+
+        def inspect: (?depth: Integer) -> String
+
+        def self.type_info: (
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> FindAI::Internal::Type::Converter::input?,
+            union: ^-> FindAI::Internal::Type::Converter::input?
+          }
+          | ^-> FindAI::Internal::Type::Converter::input
+          | FindAI::Internal::Type::Converter::input spec
+        ) -> (^-> top)
+
+        def self.meta_info: (
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> FindAI::Internal::Type::Converter::input?,
+            union: ^-> FindAI::Internal::Type::Converter::input?
+          }
+          | ^-> FindAI::Internal::Type::Converter::input
+          | FindAI::Internal::Type::Converter::input type_info,
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> FindAI::Internal::Type::Converter::input?,
+            union: ^-> FindAI::Internal::Type::Converter::input?
+          }
+          | ^-> FindAI::Internal::Type::Converter::input
+          | FindAI::Internal::Type::Converter::input spec
+        ) -> ::Hash[Symbol, top]
+
+        def self.new_coerce_state: (
+          ?translate_names: bool
+        ) -> FindAI::Internal::Type::Converter::coerce_state
+
+        def self.coerce: (
+          FindAI::Internal::Type::Converter::input target,
+          top value,
+          ?state: FindAI::Internal::Type::Converter::coerce_state
+        ) -> top
+
+        def self.dump: (
+          FindAI::Internal::Type::Converter::input target,
+          top value,
+          ?state: FindAI::Internal::Type::Converter::dump_state
+        ) -> top
+
+        def self.inspect: (top target, depth: Integer) -> String
+      end
+    end
+  end
+end

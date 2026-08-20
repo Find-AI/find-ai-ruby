@@ -1,0 +1,92 @@
+module FindAI
+  module Models
+    type search_retrieve_response_item =
+      {
+        linkedin_url: String,
+        name: String,
+        company: String,
+        criteria_and_reasons: ::Array[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason],
+        domain: String,
+        status: String,
+        title: String
+      }
+
+    class SearchRetrieveResponseItem < FindAI::Internal::Type::BaseModel
+      attr_accessor linkedin_url: String
+
+      attr_accessor name: String
+
+      attr_reader company: String?
+
+      def company=: (String) -> String
+
+      attr_reader criteria_and_reasons: ::Array[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason]?
+
+      def criteria_and_reasons=: (
+        ::Array[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason]
+      ) -> ::Array[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason]
+
+      attr_reader domain: String?
+
+      def domain=: (String) -> String
+
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      attr_reader title: String?
+
+      def title=: (String) -> String
+
+      def initialize: (
+        linkedin_url: String,
+        name: String,
+        ?company: String,
+        ?criteria_and_reasons: ::Array[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason],
+        ?domain: String,
+        ?status: String,
+        ?title: String
+      ) -> void
+
+      def to_hash: -> {
+        linkedin_url: String,
+        name: String,
+        company: String,
+        criteria_and_reasons: ::Array[FindAI::Models::SearchRetrieveResponseItem::CriteriaAndReason],
+        domain: String,
+        status: String,
+        title: String
+      }
+
+      type criteria_and_reason =
+        { criteria: String, match: bool, reason: String }
+
+      class CriteriaAndReason < FindAI::Internal::Type::BaseModel
+        attr_reader criteria: String?
+
+        def criteria=: (String) -> String
+
+        attr_reader match: bool?
+
+        def match=: (bool) -> bool
+
+        attr_reader reason: String?
+
+        def reason=: (String) -> String
+
+        def initialize: (
+          ?criteria: String,
+          ?match: bool,
+          ?reason: String
+        ) -> void
+
+        def to_hash: -> { criteria: String, match: bool, reason: String }
+      end
+    end
+
+    type search_retrieve_response =
+      ::Array[FindAI::Models::SearchRetrieveResponseItem]
+
+    SearchRetrieveResponse: FindAI::Internal::Type::Converter
+  end
+end

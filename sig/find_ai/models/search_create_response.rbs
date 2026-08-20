@@ -1,0 +1,26 @@
+module FindAI
+  module Models
+    type search_create_response =
+      { poll: FindAI::Models::SearchCreateResponse::Poll }
+
+    class SearchCreateResponse < FindAI::Internal::Type::BaseModel
+      attr_accessor poll: FindAI::Models::SearchCreateResponse::Poll
+
+      def initialize: (poll: FindAI::Models::SearchCreateResponse::Poll) -> void
+
+      def to_hash: -> { poll: FindAI::Models::SearchCreateResponse::Poll }
+
+      type poll = { token: String, path: String }
+
+      class Poll < FindAI::Internal::Type::BaseModel
+        attr_accessor token: String
+
+        attr_accessor path: String
+
+        def initialize: (token: String, path: String) -> void
+
+        def to_hash: -> { token: String, path: String }
+      end
+    end
+  end
+end

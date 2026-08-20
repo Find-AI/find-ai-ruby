@@ -1,0 +1,3 @@
+module FindAI
+  VERSION: String
+end

@@ -1,0 +1,75 @@
+module FindAI
+  module Models
+    type search_create_params =
+      {
+        max_matches: Float,
+        query: String,
+        result_mode: FindAI::Models::SearchCreateParams::result_mode,
+        scope: FindAI::Models::SearchCreateParams::scope
+      }
+      & FindAI::Internal::Type::request_parameters
+
+    class SearchCreateParams < FindAI::Internal::Type::BaseModel
+      extend FindAI::Internal::Type::RequestParameters::Converter
+      include FindAI::Internal::Type::RequestParameters
+
+      attr_reader max_matches: Float?
+
+      def max_matches=: (Float) -> Float
+
+      attr_reader query: String?
+
+      def query=: (String) -> String
+
+      attr_reader result_mode: FindAI::Models::SearchCreateParams::result_mode?
+
+      def result_mode=: (
+        FindAI::Models::SearchCreateParams::result_mode
+      ) -> FindAI::Models::SearchCreateParams::result_mode
+
+      attr_reader scope: FindAI::Models::SearchCreateParams::scope?
+
+      def scope=: (
+        FindAI::Models::SearchCreateParams::scope
+      ) -> FindAI::Models::SearchCreateParams::scope
+
+      def initialize: (
+        ?max_matches: Float,
+        ?query: String,
+        ?result_mode: FindAI::Models::SearchCreateParams::result_mode,
+        ?scope: FindAI::Models::SearchCreateParams::scope,
+        ?request_options: FindAI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        max_matches: Float,
+        query: String,
+        result_mode: FindAI::Models::SearchCreateParams::result_mode,
+        scope: FindAI::Models::SearchCreateParams::scope,
+        request_options: FindAI::RequestOptions
+      }
+
+      type result_mode = :exact | :best
+
+      module ResultMode
+        extend FindAI::Internal::Type::Enum
+
+        EXACT: :exact
+        BEST: :best
+
+        def self?.values: -> ::Array[FindAI::Models::SearchCreateParams::result_mode]
+      end
+
+      type scope = :person | :company
+
+      module Scope
+        extend FindAI::Internal::Type::Enum
+
+        PERSON: :person
+        COMPANY: :company
+
+        def self?.values: -> ::Array[FindAI::Models::SearchCreateParams::scope]
+      end
+    end
+  end
+end
