@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    find-ai (1.2.0)
+    find-ai (2.0.0)
       cgi
       connection_pool
 
